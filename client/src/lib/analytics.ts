@@ -9,6 +9,7 @@ const DEFAULT_GOOGLE_TAG_ID = "G-RVWB8SMX27";
 const UMAMI_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="umami"]';
 const GOOGLE_TAG_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="gtag"]';
 const GOOGLE_TAG_SCRIPT_URL = "https://www.googletagmanager.com/gtag/js";
+const UMAMI_DEFAULT_SCRIPT_PATH = "/script.js";
 type GtagCommand = IArguments;
 
 let umamiScriptLoaded = false;
@@ -140,6 +141,20 @@ function isUsableAnalyticsEndpoint(endpoint: string) {
   return true;
 }
 
+function resolveUmamiScriptUrl(endpoint: string) {
+  const trimmed = endpoint.trim();
+
+  if (!trimmed) {
+    return "";
+  }
+
+  if (trimmed.endsWith(".js")) {
+    return trimmed;
+  }
+
+  return `${trimmed.replace(/\/$/, "")}${UMAMI_DEFAULT_SCRIPT_PATH}`;
+}
+
 function isUsableGoogleTagId(tagId: string) {
   const trimmed = tagId.trim();
 
@@ -176,8 +191,9 @@ function initializeUmamiAnalytics() {
 
   const endpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT?.trim() ?? "";
   const websiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID?.trim() ?? "";
+  const scriptUrl = resolveUmamiScriptUrl(endpoint);
 
-  if (!isUsableAnalyticsEndpoint(endpoint) || !websiteId) {
+  if (!isUsableAnalyticsEndpoint(endpoint) || !websiteId || !scriptUrl) {
     return;
   }
 
@@ -196,7 +212,7 @@ function initializeUmamiAnalytics() {
   const script = document.createElement("script");
   script.async = true;
   script.defer = true;
-  script.src = `${endpoint.replace(/\/$/, "")}/umami`;
+  script.src = scriptUrl;
   script.setAttribute("data-website-id", websiteId);
   script.setAttribute("data-toolsy-analytics", "umami");
   script.onerror = () => {

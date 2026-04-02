@@ -129,11 +129,13 @@ Analytics are disabled unless you configure them. If you want Umami tracking or 
 
 | Variable | Purpose | Required |
 | --- | --- | --- |
-| `VITE_ANALYTICS_ENDPOINT` | Base URL of your Umami instance | No |
+| `VITE_ANALYTICS_ENDPOINT` | Umami base URL or direct tracker script URL | No |
 | `VITE_ANALYTICS_WEBSITE_ID` | Umami website ID | No |
 | `VITE_GOOGLE_TAG_ID` | Google Analytics / Google tag measurement ID | No |
 
 If these values are missing, the analytics scripts will not load.
+
+For Umami Cloud, set `VITE_ANALYTICS_ENDPOINT` to `https://cloud.umami.is` and the app will load `script.js` from that host with your website ID.
 
 ## Project Structure
 
