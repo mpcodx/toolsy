@@ -125,14 +125,15 @@ When adding a new tool, remember to update the tool registry, the SEO helper, an
 
 ## Optional Analytics
 
-Analytics are disabled unless you configure them. If you want Umami tracking, set:
+Analytics are disabled unless you configure them. If you want Umami tracking or the Google tag, set:
 
 | Variable | Purpose | Required |
 | --- | --- | --- |
 | `VITE_ANALYTICS_ENDPOINT` | Base URL of your Umami instance | No |
 | `VITE_ANALYTICS_WEBSITE_ID` | Umami website ID | No |
+| `VITE_GOOGLE_TAG_ID` | Google Analytics / Google tag measurement ID | No |
 
-If those values are missing, the analytics script will not load.
+If these values are missing, the analytics scripts will not load.
 
 ## Project Structure
 

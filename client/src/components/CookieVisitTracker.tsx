@@ -1,20 +1,26 @@
-import { initializeAnalytics, disableAnalytics } from "@/lib/analytics";
+import { Analytics, initializeAnalytics, disableAnalytics } from "@/lib/analytics";
 import {
   COOKIE_CONSENT_CHANGED_EVENT,
   clearVisitorCookies,
   recordVisitorCookies,
   readCookieConsent,
 } from "@/lib/cookie-consent";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 
 export default function CookieVisitTracker() {
   const [location] = useLocation();
+  const previousLocationRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (readCookieConsent() === "accepted") {
       recordVisitorCookies();
       initializeAnalytics();
+      Analytics.getInstance().trackPageView(
+        location,
+        previousLocationRef.current ?? document.referrer ?? undefined
+      );
+      previousLocationRef.current = location;
     }
   }, [location]);
 
@@ -25,12 +31,18 @@ export default function CookieVisitTracker() {
       if (consent === "accepted") {
         recordVisitorCookies();
         initializeAnalytics();
+        Analytics.getInstance().trackPageView(
+          location,
+          previousLocationRef.current ?? document.referrer ?? undefined
+        );
+        previousLocationRef.current = location;
         return;
       }
 
       if (consent === "rejected") {
         clearVisitorCookies();
         disableAnalytics();
+        previousLocationRef.current = null;
       }
     };
 
@@ -39,7 +51,7 @@ export default function CookieVisitTracker() {
     return () => {
       window.removeEventListener(COOKIE_CONSENT_CHANGED_EVENT, handleConsentChange);
     };
-  }, []);
+  }, [location]);
 
   return null;
 }
