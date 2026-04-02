@@ -1,4 +1,8 @@
-import { Analytics, initializeAnalytics, disableAnalytics } from "@/lib/analytics";
+import {
+  Analytics,
+  disableAnalytics,
+  initializeAnalytics,
+} from "@/lib/analytics";
 import {
   COOKIE_CONSENT_CHANGED_EVENT,
   clearVisitorCookies,

@@ -179,9 +179,22 @@ function bootstrapGoogleTag(tagId: string) {
     window.dataLayer?.push(arguments as unknown as GtagCommand);
   };
 
+  window.gtag("consent", "default", {
+    analytics_storage: "denied",
+  });
   window.gtag("js", new Date());
   window.gtag("config", tagId, { send_page_view: false });
   googleTagBootstrapped = true;
+}
+
+export function syncGoogleAnalyticsConsent(status: "accepted" | "rejected") {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("consent", "update", {
+    analytics_storage: status === "accepted" ? "granted" : "denied",
+  });
 }
 
 function initializeUmamiAnalytics() {
@@ -270,6 +283,7 @@ export function initializeAnalytics() {
 
   initializeUmamiAnalytics();
   initializeGoogleAnalytics();
+  syncGoogleAnalyticsConsent("accepted");
 }
 
 export function disableAnalytics() {
@@ -278,11 +292,9 @@ export function disableAnalytics() {
   }
 
   umamiScriptLoaded = false;
-  googleTagScriptLoaded = false;
-  googleTagBootstrapped = false;
 
   const scripts = document.querySelectorAll<HTMLScriptElement>(
-    `${UMAMI_SCRIPT_SELECTOR}, ${GOOGLE_TAG_SCRIPT_SELECTOR}`
+    UMAMI_SCRIPT_SELECTOR
   );
 
   scripts.forEach((script) => script.remove());
@@ -291,11 +303,7 @@ export function disableAnalytics() {
     window.umami = undefined;
   }
 
-  if (window.gtag) {
-    window.gtag = undefined;
-  }
-
-  window.dataLayer = [];
+  syncGoogleAnalyticsConsent("rejected");
 }
 
 // Extend Window interface for Umami

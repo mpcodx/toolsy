@@ -134,8 +134,11 @@ Analytics are disabled unless you configure them. If you want Umami tracking or 
 | `VITE_GOOGLE_TAG_ID` | Google Analytics / Google tag measurement ID | No |
 
 If these values are missing, the analytics scripts will not load.
+On Vercel, the production build gets the same values from `vercel.json`, since `.env` is gitignored and not available to the hosted build by default.
 
 For Umami Cloud, set `VITE_ANALYTICS_ENDPOINT` to `https://cloud.umami.is` and the app will load `script.js` from that host with your website ID.
+
+The Google tag is included in the HTML shell for Search Console detection, but consent mode keeps analytics storage denied until the user accepts cookies.
 
 ## Project Structure
 

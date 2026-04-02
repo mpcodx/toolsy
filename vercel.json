@@ -2,6 +2,13 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm build",
   "outputDirectory": "dist/public",
+  "build": {
+    "env": {
+      "VITE_ANALYTICS_ENDPOINT": "https://cloud.umami.is",
+      "VITE_ANALYTICS_WEBSITE_ID": "717ff38c-4238-4627-b275-d61f87854be4",
+      "VITE_GOOGLE_TAG_ID": "G-RVWB8SMX27"
+    }
+  },
   "routes": [
     {
       "handle": "filesystem"
