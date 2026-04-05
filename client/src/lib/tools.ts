@@ -171,7 +171,7 @@ export const TOOLS: Tool[] = [
   {
     id: "video-clipper",
     name: "Video Clip Cutter",
-    description: "Trim an uploaded video into a shorter clip with start and end times",
+    description: "Trim uploaded videos into shorter clips with a free, secure, fast, no-watermark workflow",
     category: "Video",
     icon: "Scissors",
     color: "from-emerald-600 to-lime-500",

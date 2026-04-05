@@ -11,7 +11,7 @@ export interface MetadataConfig {
 const DEFAULT_METADATA: MetadataConfig = {
   title: "Toolsy - Free PDF, Video & Image Tools",
   description:
-    "Toolsy is a free online hub for PDF, video, and image tools. Merge PDFs, split files, convert video to audio, make thumbnails, and use browser-safe downloads. No signup required.",
+    "Toolsy is a free online hub for PDF, video, and image tools. Merge PDFs, split files, trim videos, convert video to audio, make thumbnails, and use browser-safe downloads. No signup required.",
   keywords: [
     "PDF converter",
     "image converter",
@@ -20,10 +20,16 @@ const DEFAULT_METADATA: MetadataConfig = {
     "video to pic",
     "video to images",
     "thumbnail maker",
+    "video trimmer",
+    "video cutter online",
     "video clip cutter",
     "mp4 downloader",
     "direct mp4 downloader",
     "video link downloader",
+    "free online video trimmer",
+    "video trimmer no watermark",
+    "watermark-free video cutter",
+    "trim uploaded video privately",
     "file conversion",
     "PDF to image",
     "image to PDF",

@@ -8,7 +8,7 @@ import { getTool, TOOLS } from "@/lib/tools";
 export const SITE_CONFIG = {
   title: "Toolsy - Free PDF, Video & Image Tools",
   description:
-    "Toolsy is a free online hub for PDF, video, and image tools. Merge PDFs, split files, convert video to audio, make thumbnails, and use browser-safe downloads. No signup required.",
+    "Toolsy is a free online hub for PDF, video, and image tools. Merge PDFs, split files, trim videos, convert video to audio, make thumbnails, and use browser-safe downloads. No signup required.",
   url: "https://toolsy.rayonweb.com",
   image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
   author: "Toolsy Team",
@@ -21,8 +21,14 @@ export const SITE_CONFIG = {
     "video to pic",
     "video to images",
     "thumbnail maker",
+    "video trimmer",
+    "video cutter online",
     "video clip cutter",
     "video to clip",
+    "free online video trimmer",
+    "video trimmer no watermark",
+    "watermark-free video cutter",
+    "trim uploaded video privately",
     "mp4 downloader",
     "direct mp4 downloader",
     "video link downloader",
@@ -87,10 +93,20 @@ export const TOOL_SEO_DATA: Record<string, any> = {
     keywords: ["video to frames", "video to images", "video to pic", "frame extractor", "ZIP frames"],
   },
   "video-clipper": {
-    title: "Video Clip Cutter - Trim Uploaded Videos into Short Clips",
+    title: "Video Clip Cutter - Free Online Video Trimmer, No Watermark",
     description:
-      "Trim an uploaded video into a shorter clip using start and end times. Download a browser-generated WebM clip.",
-    keywords: ["video clip cutter", "video to clip", "video trimmer", "clip maker"],
+      "Trim videos online in seconds with Toolsy. Free, secure, fast, and no watermark. No signup needed. Supports MP4, MOV, WebM, MKV, and AVI.",
+    keywords: [
+      "free online video trimmer",
+      "video cutter online",
+      "trim video online",
+      "video clip cutter",
+      "video trimmer no watermark",
+      "online video cutter",
+      "browser-based video trimmer",
+      "watermark-free video cutter",
+      "trim uploaded video privately",
+    ],
   },
   "direct-mp4-downloader": {
     title: "Direct MP4 Downloader - Download Public MP4 File URLs",
@@ -131,16 +147,18 @@ export function generateMetaTags(toolId?: string) {
           url: `${SITE_CONFIG.url}/tool/${tool.id}`,
         }
       : SITE_CONFIG;
+  const url = config.url || (tool ? `${SITE_CONFIG.url}/tool/${tool.id}` : SITE_CONFIG.url);
 
   return {
     title: config.title,
     description: config.description,
     keywords: config.keywords?.join(", ") || SITE_CONFIG.keywords.join(", "),
+    canonical: url,
     og: {
       title: config.title,
       description: config.description,
       image: config.image || SITE_CONFIG.image,
-      url: config.url || SITE_CONFIG.url,
+      url,
       type: "website",
     },
     twitter: {

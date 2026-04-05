@@ -58,7 +58,7 @@ const creatorTools = [
   },
   {
     title: "Video Clip Cutter",
-    description: "Trim an uploaded video into a shorter WebM clip.",
+    description: "Trim an uploaded video into a shorter, watermark-free clip.",
     href: "/tool/video-clipper",
     icon: Scissors,
   },

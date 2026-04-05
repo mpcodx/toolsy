@@ -83,7 +83,8 @@ export default function ToolPage({ params }: ToolPageProps) {
   const IconComponent = (Icons as any)[tool.icon] || Icons.Zap;
   const relatedTools = getToolsByCategory(tool.category).filter((t) => t.id !== tool.id);
   const categorySearchHref = `/?search=${encodeURIComponent(tool.category.toLowerCase())}`;
-  const searchPhrasesToShow = seo?.content.searchPhrases.slice(0, 10) ?? [];
+  const searchPhrasesToShow = seo?.content.searchPhrases.slice(0, 12) ?? [];
+  const trustBadges = seo?.content.trustBadges ?? ["Free", "Secure", "No Signup"];
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -151,15 +152,17 @@ export default function ToolPage({ params }: ToolPageProps) {
                     {tool.description}
                   </p>
                   <div className="flex flex-wrap gap-3">
-                    <span className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent font-medium text-sm">
+                    <span className="inline-block rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
                       {tool.category}
                     </span>
-                    <span className="inline-block px-4 py-2 rounded-full bg-secondary/50 text-muted-foreground font-medium text-sm">
-                      Free to use
-                    </span>
-                    <span className="inline-block px-4 py-2 rounded-full bg-secondary/50 text-muted-foreground font-medium text-sm">
-                      No signup required
-                    </span>
+                    {trustBadges.map((badge) => (
+                      <span
+                        key={badge}
+                        className="inline-block rounded-full bg-secondary/50 px-4 py-2 text-sm font-medium text-muted-foreground"
+                      >
+                        {badge}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -294,6 +297,42 @@ export default function ToolPage({ params }: ToolPageProps) {
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              )}
+
+              {seo && seo.content.sections.length > 0 && (
+                <div className="mt-16 rounded-2xl border border-border bg-card p-6 md:p-8 shadow-sm">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">
+                        SEO content
+                      </p>
+                      <h3 className="mt-2 text-2xl font-display font-bold text-foreground">
+                        Why people use {tool.name}
+                      </h3>
+                    </div>
+                    <Icons.BookOpen className="h-6 w-6 text-accent" />
+                  </div>
+                  <div className="mt-6 space-y-6">
+                    {seo.content.sections.map((section) => (
+                      <article
+                        key={section.heading}
+                        className="rounded-2xl border border-border/70 bg-background/70 p-5 md:p-6"
+                      >
+                        <h4 className="text-lg font-semibold text-foreground">{section.heading}</h4>
+                        <div className="mt-4 space-y-4">
+                          {section.paragraphs.map((paragraph, paragraphIndex) => (
+                            <p
+                              key={`${section.heading}-${paragraphIndex}`}
+                              className="text-sm leading-7 text-muted-foreground"
+                            >
+                              {paragraph}
+                            </p>
+                          ))}
+                        </div>
+                      </article>
+                    ))}
                   </div>
                 </div>
               )}
