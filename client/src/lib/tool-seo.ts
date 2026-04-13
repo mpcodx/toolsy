@@ -50,6 +50,10 @@ function isVideoClipper(tool: Tool) {
   return tool.id === "video-clipper";
 }
 
+function isAiMetaGenerator(tool: Tool) {
+  return tool.id === "ai-meta-generator";
+}
+
 function getToolProfile(tool: Tool): ToolProfile {
   const name = normalizePhrase(tool.name);
   const description = normalizePhrase(tool.description);
@@ -401,6 +405,183 @@ function getToolProfile(tool: Tool): ToolProfile {
     }
   }
 
+  if (tool.category === "AI") {
+    if (tool.id === "ai-meta-generator") {
+      return {
+        focus: "generate SEO meta titles and descriptions from a topic and keyword list",
+        supportedInput: "page topics, target keywords, audience notes, and tone preferences",
+        supportedOutput: "meta title and description drafts",
+        extraKeywords: [
+          "ai meta generator",
+          "meta title generator",
+          "meta description generator",
+          "seo metadata generator",
+          "free ai seo tool",
+        ],
+        trustBadges: ["Free", "No Signup", "OpenRouter Optional"],
+      };
+    }
+
+    if (tool.id === "ai-paragraph-rewriter") {
+      return {
+        focus: "rewrite paragraphs for clarity, tone, and readability",
+        supportedInput: "plain text paragraphs and rewrite instructions",
+        supportedOutput: "rewritten paragraph drafts",
+        extraKeywords: [
+          "ai paragraph rewriter",
+          "rewrite paragraph online",
+          "text rewriter tool",
+          "rewrite content with ai",
+        ],
+        trustBadges: ["Free", "No Signup", "OpenRouter Optional"],
+      };
+    }
+
+    return {
+      focus: "generate titles and copy ideas from a short prompt",
+      supportedInput: "topics, audiences, keywords, and tone preferences",
+      supportedOutput: "title or text drafts",
+      extraKeywords: [
+        "ai title generator",
+        "headline generator",
+        "blog title generator",
+        "free ai writing tool",
+      ],
+      trustBadges: ["Free", "No Signup", "OpenRouter Optional"],
+    };
+  }
+
+  if (tool.category === "SEO") {
+    if (tool.id === "keyword-clustering-tool") {
+      return {
+        focus: "group related keywords into SEO clusters for topical authority planning",
+        supportedInput: "keyword lists and topic hints",
+        supportedOutput: "keyword clusters and content group ideas",
+        extraKeywords: [
+          "keyword clustering tool",
+          "group keywords for seo",
+          "keyword cluster generator",
+          "seo keyword grouping tool",
+        ],
+        trustBadges: ["Free", "No Signup", "Search Intent Ready"],
+      };
+    }
+
+    if (tool.id === "schema-markup-generator") {
+      return {
+        focus: "create JSON-LD schema markup for tool pages, articles, products, and FAQs",
+        supportedInput: "schema type selections and page details",
+        supportedOutput: "JSON-LD schema markup",
+        extraKeywords: [
+          "schema markup generator",
+          "json ld generator",
+          "software application schema",
+          "faq schema generator",
+        ],
+        trustBadges: ["Free", "No Signup", "JSON-LD"],
+      };
+    }
+
+    return {
+      focus: "generate SEO-friendly FAQ copy for landing pages and content hubs",
+      supportedInput: "page topics, keywords, audience notes, and FAQ counts",
+      supportedOutput: "FAQ question and answer drafts",
+      extraKeywords: [
+        "faq generator",
+        "seo faq generator",
+        "landing page faq tool",
+        "faq schema content generator",
+      ],
+      trustBadges: ["Free", "No Signup", "SERP Friendly"],
+    };
+  }
+
+  if (tool.category === "Developer") {
+    if (tool.id === "commit-message-generator") {
+      return {
+        focus: "turn rough change summaries into clean conventional commit messages",
+        supportedInput: "change summaries, scopes, and commit types",
+        supportedOutput: "formatted commit messages",
+        extraKeywords: [
+          "commit message generator",
+          "conventional commit generator",
+          "git commit message tool",
+        ],
+        trustBadges: ["Free", "No Signup", "Dev Friendly"],
+      };
+    }
+
+    if (tool.id === "regex-explainer") {
+      return {
+        focus: "explain regular expressions in plain English with token breakdowns",
+        supportedInput: "regex patterns, optional sample text, and regex flavor notes",
+        supportedOutput: "regex explanations",
+        extraKeywords: [
+          "regex explainer",
+          "explain regex online",
+          "regex to english",
+          "regular expression helper",
+        ],
+        trustBadges: ["Free", "No Signup", "Plain English"],
+      };
+    }
+
+    return {
+      focus: "build cURL commands from request details without hand-writing terminal flags",
+      supportedInput: "request URLs, methods, headers, and JSON bodies",
+      supportedOutput: "ready-to-run cURL commands",
+      extraKeywords: [
+        "curl command generator",
+        "http request to curl",
+        "api curl builder",
+      ],
+      trustBadges: ["Free", "No Signup", "Developer Workflow"],
+    };
+  }
+
+  if (tool.category === "Social Media") {
+    if (tool.id === "hashtag-generator") {
+      return {
+        focus: "generate grouped hashtags for niche reach and discovery",
+        supportedInput: "post topics, keywords, platforms, and brand names",
+        supportedOutput: "hashtag sets",
+        extraKeywords: [
+          "hashtag generator",
+          "instagram hashtag generator",
+          "tiktok hashtag generator",
+          "social media hashtags",
+        ],
+        trustBadges: ["Free", "No Signup", "Creator Ready"],
+      };
+    }
+
+    if (tool.id === "instagram-caption-generator") {
+      return {
+        focus: "create Instagram captions with hooks, body copy, and calls to action",
+        supportedInput: "post topics, offers, CTAs, and tone preferences",
+        supportedOutput: "Instagram caption drafts",
+        extraKeywords: [
+          "instagram caption generator",
+          "caption generator for instagram",
+          "social caption generator",
+        ],
+        trustBadges: ["Free", "No Signup", "Creator Ready"],
+      };
+    }
+
+    return {
+      focus: "write YouTube descriptions with keyword coverage and channel calls to action",
+      supportedInput: "video titles, summaries, keywords, and CTA notes",
+      supportedOutput: "YouTube description drafts",
+      extraKeywords: [
+        "youtube description generator",
+        "video description generator",
+        "youtube seo description tool",
+      ],
+      trustBadges: ["Free", "No Signup", "Creator Ready"],
+    };
+  }
+
   return {
     focus: `handle ${tool.category.toLowerCase()} workflows`,
     supportedInput: `${tool.category.toLowerCase()} inputs`,
@@ -411,6 +592,10 @@ function getToolProfile(tool: Tool): ToolProfile {
 }
 
 function buildIntro(tool: Tool, profile: ToolProfile) {
+  if (isAiMetaGenerator(tool)) {
+    return "Writing strong metadata sounds simple until you need to do it consistently across blog posts, landing pages, category pages, and product listings. Toolsy's AI Meta Generator helps marketers, founders, ecommerce teams, and agencies turn a topic plus target keywords into clearer, more compelling title tags and meta descriptions in seconds.";
+  }
+
   if (isVideoClipper(tool)) {
     return "Toolsy's free online video trimmer helps you cut the exact part you need without opening a heavy editor. Upload a local file, choose the start and end points, and download a clean, watermark-free WebM clip. The workflow is fast, secure, and does not require signup.";
   }
@@ -423,6 +608,14 @@ function buildIntro(tool: Tool, profile: ToolProfile) {
 }
 
 function buildHighlights(tool: Tool, profile: ToolProfile) {
+  if (isAiMetaGenerator(tool)) {
+    return [
+      "Generate multiple title tag and meta description options from one topic and keyword set.",
+      `Input: ${profile.supportedInput}. Output: ${profile.supportedOutput}.`,
+      "Useful for blog posts, landing pages, product pages, and ongoing SEO refreshes.",
+    ];
+  }
+
   if (isVideoClipper(tool)) {
     return [
       "Trim videos online with a focused tool built for fast, everyday cuts.",
@@ -447,6 +640,14 @@ function buildHighlights(tool: Tool, profile: ToolProfile) {
 }
 
 function buildSteps(tool: Tool, profile: ToolProfile) {
+  if (isAiMetaGenerator(tool)) {
+    return [
+      "Add the page topic, your main keyword, and any supporting terms you want included.",
+      "Choose the audience and tone that best fit the page you are optimizing.",
+      "Generate several metadata drafts, then edit the strongest option before publishing.",
+    ];
+  }
+
   if (isVideoClipper(tool)) {
     return [
       `Upload a local video file such as ${profile.supportedInput}.`,
@@ -471,6 +672,36 @@ function buildSteps(tool: Tool, profile: ToolProfile) {
 }
 
 function buildFaqs(tool: Tool, profile: ToolProfile): ToolSeoFaq[] {
+  if (isAiMetaGenerator(tool)) {
+    return [
+      {
+        question: "What is an AI Meta Generator?",
+        answer:
+          "An AI Meta Generator creates title tags and meta descriptions from a page topic, target keywords, and audience cues. It gives you faster first drafts for SEO without writing every snippet manually.",
+      },
+      {
+        question: "How does an AI Meta Generator help SEO?",
+        answer:
+          "It helps you create clearer metadata that better matches search intent and supports stronger click-through potential. The page content still matters, but stronger snippets make the result easier to understand in search.",
+      },
+      {
+        question: "Is this tool only a meta title generator?",
+        answer:
+          "No. It works as both a meta title generator and a meta description generator, so you can create complete metadata sets for blog posts, landing pages, service pages, and product URLs.",
+      },
+      {
+        question: "Can I use the AI Meta Generator for ecommerce pages?",
+        answer:
+          "Yes. The tool is useful for product pages, collection pages, category pages, and promotional landing pages where teams need metadata ideas quickly and consistently.",
+      },
+      {
+        question: "Should I publish AI-generated metadata without editing it?",
+        answer:
+          "It is better to review and refine the output first. A good SEO metadata generator saves time and gives you strong options, but a quick human edit keeps the copy aligned with brand voice and page intent.",
+      },
+    ];
+  }
+
   if (isVideoClipper(tool)) {
     return [
       {
@@ -552,6 +783,22 @@ function buildFaqs(tool: Tool, profile: ToolProfile): ToolSeoFaq[] {
 }
 
 function buildSearchPhrases(tool: Tool, profile: ToolProfile) {
+  if (isAiMetaGenerator(tool)) {
+    return unique([
+      "ai meta generator",
+      "meta title generator",
+      "meta description generator",
+      "seo metadata generator",
+      "free ai meta generator",
+      "generate meta title and description",
+      "meta generator for blog posts",
+      "meta generator for landing pages",
+      "ecommerce meta description generator",
+      "seo title and description tool",
+      tool.name,
+    ]);
+  }
+
   if (isVideoClipper(tool)) {
     return unique([
       "free online video trimmer",
@@ -585,6 +832,60 @@ function buildSearchPhrases(tool: Tool, profile: ToolProfile) {
 }
 
 function buildSections(tool: Tool, profile: ToolProfile): ToolSeoSection[] {
+  if (isAiMetaGenerator(tool)) {
+    return [
+      {
+        heading: "Why use an AI Meta Generator?",
+        paragraphs: [
+          "Metadata has an outsized effect on how a page presents in search. Even when your page ranks, the title tag and meta description still shape whether the right person clicks or keeps scrolling. That makes metadata a conversion layer, not just a technical SEO field. Toolsy's AI Meta Generator helps you move from a rough topic to cleaner, clearer metadata without getting stuck on the first draft.",
+          "This matters most for teams publishing at scale. A founder updating landing pages, a content marketer shipping weekly articles, or an ecommerce team optimizing dozens of product and category URLs all face the same bottleneck: writing good metadata consistently takes time. A focused meta title generator and meta description generator reduces that friction by turning the blank page into several usable directions you can quickly review and refine.",
+        ],
+      },
+      {
+        heading: "How the tool fits real SEO workflows",
+        paragraphs: [
+          "The best use case for an AI Meta Generator is not blind automation. It is faster drafting. You enter the page topic, include your primary keyword, add a few supporting terms, and define the audience or tone. The tool then returns several metadata options designed to match intent more naturally than a one-size-fits-all template. That makes it easier to choose the version that fits the actual page instead of forcing every URL into the same style.",
+          "This approach also supports better collaboration. Writers can create first drafts faster, SEO specialists can review messaging more easily, and founders or editors can compare multiple angles before publishing. Instead of debating wording from zero, the team reacts to a set of options. That alone can save meaningful time across a growing website.",
+        ],
+      },
+      {
+        heading: "What makes a strong meta title generator useful",
+        paragraphs: [
+          "A useful meta title generator does more than place a keyword into a sentence. It helps make the page promise obvious. If the page solves a problem, the title should make that benefit clear. If the page is a tool, the snippet should show why the tool is worth opening. Searchers do not click because a title merely contains a phrase. They click because the title signals relevance, clarity, and value in one quick scan.",
+          "That is why short, readable titles usually win over overly clever ones. A clear title with a relevant angle often performs better than something vague or overloaded. The strongest title drafts usually emphasize one core outcome, one main keyword, and one obvious audience. When an AI Meta Generator helps you produce several clean options in that format, it becomes far more useful than a generic writing assistant.",
+        ],
+      },
+      {
+        heading: "Why a meta description generator still matters",
+        paragraphs: [
+          "Meta descriptions are not a magic ranking factor, but they still matter because they help frame the click. A strong description supports the title, adds context, and gives the searcher a reason to choose your page. In practical terms, that means explaining the outcome, naming the audience, or clarifying why the page is worth opening now. A good meta description generator helps teams do that quickly and consistently.",
+          "Descriptions are especially helpful when several results on the page target similar topics. If competing titles feel close, a better description can improve perceived usefulness. That is why this tool focuses on realistic SEO drafting rather than inflated promises. The goal is to create metadata that sounds helpful, trustworthy, and aligned with the page behind it, which is exactly what strong organic snippets need.",
+        ],
+      },
+      {
+        heading: "Who gets the most value from an SEO metadata generator",
+        paragraphs: [
+          "Bloggers and publishers can use the tool to create title and description ideas for new posts without slowing down the writing process. SaaS teams can use it for feature pages, comparison pages, integration pages, and product launches. Ecommerce teams can draft metadata for collections, product groups, and seasonal campaigns. Agencies and freelancers can use it to produce faster first drafts across many client URLs while keeping messaging more consistent.",
+          "The common thread is scale. When you only write metadata once a month, manual drafting may be enough. When you publish regularly or manage large sets of URLs, repetition becomes expensive. A reliable SEO metadata generator helps you protect quality while reducing the time spent on repetitive work. It also makes it easier to revisit underperforming pages and generate fresh snippet ideas when click-through rate needs improvement.",
+        ],
+      },
+      {
+        heading: "How to get better results from this AI Meta Generator",
+        paragraphs: [
+          "Start with a specific topic and one clear primary keyword. Do not try to force every possible variation into the same draft. Use secondary keywords only where they fit naturally. Include the audience when it matters, especially if the page is meant for founders, marketers, agencies, ecommerce teams, or a specific niche. The more focused the input, the easier it is for the tool to return drafts that feel publishable instead of generic.",
+          "Then treat the output as a shortlist, not a final answer. Review for tone, accuracy, and search intent match. Compare which version communicates the benefit most clearly. If the page already has impressions but weak clicks, use the tool to test new angles rather than rewriting from scratch. That iterative workflow is what turns an AI Meta Generator into a practical SEO asset instead of a novelty.",
+        ],
+      },
+      {
+        heading: "A smarter way to scale metadata without losing quality",
+        paragraphs: [
+          "The real advantage of an AI Meta Generator is not that it writes instead of you. It is that it helps you move faster toward stronger drafts. That makes metadata easier to maintain across blog posts, landing pages, product pages, and category URLs. For most teams, that is the difference between metadata that gets done well and metadata that gets rushed at the last minute.",
+          "If you want a faster path to clearer titles and descriptions, this tool gives you a practical place to start. Generate a few options, keep the best one, refine it with human judgment, and publish with more confidence. That workflow supports better SEO hygiene, cleaner collaboration, and a more scalable content system over time.",
+        ],
+      },
+    ];
+  }
+
   if (isVideoClipper(tool)) {
     return [
       {
@@ -641,13 +942,17 @@ function buildMetadata(tool: Tool, profile: ToolProfile): MetadataConfig {
 
   return {
     title:
-      isVideoClipper(tool)
+      isAiMetaGenerator(tool)
+        ? "AI Meta Generator for SEO Titles & Descriptions"
+        : isVideoClipper(tool)
         ? "Video Clip Cutter - Free Online Video Trimmer, No Watermark | Toolsy"
         : tool.id === "direct-mp4-downloader"
         ? "Direct MP4 Downloader - Download Public MP4 File URLs"
         : `${tool.name} - Free ${tool.category} Tool | Toolsy`,
     description:
-      isVideoClipper(tool)
+      isAiMetaGenerator(tool)
+        ? "Generate SEO titles and meta descriptions in seconds with Toolsy's AI Meta Generator. Great for blogs, landing pages, product pages, and ecommerce SEO workflows."
+        : isVideoClipper(tool)
         ? "Trim videos online in seconds with Toolsy. Free, secure, fast, and no watermark. No signup needed. Supports MP4, MOV, WebM, MKV, and AVI."
         : tool.id === "direct-mp4-downloader"
         ? "Paste a direct public MP4 file URL and use a browser-safe download link to save it locally. Direct file URLs only, no platform pages."
@@ -673,7 +978,7 @@ function buildSchemas(tool: Tool, content: ToolSeoContent) {
   return [
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": "SoftwareApplication",
       name: tool.name,
       description: content.intro,
       url: canonical,

@@ -22,13 +22,14 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
 
 const spotlightToolIds = [
+  "ai-meta-generator",
+  "keyword-clustering-tool",
+  "schema-markup-generator",
+  "commit-message-generator",
+  "regex-explainer",
+  "instagram-caption-generator",
+  "youtube-description-generator",
   "pdf-to-image",
-  "image-to-pdf",
-  "pdf-merger",
-  "video-to-audio",
-  "video-thumbnail-maker",
-  "video-to-frames",
-  "direct-mp4-downloader",
 ] as const;
 
 const creatorTools = [
@@ -65,32 +66,35 @@ const creatorTools = [
 ] as const;
 
 const quickSearches = [
+  "ai meta generator",
+  "keyword clustering tool",
+  "schema markup generator",
+  "commit message generator",
+  "regex explainer",
+  "instagram caption generator",
   "pdf merger",
-  "video to audio",
-  "thumbnail maker",
-  "video to frames",
-  "video clip cutter",
-  "mp4 downloader",
-  "image to pdf",
 ];
 
 const trustPoints = [
   {
-    title: "Browser-first",
-    description: "Many tools run locally in the browser so the workflow stays fast and private.",
+    title: "Free-first stack",
+    description: "The new catalog works without forced signup and can fall back to local generation when no AI key is configured.",
     icon: ShieldCheck,
   },
   {
     title: "Search-friendly",
-    description: "Keyword-rich titles, internal links, and sitemap updates help each tool get discovered.",
+    description: "Keyword-rich titles, internal links, and sitemap coverage help each tool target a specific search intent.",
     icon: Search,
   },
   {
-    title: "Built for sharing",
-    description: "Social metadata and focused landing pages make the tool pages easy to share.",
+    title: "Simple to build",
+    description: "Shared UI and one backend route make it easy to keep shipping more rankable tool pages without duplicating code.",
     icon: ArrowRight,
   },
 ] as const;
+
+const TOOL_COUNT_LABEL = "40+";
+const CATEGORY_COUNT_LABEL = "10+";
 
 function scrollToTools() {
   document.getElementById("tools-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -178,26 +182,26 @@ export default function Home() {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="max-w-3xl">
                 <Badge className="rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-accent hover:bg-accent/10">
-                  {TOOLS.length} free tools for PDF, video, and image work
+                  {TOOL_COUNT_LABEL} free tools for AI, SEO, developer, social, PDF, and media work
                 </Badge>
 
                 <h1 className="mt-6 text-4xl md:text-6xl font-display font-bold leading-tight text-foreground">
-                  Toolsy: fast file tools for{" "}
-                  <span className="text-accent">PDFs, videos, and images</span>.
+                  Toolsy: free tools for{" "}
+                  <span className="text-accent">SEO, AI workflows, creators, and everyday files</span>.
                 </h1>
 
                 <p className="mt-5 text-lg md:text-xl leading-relaxed text-muted-foreground">
-                  Search tools for PDF merging, video to audio, thumbnail maker, direct MP4 file URLs,
-                  video to frames ZIP exports, clip cutting, and image conversion. Everything is tuned for
-                  quick results and clear SEO landing pages.
+                  Search tools for meta generation, keyword clustering, regex explanations, captions,
+                  hashtags, PDF workflows, video utilities, and image conversion. Each page is built to
+                  solve one real problem with clear UX and strong SEO intent.
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
                   <Button
-                    onClick={() => setLocation("/tool/direct-mp4-downloader")}
+                    onClick={() => setLocation("/tool/ai-meta-generator")}
                     className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-3 text-base"
                   >
-                    Try MP4 downloader
+                    Try AI meta generator
                   </Button>
                   <Button
                     variant="outline"
@@ -214,7 +218,7 @@ export default function Home() {
                     <Input
                       value={searchQuery}
                       onChange={(event) => handleSearch(event.currentTarget.value)}
-                      placeholder="Search pdf merger, thumbnail maker, video to frames..."
+                      placeholder="Search ai meta generator, regex explainer, pdf merger..."
                       className="h-14 rounded-2xl border-border bg-background/95 pl-12 pr-4 text-base shadow-sm"
                     />
                   </div>
@@ -244,10 +248,10 @@ export default function Home() {
                     Tools
                   </p>
                   <p className="mt-2 text-4xl font-display font-bold text-foreground">
-                    {TOOLS.length}
+                    {TOOL_COUNT_LABEL}
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Free utilities for PDFs, videos, images, archives, and quick text workflows.
+                    Free utilities for AI drafting, SEO, developer work, social media, PDFs, videos, and images.
                   </p>
                 </div>
 
@@ -256,10 +260,10 @@ export default function Home() {
                     Categories
                   </p>
                   <p className="mt-2 text-4xl font-display font-bold text-foreground">
-                    {CATEGORIES.length}
+                    {CATEGORY_COUNT_LABEL}
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    PDF, video, image, archive, utility, and text tools grouped for easy scanning.
+                    AI, SEO, developer, social media, document, video, image, archive, utility, and text tools.
                   </p>
                 </div>
 
@@ -270,14 +274,14 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-sm uppercase tracking-[0.25em] text-white/70">
-                        Works on uploaded files
+                        Free and focused
                       </p>
-                      <p className="text-lg font-semibold">No signup, no clutter, no platform-only shortcuts.</p>
+                      <p className="text-lg font-semibold">No signup, clear search intent, and room to scale the catalog.</p>
                     </div>
                   </div>
                   <p className="mt-4 text-sm leading-relaxed text-white/75">
-                    We keep the workflow focused on your own files. Video tools support thumbnails, frame ZIPs,
-                    clip trimming, and audio extraction, while PDF tools handle conversions and compression.
+                    The catalog now spans AI generators, SEO helpers, developer utilities, social media drafts,
+                    and classic file tools. That mix gives you more organic entry points without making the UX noisy.
                   </p>
                 </div>
               </div>
@@ -287,7 +291,14 @@ export default function Home() {
 
         <section className="border-b border-border bg-card/30 py-6">
           <div className="container flex flex-wrap items-center justify-center gap-2">
-            {["pdf merger", "video to audio", "thumbnail maker", "video to frames", "video clip cutter", "image to pdf"].map(
+            {[
+              "ai meta generator",
+              "keyword clustering tool",
+              "schema markup generator",
+              "regex explainer",
+              "instagram caption generator",
+              "pdf merger",
+            ].map(
               (keyword) => (
                 <Badge
                   key={keyword}
@@ -434,7 +445,7 @@ export default function Home() {
                     {filteredTools.length} tool{filteredTools.length !== 1 ? "s" : ""} available
                   </p>
                   <p className="hidden text-sm text-muted-foreground md:block">
-                    Search terms like “video to audio”, “thumbnail maker”, or “pdf merger”.
+                    Search terms like “ai meta generator”, “regex explainer”, or “pdf merger”.
                   </p>
                 </div>
 

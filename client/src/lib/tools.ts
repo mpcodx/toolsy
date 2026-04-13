@@ -270,9 +270,138 @@ export const TOOLS: Tool[] = [
     icon: "Code2",
     color: "from-orange-400 to-orange-500",
   },
+
+  // AI Tools
+  {
+    id: "ai-meta-generator",
+    name: "AI Meta Generator",
+    description: "Generate SEO meta titles and descriptions from a topic and target keywords",
+    category: "AI",
+    icon: "Sparkles",
+    color: "from-cyan-500 to-blue-600",
+    featured: true,
+  },
+  {
+    id: "ai-paragraph-rewriter",
+    name: "AI Paragraph Rewriter",
+    description: "Rewrite paragraphs for clarity, tone, and readability in seconds",
+    category: "AI",
+    icon: "FilePenLine",
+    color: "from-violet-500 to-indigo-600",
+    featured: true,
+  },
+  {
+    id: "ai-title-generator",
+    name: "AI Title Generator",
+    description: "Create catchy blog, landing page, and video titles from a simple prompt",
+    category: "AI",
+    icon: "Heading1",
+    color: "from-sky-500 to-cyan-600",
+  },
+
+  // SEO Tools
+  {
+    id: "keyword-clustering-tool",
+    name: "Keyword Clustering Tool",
+    description: "Group related keywords into SEO clusters for content planning and internal links",
+    category: "SEO",
+    icon: "SearchCheck",
+    color: "from-emerald-500 to-teal-600",
+    featured: true,
+  },
+  {
+    id: "schema-markup-generator",
+    name: "Schema Markup Generator",
+    description: "Create JSON-LD schema markup for articles, FAQs, products, and software pages",
+    category: "SEO",
+    icon: "Braces",
+    color: "from-amber-500 to-orange-600",
+    featured: true,
+  },
+  {
+    id: "faq-generator",
+    name: "FAQ Generator",
+    description: "Generate SEO-friendly frequently asked questions and answers for landing pages",
+    category: "SEO",
+    icon: "MessageCircleQuestion",
+    color: "from-lime-500 to-green-600",
+  },
+
+  // Developer Tools
+  {
+    id: "commit-message-generator",
+    name: "Commit Message Generator",
+    description: "Turn change summaries into clean conventional commits with optional body text",
+    category: "Developer",
+    icon: "GitCommitHorizontal",
+    color: "from-slate-600 to-slate-800",
+    featured: true,
+  },
+  {
+    id: "regex-explainer",
+    name: "Regex Explainer",
+    description: "Explain what a regular expression does in plain English with token breakdowns",
+    category: "Developer",
+    icon: "ScanSearch",
+    color: "from-red-500 to-rose-600",
+    featured: true,
+  },
+  {
+    id: "curl-command-generator",
+    name: "cURL Command Generator",
+    description: "Build ready-to-run cURL requests from URL, headers, method, and JSON body input",
+    category: "Developer",
+    icon: "TerminalSquare",
+    color: "from-zinc-700 to-zinc-900",
+  },
+
+  // Social Media Tools
+  {
+    id: "hashtag-generator",
+    name: "Hashtag Generator",
+    description: "Generate niche, branded, and discovery hashtags for posts and short videos",
+    category: "Social Media",
+    icon: "Hash",
+    color: "from-fuchsia-500 to-pink-600",
+    featured: true,
+  },
+  {
+    id: "instagram-caption-generator",
+    name: "Instagram Caption Generator",
+    description: "Create scroll-stopping Instagram captions with hooks, CTAs, and hashtags",
+    category: "Social Media",
+    icon: "Instagram",
+    color: "from-pink-500 to-rose-600",
+    featured: true,
+  },
+  {
+    id: "youtube-description-generator",
+    name: "YouTube Description Generator",
+    description: "Write keyword-aware YouTube descriptions with chapters, CTAs, and hashtags",
+    category: "Social Media",
+    icon: "Youtube",
+    color: "from-red-500 to-orange-600",
+    featured: true,
+  },
 ];
 
-export const CATEGORIES = Array.from(new Set(TOOLS.map((tool) => tool.category)));
+const CATEGORY_ORDER = [
+  "AI",
+  "SEO",
+  "Developer",
+  "Social Media",
+  "PDF",
+  "Document",
+  "Image",
+  "Video",
+  "Text",
+  "Archive",
+  "Utility",
+];
+
+export const CATEGORIES = CATEGORY_ORDER.filter((category) =>
+  TOOLS.some((tool) => tool.category === category)
+);
 
 export function getTool(id: string): Tool | undefined {
   return TOOLS.find((tool) => tool.id === id);

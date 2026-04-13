@@ -6,14 +6,28 @@
 import { getTool, TOOLS } from "@/lib/tools";
 
 export const SITE_CONFIG = {
-  title: "Toolsy - Free PDF, Video & Image Tools",
+  title: "Toolsy - Free AI, SEO, Developer, Social, PDF & Media Tools",
   description:
-    "Toolsy is a free online hub for PDF, video, and image tools. Merge PDFs, split files, trim videos, convert video to audio, make thumbnails, and use browser-safe downloads. No signup required.",
+    "Toolsy is a free online hub for AI, SEO, developer, social media, PDF, video, and image tools. Generate metadata, cluster keywords, explain regex, write captions, and handle file workflows with no signup required.",
   url: "https://toolsy.rayonweb.com",
   image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
   author: "Toolsy Team",
   keywords: [
     "Toolsy",
+    "AI tools",
+    "SEO tools",
+    "developer tools",
+    "social media tools",
+    "ai meta generator",
+    "keyword clustering tool",
+    "schema markup generator",
+    "faq generator",
+    "commit message generator",
+    "regex explainer",
+    "curl command generator",
+    "hashtag generator",
+    "instagram caption generator",
+    "youtube description generator",
     "PDF converter",
     "image converter",
     "video to audio",

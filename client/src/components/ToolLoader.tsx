@@ -37,6 +37,18 @@ const toolComponents: Record<string, any> = {
   "base64-encoder": lazyNamed(() => import("./tools/UtilityTools"), "Base64EncoderDecoder"),
   "qr-code-generator": lazyNamed(() => import("./tools/UtilityTools"), "QrCodeGenerator"),
   "barcode-generator": lazyNamed(() => import("./tools/UtilityTools"), "BarcodeGenerator"),
+  "ai-meta-generator": lazyNamed(() => import("./tools/AiTextTools"), "AiMetaGenerator"),
+  "ai-paragraph-rewriter": lazyNamed(() => import("./tools/AiTextTools"), "AiParagraphRewriter"),
+  "ai-title-generator": lazyNamed(() => import("./tools/AiTextTools"), "AiTitleGenerator"),
+  "keyword-clustering-tool": lazyNamed(() => import("./tools/AiTextTools"), "KeywordClusteringTool"),
+  "schema-markup-generator": lazyNamed(() => import("./tools/AiTextTools"), "SchemaMarkupGenerator"),
+  "faq-generator": lazyNamed(() => import("./tools/AiTextTools"), "FaqGenerator"),
+  "commit-message-generator": lazyNamed(() => import("./tools/AiTextTools"), "CommitMessageGenerator"),
+  "regex-explainer": lazyNamed(() => import("./tools/AiTextTools"), "RegexExplainer"),
+  "curl-command-generator": lazyNamed(() => import("./tools/AiTextTools"), "CurlCommandGenerator"),
+  "hashtag-generator": lazyNamed(() => import("./tools/AiTextTools"), "HashtagGenerator"),
+  "instagram-caption-generator": lazyNamed(() => import("./tools/AiTextTools"), "InstagramCaptionGenerator"),
+  "youtube-description-generator": lazyNamed(() => import("./tools/AiTextTools"), "YoutubeDescriptionGenerator"),
 };
 
 interface ToolLoaderProps {
