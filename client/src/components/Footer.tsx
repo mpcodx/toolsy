@@ -9,59 +9,59 @@ export default function Footer() {
           <div>
             <h3 className="font-display font-bold text-foreground mb-2">Toolsy</h3>
             <p className="text-sm text-muted-foreground">
-              Free online tools for PDF, video, image, archive, and text workflows. No signup required.
+              Free online tools for AI, SEO, developer, social, PDF, video, image, archive, and text workflows. No signup required.
             </p>
           </div>
 
-          {/* Tools */}
+          {/* SEO and AI */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Popular Tools</h4>
+            <h4 className="font-semibold text-foreground mb-4">SEO & AI Tools</h4>
             <ul className="space-y-2">
               <li>
-                <a href="/tool/pdf-to-image" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  PDF to Image
+                <a href="/tool/ai-meta-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  AI Meta Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/image-to-pdf" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Image to PDF
+                <a href="/tool/keyword-clustering-tool" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Keyword Clustering Tool
                 </a>
               </li>
               <li>
-                <a href="/tool/pdf-merger" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  PDF Merger
+                <a href="/tool/schema-markup-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Schema Markup Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/video-to-audio" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Video to Audio
+                <a href="/tool/faq-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  FAQ Generator
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Video */}
+          {/* Developer and Social */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Video Tools</h4>
+            <h4 className="font-semibold text-foreground mb-4">Creator & Dev Tools</h4>
             <ul className="space-y-2">
               <li>
-                <a href="/tool/video-thumbnail-maker" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Thumbnail Maker
+                <a href="/tool/regex-explainer" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Regex Explainer
                 </a>
               </li>
               <li>
-                <a href="/tool/video-to-frames" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Video to Frames
+                <a href="/tool/commit-message-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Commit Message Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/video-clipper" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Video Clip Cutter
+                <a href="/tool/instagram-caption-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Instagram Caption Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/direct-mp4-downloader" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Direct MP4 Downloader
+                <a href="/tool/youtube-description-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  YouTube Description Generator
                 </a>
               </li>
             </ul>
@@ -72,18 +72,18 @@ export default function Footer() {
             <h4 className="font-semibold text-foreground mb-4">Search Tips</h4>
             <ul className="space-y-2">
               <li>
-                <a href="/?search=pdf merger" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  PDF merger
+                <a href="/?search=ai meta generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  AI meta generator
                 </a>
               </li>
               <li>
-                <a href="/?search=thumbnail maker" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Thumbnail maker
+                <a href="/?search=keyword clustering tool" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Keyword clustering tool
                 </a>
               </li>
               <li>
-                <a href="/?search=video to frames" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Video to frames
+                <a href="/?search=regex explainer" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Regex explainer
                 </a>
               </li>
               <li>
@@ -92,8 +92,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/?search=mp4 downloader" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  MP4 downloader
+                <a href="/?search=pdf merger" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  PDF merger
                 </a>
               </li>
             </ul>
