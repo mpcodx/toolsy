@@ -1,3 +1,12 @@
+import { OPEN_COOKIE_SETTINGS_EVENT } from "@/lib/cookie-consent";
+
+const footerInfoLinks = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Contact Us", href: "/contact-us" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
+] as const;
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -110,13 +119,24 @@ export default function Footer() {
               <p className="text-sm text-muted-foreground">
                 Built for quick conversions, shareable tool pages, and search-friendly landing pages.
               </p>
-              <button
-                type="button"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                onClick={() => window.dispatchEvent(new Event("toolsy:open-cookie-settings"))}
-              >
-                Cookie settings
-              </button>
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:justify-end">
+                {footerInfoLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <button
+                  type="button"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS_EVENT))}
+                >
+                  Cookie settings
+                </button>
+              </div>
             </div>
           </div>
         </div>

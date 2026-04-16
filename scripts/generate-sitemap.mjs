@@ -4,6 +4,12 @@ const SITE_URL = "https://toolsy.rayonweb.com";
 const LASTMOD = new Date().toISOString().slice(0, 10);
 const TOOLS_FILE = new URL("../client/src/lib/tools.ts", import.meta.url);
 const SITEMAP_FILE = new URL("../client/public/sitemap.xml", import.meta.url);
+const STATIC_PAGES = [
+  "/privacy-policy",
+  "/about-us",
+  "/contact-us",
+  "/terms-and-conditions",
+];
 
 function escapeXml(value) {
   return value
@@ -60,6 +66,11 @@ const urls = [
     changefreq: "daily",
     priority: "1.0",
   },
+  ...STATIC_PAGES.map((path) => ({
+    loc: `${SITE_URL}${path}`,
+    changefreq: "monthly",
+    priority: "0.5",
+  })),
   ...tools.map((tool) => ({
     loc: `${SITE_URL}/tool/${tool.id}`,
     changefreq: "weekly",
