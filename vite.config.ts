@@ -5,8 +5,8 @@ import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { defineConfig, type Plugin, type PreviewServer, type ViteDevServer } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
-import { generateAiPayload } from "./server/ai-tools";
 import { registerConvertRoutes, type ConvertRequestHandler } from "./server/register-tool-routes";
+import { generateAiPayload } from "./shared/ai-tools-core";
 
 // =============================================================================
 // Manus Debug Collector - Vite Plugin
