@@ -5,7 +5,7 @@
 
 import { readCookieConsent } from "@/lib/cookie-consent";
 
-const DEFAULT_GOOGLE_TAG_ID = "G-RVWB8SMX27";
+const DEFAULT_GOOGLE_TAG_ID = "G-SEVGK0TPTF";
 const UMAMI_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="umami"]';
 const GOOGLE_TAG_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="gtag"]';
 const GOOGLE_TAG_SCRIPT_URL = "https://www.googletagmanager.com/gtag/js";
@@ -247,16 +247,27 @@ function initializeGoogleAnalytics() {
     return;
   }
 
+  const existingScript = document.querySelector<HTMLScriptElement>(
+    `${GOOGLE_TAG_SCRIPT_SELECTOR}, script[src^="${GOOGLE_TAG_SCRIPT_URL}?id="]`
+  );
+
+  if (typeof window.gtag === "function") {
+    googleTagBootstrapped = true;
+  }
+
+  if (existingScript) {
+    googleTagScriptLoaded = true;
+
+    if (googleTagBootstrapped) {
+      return;
+    }
+  }
+
   if (!googleTagBootstrapped) {
     bootstrapGoogleTag(tagId);
   }
 
-  const existingScript = document.querySelector<HTMLScriptElement>(
-    GOOGLE_TAG_SCRIPT_SELECTOR
-  );
-
   if (existingScript) {
-    googleTagScriptLoaded = true;
     return;
   }
 

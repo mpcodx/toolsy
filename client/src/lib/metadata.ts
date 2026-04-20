@@ -38,9 +38,9 @@ const DEFAULT_METADATA: MetadataConfig = {
     "free converter",
   ],
   image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
-  url: "https://toolsy.rayonweb.com",
+  url: "https://www.toolsylab.xyz",
   type: "website",
-  canonical: "https://toolsy.rayonweb.com/",
+  canonical: "https://www.toolsylab.xyz/",
 };
 
 export function updateMetadata(config: Partial<MetadataConfig> = {}) {

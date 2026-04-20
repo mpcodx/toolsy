@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
-const SITE_URL = "https://toolsy.rayonweb.com";
+const SITE_URL = "https://www.toolsylab.xyz";
 const LASTMOD = new Date().toISOString().slice(0, 10);
 const TOOLS_FILE = new URL("../client/src/lib/tools.ts", import.meta.url);
 const SITEMAP_FILE = new URL("../client/public/sitemap.xml", import.meta.url);

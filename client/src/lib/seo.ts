@@ -9,7 +9,7 @@ export const SITE_CONFIG = {
   title: "Toolsy - Free AI, SEO, Developer, Social, PDF & Media Tools",
   description:
     "Toolsy is a free online hub for AI, SEO, developer, social media, PDF, video, and image tools. Generate metadata, cluster keywords, explain regex, write captions, and handle file workflows with no signup required.",
-  url: "https://toolsy.rayonweb.com",
+  url: "https://www.toolsylab.xyz",
   image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
   author: "Toolsy Team",
   keywords: [
@@ -216,7 +216,7 @@ Disallow: /admin
 Disallow: /api
 Disallow: /private
 
-Sitemap: https://toolsy.rayonweb.com/sitemap.xml`;
+Sitemap: https://www.toolsylab.xyz/sitemap.xml`;
 
 export const SITEMAP_URLS = [
   { url: "/", priority: 1.0, changefreq: "daily" },
