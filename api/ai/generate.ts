@@ -1,4 +1,4 @@
-import { generateAiPayload } from "../../shared/ai-tools-core";
+import { generateAiPayload } from "../../shared/ai-tools-core.js";
 
 type VercelRequestLike = {
   body?: unknown;
