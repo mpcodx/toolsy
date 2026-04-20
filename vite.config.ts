@@ -223,9 +223,13 @@ function registerAiGenerateMiddleware(server: ViteDevServer | PreviewServer) {
         res.setHeader("Content-Type", "application/json; charset=utf-8");
         res.end(JSON.stringify(payload));
       } catch (error) {
+        console.error("/api/ai/generate failed in Vite middleware:", error);
+
         const isInvalidJson =
           error instanceof SyntaxError &&
           /JSON|Unexpected token|Unexpected end of JSON input/i.test(error.message);
+        const errorMessage =
+          error instanceof Error ? error.message : "Unable to generate content right now.";
 
         res.statusCode = isInvalidJson ? 400 : 500;
         res.setHeader("Content-Type", "application/json; charset=utf-8");
@@ -233,7 +237,9 @@ function registerAiGenerateMiddleware(server: ViteDevServer | PreviewServer) {
           JSON.stringify({
             error: isInvalidJson
               ? "Invalid JSON request body."
-              : "Unable to generate content right now.",
+              : process.env.NODE_ENV === "production"
+                ? "Unable to generate content right now."
+                : `Unable to generate content right now. ${errorMessage}`,
           })
         );
       }
