@@ -11,10 +11,19 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { getToolIcon } from "@/lib/tool-icons";
 import { getTool, getToolsByCategory, TOOLS } from "@/lib/tools";
 import { updateMetadata } from "@/lib/metadata";
 import { buildToolSeo } from "@/lib/tool-seo";
-import * as Icons from "lucide-react";
+import {
+  BookOpen,
+  CheckCircle2,
+  ChevronLeft,
+  Download,
+  Route as RouteIcon,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { useLocation } from "wouter";
 
@@ -80,7 +89,7 @@ export default function ToolPage({ params }: ToolPageProps) {
     );
   }
 
-  const IconComponent = (Icons as any)[tool.icon] || Icons.Zap;
+  const IconComponent = getToolIcon(tool.icon);
   const relatedTools = getToolsByCategory(tool.category).filter((t) => t.id !== tool.id);
   const categorySearchHref = `/?search=${encodeURIComponent(tool.category.toLowerCase())}`;
   const searchPhrasesToShow = seo?.content.searchPhrases.slice(0, 12) ?? [];
@@ -99,7 +108,7 @@ export default function ToolPage({ params }: ToolPageProps) {
               variant="ghost"
               className="mb-6 text-muted-foreground hover:text-foreground"
             >
-              <Icons.ChevronLeft className="w-4 h-4 mr-2" />
+              <ChevronLeft className="w-4 h-4 mr-2" />
               Back to Tools
             </Button>
 
@@ -229,14 +238,15 @@ export default function ToolPage({ params }: ToolPageProps) {
                           Built for {tool.name.toLowerCase()}
                         </h2>
                       </div>
-                      <Icons.Sparkles className="h-6 w-6 text-accent" />
+                      <Sparkles className="h-6 w-6 text-accent" />
                     </div>
                     <p className="mt-4 text-sm md:text-base leading-7 text-muted-foreground">
                       {seo.content.intro}
                     </p>
                     <div className="mt-6 grid gap-4">
                       {seo.content.highlights.map((highlight, index) => {
-                        const HighlightIcon = index === 0 ? Icons.CheckCircle2 : index === 1 ? Icons.ShieldCheck : Icons.Download;
+                        const HighlightIcon =
+                          index === 0 ? CheckCircle2 : index === 1 ? ShieldCheck : Download;
 
                         return (
                           <div
@@ -263,7 +273,7 @@ export default function ToolPage({ params }: ToolPageProps) {
                           {tool.name} in a few steps
                         </h2>
                       </div>
-                      <Icons.Route className="h-6 w-6 text-accent" />
+                      <RouteIcon className="h-6 w-6 text-accent" />
                     </div>
                     <ol className="mt-6 space-y-4">
                       {seo.content.steps.map((step, index) => (
@@ -312,7 +322,7 @@ export default function ToolPage({ params }: ToolPageProps) {
                         Why people use {tool.name}
                       </h3>
                     </div>
-                    <Icons.BookOpen className="h-6 w-6 text-accent" />
+                    <BookOpen className="h-6 w-6 text-accent" />
                   </div>
                   <div className="mt-6 space-y-6">
                     {seo.content.sections.map((section) => (

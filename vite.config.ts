@@ -183,53 +183,56 @@ function registerApiRoutes(server: ViteDevServer | PreviewServer) {
   registerConvertRoutes((route, handler) => registerApiMiddleware(server, route, handler));
 }
 
-const plugins = [
-  react(),
-  tailwindcss(),
-  vitePluginManusRuntime(),
-  vitePluginManusDebugCollector(),
-  {
-    name: "register-convert-api-routes",
-    configureServer(server) {
-      registerApiRoutes(server);
+export default defineConfig(({ command, mode }) => {
+  const includeManusRuntime = command === "serve" && mode !== "production";
+  const plugins: Plugin[] = [
+    react(),
+    tailwindcss(),
+    ...(includeManusRuntime ? [vitePluginManusRuntime()] : []),
+    vitePluginManusDebugCollector(),
+    {
+      name: "register-convert-api-routes",
+      configureServer(server) {
+        registerApiRoutes(server);
+      },
+      configurePreviewServer(server) {
+        registerApiRoutes(server);
+      },
     },
-    configurePreviewServer(server) {
-      registerApiRoutes(server);
-    },
-  },
-];
+  ];
 
-export default defineConfig({
-  plugins,
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+  return {
+    plugins,
+    resolve: {
+      alias: {
+        "@": path.resolve(import.meta.dirname, "client", "src"),
+        "@shared": path.resolve(import.meta.dirname, "shared"),
+        "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      },
     },
-  },
-  envDir: path.resolve(import.meta.dirname),
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-  server: {
-    port: 3000,
-    strictPort: false, // Will find next available port if 3000 is busy
-    host: true,
-    allowedHosts: [
-      ".manuspre.computer",
-      ".manus.computer",
-      ".manus-asia.computer",
-      ".manuscomputer.ai",
-      ".manusvm.computer",
-      "localhost",
-      "127.0.0.1",
-    ],
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+    envDir: path.resolve(import.meta.dirname),
+    root: path.resolve(import.meta.dirname, "client"),
+    build: {
+      outDir: path.resolve(import.meta.dirname, "dist/public"),
+      emptyOutDir: true,
     },
-  },
+    server: {
+      port: 3000,
+      strictPort: false, // Will find next available port if 3000 is busy
+      host: true,
+      allowedHosts: [
+        ".manuspre.computer",
+        ".manus.computer",
+        ".manus-asia.computer",
+        ".manuscomputer.ai",
+        ".manusvm.computer",
+        "localhost",
+        "127.0.0.1",
+      ],
+      fs: {
+        strict: true,
+        deny: ["**/.*"],
+      },
+    },
+  };
 });

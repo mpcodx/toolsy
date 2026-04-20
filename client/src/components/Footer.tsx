@@ -7,11 +7,16 @@ const footerInfoLinks = [
   { label: "Terms & Conditions", href: "/terms-and-conditions" },
 ] as const;
 
+const deferredFooterStyle = {
+  contentVisibility: "auto",
+  containIntrinsicSize: "1px 360px",
+} as const;
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-card mt-20">
+    <footer className="border-t border-border bg-card mt-20" style={deferredFooterStyle}>
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}

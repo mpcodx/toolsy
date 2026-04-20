@@ -95,6 +95,10 @@ const trustPoints = [
 
 const TOOL_COUNT_LABEL = "40+";
 const CATEGORY_COUNT_LABEL = "10+";
+const deferredSectionStyle = {
+  contentVisibility: "auto",
+  containIntrinsicSize: "1px 900px",
+} as const;
 
 function scrollToTools() {
   document.getElementById("tools-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -312,7 +316,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24" style={deferredSectionStyle}>
           <div className="container">
             <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
@@ -341,7 +345,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="border-y border-border bg-card/50 py-16 md:py-24">
+        <section
+          className="border-y border-border bg-card/50 py-16 md:py-24"
+          style={deferredSectionStyle}
+        >
           <div className="container">
             <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div>
@@ -395,7 +402,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="tools-grid" className="py-16 md:py-24">
+        <section id="tools-grid" className="py-16 md:py-24" style={deferredSectionStyle}>
           <div className="container">
             <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
@@ -472,7 +479,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="border-t border-border bg-card/40 py-16 md:py-24">
+        <section
+          className="border-t border-border bg-card/40 py-16 md:py-24"
+          style={deferredSectionStyle}
+        >
           <div className="container">
             <div className="mb-10">
               <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">
