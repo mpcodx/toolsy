@@ -5,6 +5,17 @@
 
 import { readCookieConsent } from "@/lib/cookie-consent";
 
+const STATIC_GOOGLE_TAG_ID = "G-SNEL6TMHFB";
+const UMAMI_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="umami"]';
+const GOOGLE_TAG_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="gtag"]';
+const GOOGLE_TAG_SCRIPT_URL = "https://www.googletagmanager.com/gtag/js";
+const UMAMI_DEFAULT_SCRIPT_PATH = "/script.js";
+type GtagCommand = IArguments;
+
+let umamiScriptLoaded = false;
+let googleTagScriptLoaded = false;
+let googleTagBootstrapped = false;
+
 export interface ToolUsageEvent {
   toolId: string;
   toolName: string;
@@ -74,6 +85,37 @@ export class Analytics {
         });
       }
     }
+
+    if (typeof window !== "undefined" && window.gtag) {
+      if ("toolId" in event) {
+        const params: Record<string, unknown> = {
+          tool_id: event.toolId,
+          tool_name: event.toolName,
+          success: event.success,
+        };
+
+        if (typeof event.duration === "number") {
+          params.tool_duration_ms = event.duration;
+        }
+
+        if (typeof event.fileSize === "number") {
+          params.file_size_bytes = event.fileSize;
+        }
+
+        window.gtag("event", "tool_used", params);
+      } else {
+        const params: Record<string, unknown> = {
+          page_path: event.page,
+          page_location: window.location.href,
+        };
+
+        if (event.referrer) {
+          params.page_referrer = event.referrer;
+        }
+
+        window.gtag("event", "page_view", params);
+      }
+    }
   }
 
   getEvents(): (ToolUsageEvent | PageViewEvent)[] {
@@ -89,8 +131,6 @@ export class Analytics {
   }
 }
 
-let analyticsScriptLoaded = false;
-
 function isUsableAnalyticsEndpoint(endpoint: string) {
   const trimmed = endpoint.trim();
 
@@ -101,44 +141,91 @@ function isUsableAnalyticsEndpoint(endpoint: string) {
   return true;
 }
 
-export function initializeAnalytics() {
-  if (typeof document === "undefined" || typeof window === "undefined") {
+function resolveUmamiScriptUrl(endpoint: string) {
+  const trimmed = endpoint.trim();
+
+  if (!trimmed) {
+    return "";
+  }
+
+  if (trimmed.endsWith(".js")) {
+    return trimmed;
+  }
+
+  return `${trimmed.replace(/\/$/, "")}${UMAMI_DEFAULT_SCRIPT_PATH}`;
+}
+
+function isUsableGoogleTagId(tagId: string) {
+  const trimmed = tagId.trim();
+
+  if (!trimmed || trimmed === "test") {
+    return false;
+  }
+
+  return trimmed.startsWith("G-");
+}
+
+function getGoogleTagId() {
+  return STATIC_GOOGLE_TAG_ID;
+}
+
+function bootstrapGoogleTag(tagId: string) {
+  if (typeof window === "undefined") {
     return;
   }
 
-  if (analyticsScriptLoaded) {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() {
+    window.dataLayer?.push(arguments as unknown as GtagCommand);
+  };
+
+  window.gtag("consent", "default", {
+    analytics_storage: "denied",
+  });
+  window.gtag("js", new Date());
+  window.gtag("config", tagId, { send_page_view: false });
+  googleTagBootstrapped = true;
+}
+
+export function syncGoogleAnalyticsConsent(status: "accepted" | "rejected") {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") {
     return;
   }
 
-  if (readCookieConsent() !== "accepted") {
+  window.gtag("consent", "update", {
+    analytics_storage: status === "accepted" ? "granted" : "denied",
+  });
+}
+
+function initializeUmamiAnalytics() {
+  if (umamiScriptLoaded) {
     return;
   }
 
   const endpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT?.trim() ?? "";
   const websiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID?.trim() ?? "";
+  const scriptUrl = resolveUmamiScriptUrl(endpoint);
 
-  if (!isUsableAnalyticsEndpoint(endpoint) || !websiteId) {
+  if (!isUsableAnalyticsEndpoint(endpoint) || !websiteId || !scriptUrl) {
     return;
   }
 
   if (window.umami) {
-    analyticsScriptLoaded = true;
+    umamiScriptLoaded = true;
     return;
   }
 
-  const existingScript = document.querySelector<HTMLScriptElement>(
-    'script[data-toolsy-analytics="umami"]'
-  );
+  const existingScript = document.querySelector<HTMLScriptElement>(UMAMI_SCRIPT_SELECTOR);
 
   if (existingScript) {
-    analyticsScriptLoaded = true;
+    umamiScriptLoaded = true;
     return;
   }
 
   const script = document.createElement("script");
   script.async = true;
   script.defer = true;
-  script.src = `${endpoint.replace(/\/$/, "")}/umami`;
+  script.src = scriptUrl;
   script.setAttribute("data-website-id", websiteId);
   script.setAttribute("data-toolsy-analytics", "umami");
   script.onerror = () => {
@@ -146,7 +233,68 @@ export function initializeAnalytics() {
   };
 
   document.head.appendChild(script);
-  analyticsScriptLoaded = true;
+  umamiScriptLoaded = true;
+}
+
+function initializeGoogleAnalytics() {
+  if (googleTagScriptLoaded) {
+    return;
+  }
+
+  const tagId = getGoogleTagId();
+
+  if (!isUsableGoogleTagId(tagId)) {
+    return;
+  }
+
+  const existingScript = document.querySelector<HTMLScriptElement>(
+    `${GOOGLE_TAG_SCRIPT_SELECTOR}, script[src^="${GOOGLE_TAG_SCRIPT_URL}?id="]`
+  );
+
+  if (typeof window.gtag === "function") {
+    googleTagBootstrapped = true;
+  }
+
+  if (existingScript) {
+    googleTagScriptLoaded = true;
+
+    if (googleTagBootstrapped) {
+      return;
+    }
+  }
+
+  if (!googleTagBootstrapped) {
+    bootstrapGoogleTag(tagId);
+  }
+
+  if (existingScript) {
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `${GOOGLE_TAG_SCRIPT_URL}?id=${encodeURIComponent(tagId)}`;
+  script.setAttribute("data-toolsy-analytics", "gtag");
+  script.onerror = () => {
+    console.warn("Google tag failed to load.");
+  };
+
+  document.head.appendChild(script);
+  googleTagScriptLoaded = true;
+}
+
+export function initializeAnalytics() {
+  if (typeof document === "undefined" || typeof window === "undefined") {
+    return;
+  }
+
+  if (readCookieConsent() !== "accepted") {
+    return;
+  }
+
+  initializeUmamiAnalytics();
+  initializeGoogleAnalytics();
+  syncGoogleAnalyticsConsent("accepted");
 }
 
 export function disableAnalytics() {
@@ -154,17 +302,19 @@ export function disableAnalytics() {
     return;
   }
 
-  analyticsScriptLoaded = false;
+  umamiScriptLoaded = false;
 
-  const script = document.querySelector<HTMLScriptElement>(
-    'script[data-toolsy-analytics="umami"]'
+  const scripts = document.querySelectorAll<HTMLScriptElement>(
+    UMAMI_SCRIPT_SELECTOR
   );
 
-  script?.remove();
+  scripts.forEach((script) => script.remove());
 
   if (window.umami) {
     window.umami = undefined;
   }
+
+  syncGoogleAnalyticsConsent("rejected");
 }
 
 // Extend Window interface for Umami
@@ -173,6 +323,8 @@ declare global {
     umami?: {
       track: (name: string, data?: Record<string, any>) => void;
     };
+    dataLayer?: GtagCommand[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -265,6 +417,19 @@ export class ErrorTracker {
         message: errorData.message,
         context,
       });
+    }
+
+    if (typeof window !== "undefined" && window.gtag) {
+      const params: Record<string, unknown> = {
+        description: errorData.message,
+        fatal: false,
+      };
+
+      if (context) {
+        params.context = context;
+      }
+
+      window.gtag("event", "exception", params);
     }
   }
 

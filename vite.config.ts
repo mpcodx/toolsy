@@ -183,53 +183,98 @@ function registerApiRoutes(server: ViteDevServer | PreviewServer) {
   registerConvertRoutes((route, handler) => registerApiMiddleware(server, route, handler));
 }
 
-const plugins = [
-  react(),
-  tailwindcss(),
-  vitePluginManusRuntime(),
-  vitePluginManusDebugCollector(),
-  {
-    name: "register-convert-api-routes",
-    configureServer(server) {
-      registerApiRoutes(server);
-    },
-    configurePreviewServer(server) {
-      registerApiRoutes(server);
-    },
-  },
-];
+function inlineEntrypointCss(): Plugin {
+  return {
+    name: "inline-entrypoint-css",
+    apply: "build",
+    enforce: "post",
+    generateBundle(_, bundle) {
+      const htmlAsset = Object.values(bundle).find(
+        (item): item is import("rollup").OutputAsset =>
+          item.type === "asset" && item.fileName.endsWith(".html")
+      );
 
-export default defineConfig({
-  plugins,
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      if (!htmlAsset || typeof htmlAsset.source !== "string") {
+        return;
+      }
+
+      const stylesheetMatch = htmlAsset.source.match(
+        /<link rel="stylesheet"[^>]+href="\/([^"]+\.css)"[^>]*>/
+      );
+
+      if (!stylesheetMatch) {
+        return;
+      }
+
+      const cssFileName = stylesheetMatch[1];
+      const cssAsset = bundle[cssFileName];
+
+      if (!cssAsset || cssAsset.type !== "asset" || typeof cssAsset.source !== "string") {
+        return;
+      }
+
+      const styleTag = `<style data-inline-entry-css>${cssAsset.source}</style>`;
+
+      htmlAsset.source = htmlAsset.source
+        .replace(stylesheetMatch[0], "")
+        .replace('<script type="module"', `${styleTag}\n    <script type="module"`);
+
+      delete bundle[cssFileName];
     },
-  },
-  envDir: path.resolve(import.meta.dirname),
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-  server: {
-    port: 3000,
-    strictPort: false, // Will find next available port if 3000 is busy
-    host: true,
-    allowedHosts: [
-      ".manuspre.computer",
-      ".manus.computer",
-      ".manus-asia.computer",
-      ".manuscomputer.ai",
-      ".manusvm.computer",
-      "localhost",
-      "127.0.0.1",
-    ],
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+  };
+}
+
+export default defineConfig(({ command, mode }) => {
+  const includeManusRuntime = command === "serve" && mode !== "production";
+  const plugins: Plugin[] = [
+    react(),
+    tailwindcss(),
+    ...(includeManusRuntime ? [vitePluginManusRuntime()] : []),
+    vitePluginManusDebugCollector(),
+    inlineEntrypointCss(),
+    {
+      name: "register-convert-api-routes",
+      configureServer(server) {
+        registerApiRoutes(server);
+      },
+      configurePreviewServer(server) {
+        registerApiRoutes(server);
+      },
     },
-  },
+  ];
+
+  return {
+    plugins,
+    resolve: {
+      alias: {
+        "@": path.resolve(import.meta.dirname, "client", "src"),
+        "@shared": path.resolve(import.meta.dirname, "shared"),
+        "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      },
+    },
+    envDir: path.resolve(import.meta.dirname),
+    root: path.resolve(import.meta.dirname, "client"),
+    build: {
+      outDir: path.resolve(import.meta.dirname, "dist/public"),
+      emptyOutDir: true,
+    },
+    server: {
+      port: 3000,
+      strictPort: false, // Will find next available port if 3000 is busy
+      host: true,
+      allowedHosts: [
+        ".manuspre.computer",
+        ".manus.computer",
+        ".manus-asia.computer",
+        ".manuscomputer.ai",
+        ".manusvm.computer",
+        "localhost",
+        "127.0.0.1",
+      ],
+      fs: {
+        strict: true,
+        deny: ["**/.*"],
+      },
+    },
+  };
 });

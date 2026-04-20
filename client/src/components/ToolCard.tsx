@@ -1,5 +1,6 @@
+import { getToolIcon } from "@/lib/tool-icons";
 import { Tool } from "@/lib/tools";
-import * as Icons from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useLocation } from "wouter";
 
 interface ToolCardProps {
@@ -8,16 +9,27 @@ interface ToolCardProps {
 
 export default function ToolCard({ tool }: ToolCardProps) {
   const [, setLocation] = useLocation();
-  
-  // Get the icon component dynamically
-  const IconComponent = (Icons as any)[tool.icon] || Icons.Zap;
+  const href = `/tool/${tool.id}`;
+  const IconComponent = getToolIcon(tool.icon);
 
-  const handleClick = () => {
-    setLocation(`/tool/${tool.id}`);
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    setLocation(href);
   };
 
   return (
-    <div
+    <a
+      href={href}
       onClick={handleClick}
       className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 cursor-pointer transition-all duration-300 hover:border-accent hover:shadow-lg hover:-translate-y-1"
     >
@@ -53,13 +65,13 @@ export default function ToolCard({ tool }: ToolCardProps) {
             {tool.category}
           </span>
           <div className="text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-            <Icons.ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4" />
           </div>
         </div>
       </div>
 
       {/* Gradient Border on Hover */}
       <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-    </div>
+    </a>
   );
 }

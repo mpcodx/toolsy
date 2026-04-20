@@ -212,12 +212,12 @@ export const TOOL_IMPLEMENTATIONS = {
   },
   "video-clipper": {
     name: "Video Clip Cutter",
-    description: "Trim uploaded videos into shorter clips",
+    description: "Trim uploaded videos into shorter, fast, watermark-free clips",
     libraries: ["MediaRecorder", "captureStream"],
     features: [
       "Choose start and end times",
-      "Trim a local video file",
-      "Download a WebM clip",
+      "Trim a local video file in the browser",
+      "Download a watermark-free WebM clip",
       "No third-party downloads",
     ],
   },

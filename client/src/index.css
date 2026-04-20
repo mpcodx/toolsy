@@ -121,14 +121,14 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, "Avenir Next", "Segoe UI", Arial, sans-serif;
     font-weight: 700;
   }
   .font-display {
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, "Avenir Next", "Segoe UI", Arial, sans-serif;
     font-weight: 700;
   }
   button:not(:disabled),

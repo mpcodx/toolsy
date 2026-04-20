@@ -470,6 +470,7 @@ export function VideoClipper() {
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(15);
   const [loading, setLoading] = useState(false);
+  const trustBadges = ["Free", "Secure", "No Signup", "No Watermark"];
 
   useEffect(() => {
     if (!file) {
@@ -534,8 +535,18 @@ export function VideoClipper() {
         <div className="space-y-1">
           <h3 className="text-xl font-semibold text-foreground">Video Clip Cutter</h3>
           <p className="text-sm text-muted-foreground">
-            Trim a local video into a shorter WebM clip using start and end times.
+            Trim a local video into a shorter, fast, watermark-free WebM clip using start and end times.
           </p>
+          <div className="flex flex-wrap gap-2 pt-2">
+            {trustBadges.map((badge) => (
+              <span
+                key={badge}
+                className="inline-flex items-center rounded-full bg-secondary/60 px-3 py-1 text-xs font-medium text-muted-foreground"
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -554,7 +565,7 @@ export function VideoClipper() {
           setDuration(null);
         }}
         title="Click to upload or drag and drop"
-        hint="Trim your own video files into a shorter clip"
+        hint="Trim your own video files into a shorter, watermark-free clip"
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -566,7 +577,7 @@ export function VideoClipper() {
         </div>
         <div className="rounded-2xl border border-border bg-card/70 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Output</p>
-          <p className="text-lg font-semibold text-foreground">WebM clip download</p>
+          <p className="text-lg font-semibold text-foreground">Watermark-free WebM clip</p>
         </div>
       </div>
 
@@ -608,7 +619,7 @@ export function VideoClipper() {
         ) : (
           <>
             <Download className="w-4 h-4 mr-2" />
-            Download Clip
+            Trim & Download
           </>
         )}
       </Button>
@@ -616,7 +627,8 @@ export function VideoClipper() {
       <div className="rounded-2xl border border-border bg-card/70 p-4">
         <p className="text-sm text-muted-foreground">
           Useful for short previews, social-ready edits, and clips from videos you own or have rights to
-          use. Platform-specific downloader support is not included.
+          use. Processing stays in your browser, the export is watermark-free, and platform-specific
+          downloader support is not included.
         </p>
       </div>
     </div>

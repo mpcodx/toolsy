@@ -1,13 +1,25 @@
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import CookieConsentBanner from "@/components/CookieConsentBanner";
-import CookieVisitTracker from "@/components/CookieVisitTracker";
-import NotFound from "@/pages/NotFound";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import ToolPage from "./pages/ToolPage";
+
+const AppEnhancements = lazy(() => import("./components/AppEnhancements"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ToolPage = lazy(() => import("./pages/ToolPage"));
+
+const lazyNamed = (loader: () => Promise<any>, exportName: string) =>
+  lazy(() => loader().then((module) => ({ default: module[exportName] })));
+
+const PrivacyPolicyPage = lazyNamed(
+  () => import("./pages/SitePage"),
+  "PrivacyPolicyPage"
+);
+const AboutUsPage = lazyNamed(() => import("./pages/SitePage"), "AboutUsPage");
+const ContactUsPage = lazyNamed(() => import("./pages/SitePage"), "ContactUsPage");
+const TermsAndConditionsPage = lazyNamed(
+  () => import("./pages/SitePage"),
+  "TermsAndConditionsPage"
+);
 
 /**
  * Modern Minimalist Design - Slate Blue & Cyan Accents
@@ -19,27 +31,73 @@ import ToolPage from "./pages/ToolPage";
 
 function Router() {
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/tool/:id"} component={ToolPage} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={<RouteFallback />}>
+      <Switch>
+        <Route path={"/"} component={Home} />
+        <Route path={"/privacy-policy"} component={PrivacyPolicyPage} />
+        <Route path={"/about-us"} component={AboutUsPage} />
+        <Route path={"/contact-us"} component={ContactUsPage} />
+        <Route path={"/terms-and-conditions"} component={TermsAndConditionsPage} />
+        <Route path={"/tool/:id"} component={ToolPage} />
+        <Route path={"/404"} component={NotFound} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
+  );
+}
+
+function RouteFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="text-center">
+        <div className="mx-auto h-12 w-12 rounded-full border-4 border-border border-t-accent animate-spin" />
+        <p className="mt-4 text-sm text-muted-foreground">Loading page...</p>
+      </div>
+    </div>
   );
 }
 
 function App() {
+  const [showEnhancements, setShowEnhancements] = useState(false);
+
+  useEffect(() => {
+    const loadEnhancements = () => {
+      setShowEnhancements(true);
+      void Promise.all([import("./lib/alerts"), import("./lib/analytics")]).then(
+        ([alerts, analytics]) => {
+          alerts.installSweetAlertBridge();
+          analytics.initializeAnalytics();
+        }
+      );
+    };
+
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(loadEnhancements, { timeout: 1500 });
+
+      return () => {
+        window.cancelIdleCallback(idleId);
+      };
+    }
+
+    const timeoutId = globalThis.setTimeout(loadEnhancements, 1);
+
+    return () => {
+      globalThis.clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
-        <TooltipProvider>
-          <Toaster />
-          <CookieVisitTracker />
-          <Router />
-          <CookieConsentBanner />
-        </TooltipProvider>
-      </ThemeProvider>
+      <Router />
+      {showEnhancements ? (
+        <Suspense fallback={null}>
+          <AppEnhancements />
+        </Suspense>
+      ) : null}
     </ErrorBoundary>
   );
 }

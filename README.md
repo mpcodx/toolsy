@@ -1,18 +1,18 @@
-# Toolsy - Free PDF, Video, and Image Tools
+# Toolsy - Free AI, SEO, Developer, Social, PDF, Video, and Image Tools
 
-Toolsy is a free online hub for PDF, video, image, text, archive, and utility tools. It is built for speed, clarity, and search visibility, with modern UI, SEO-friendly landing pages, and a simple workflow that works well on desktop and mobile.
+Toolsy is a free online hub for AI, SEO, developer, social media, PDF, video, image, text, archive, and utility tools. It is built for speed, clarity, and search visibility, with modern UI, SEO-friendly landing pages, and a simple workflow that works well on desktop and mobile.
 
-Live site: https://toolsy.rayonweb.com/
+Live site: https://www.toolsylab.xyz/
 
 ## Overview
 
-Toolsy helps users complete everyday file tasks without installing desktop software. People can merge PDFs, split documents, convert images, extract audio from videos, make thumbnails, export video frames, create ZIP files, generate QR codes, encode Base64, and much more.
+Toolsy helps users complete everyday file tasks and lightweight text workflows without installing desktop software. People can generate metadata, cluster keywords, explain regex, write captions, merge PDFs, split documents, convert images, extract audio from videos, make thumbnails, export video frames, create ZIP files, generate QR codes, encode Base64, and much more.
 
 The app uses a modern React stack, lazy-loaded tool components, rich metadata, structured data, sitemap and robots files, and a responsive design system so each tool page can rank and convert well.
 
 ## Why Toolsy
 
-- 30 free tools across PDF, document, image, video, text, archive, and utility workflows
+- 42 free tools across AI, SEO, developer, social media, PDF, document, image, video, text, archive, and utility workflows
 - Fast loading with code splitting and lazy-loaded tool modules
 - SEO-ready pages with unique titles, descriptions, canonical URLs, and JSON-LD
 - Clean, mobile-friendly interface with strong visual hierarchy
@@ -75,6 +75,30 @@ The app uses a modern React stack, lazy-loaded tool components, rich metadata, s
 - Unit Converter
 - Base64 Encoder/Decoder
 
+### AI Tools
+
+- AI Meta Generator
+- AI Paragraph Rewriter
+- AI Title Generator
+
+### SEO Tools
+
+- Keyword Clustering Tool
+- Schema Markup Generator
+- FAQ Generator
+
+### Developer Tools
+
+- Commit Message Generator
+- Regex Explainer
+- cURL Command Generator
+
+### Social Media Tools
+
+- Hashtag Generator
+- Instagram Caption Generator
+- YouTube Description Generator
+
 ## How It Works
 
 1. Open the Toolsy homepage.
@@ -123,16 +147,24 @@ Toolsy is set up to support both search discovery and user experience:
 
 When adding a new tool, remember to update the tool registry, the SEO helper, and the sitemap so the new page is discoverable.
 
+Blueprints for the new free-first AI and SEO catalog live in `docs/free-tool-blueprints.md`.
+
 ## Optional Analytics
 
-Analytics are disabled unless you configure them. If you want Umami tracking, set:
+Analytics are disabled unless you configure them. If you want Umami tracking or the Google tag, set:
 
 | Variable | Purpose | Required |
 | --- | --- | --- |
-| `VITE_ANALYTICS_ENDPOINT` | Base URL of your Umami instance | No |
+| `VITE_ANALYTICS_ENDPOINT` | Umami base URL or direct tracker script URL | No |
 | `VITE_ANALYTICS_WEBSITE_ID` | Umami website ID | No |
+| `VITE_GOOGLE_TAG_ID` | Google Analytics / Google tag measurement ID | No |
 
-If those values are missing, the analytics script will not load.
+If these values are missing, the analytics scripts will not load.
+On Vercel, the production build gets the same values from `vercel.json`, since `.env` is gitignored and not available to the hosted build by default.
+
+For Umami Cloud, set `VITE_ANALYTICS_ENDPOINT` to `https://cloud.umami.is` and the app will load `script.js` from that host with your website ID.
+
+The Google tag is included in the HTML shell for Search Console detection, but consent mode keeps analytics storage denied until the user accepts cookies.
 
 ## Project Structure
 
