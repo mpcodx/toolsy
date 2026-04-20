@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { generateAiPayload } from "../shared/ai-tools-core";
+import { generateAiPayload } from "../shared/ai-tools-core.js";
 
 export async function handleAiGenerateRoute(req: Request, res: Response) {
   const { status, payload } = await generateAiPayload(req.body);
