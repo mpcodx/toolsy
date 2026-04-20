@@ -1,11 +1,9 @@
-import { Toaster } from "@/components/ui/sonner";
-import CookieConsentBanner from "@/components/CookieConsentBanner";
-import CookieVisitTracker from "@/components/CookieVisitTracker";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 
+const AppEnhancements = lazy(() => import("./components/AppEnhancements"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ToolPage = lazy(() => import("./pages/ToolPage"));
 
@@ -60,12 +58,46 @@ function RouteFallback() {
 }
 
 function App() {
+  const [showEnhancements, setShowEnhancements] = useState(false);
+
+  useEffect(() => {
+    const loadEnhancements = () => {
+      setShowEnhancements(true);
+      void Promise.all([import("./lib/alerts"), import("./lib/analytics")]).then(
+        ([alerts, analytics]) => {
+          alerts.installSweetAlertBridge();
+          analytics.initializeAnalytics();
+        }
+      );
+    };
+
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(loadEnhancements, { timeout: 1500 });
+
+      return () => {
+        window.cancelIdleCallback(idleId);
+      };
+    }
+
+    const timeoutId = globalThis.setTimeout(loadEnhancements, 1);
+
+    return () => {
+      globalThis.clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
     <ErrorBoundary>
-      <Toaster />
-      <CookieVisitTracker />
       <Router />
-      <CookieConsentBanner />
+      {showEnhancements ? (
+        <Suspense fallback={null}>
+          <AppEnhancements />
+        </Suspense>
+      ) : null}
     </ErrorBoundary>
   );
 }

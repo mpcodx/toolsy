@@ -183,6 +183,47 @@ function registerApiRoutes(server: ViteDevServer | PreviewServer) {
   registerConvertRoutes((route, handler) => registerApiMiddleware(server, route, handler));
 }
 
+function inlineEntrypointCss(): Plugin {
+  return {
+    name: "inline-entrypoint-css",
+    apply: "build",
+    enforce: "post",
+    generateBundle(_, bundle) {
+      const htmlAsset = Object.values(bundle).find(
+        (item): item is import("rollup").OutputAsset =>
+          item.type === "asset" && item.fileName.endsWith(".html")
+      );
+
+      if (!htmlAsset || typeof htmlAsset.source !== "string") {
+        return;
+      }
+
+      const stylesheetMatch = htmlAsset.source.match(
+        /<link rel="stylesheet"[^>]+href="\/([^"]+\.css)"[^>]*>/
+      );
+
+      if (!stylesheetMatch) {
+        return;
+      }
+
+      const cssFileName = stylesheetMatch[1];
+      const cssAsset = bundle[cssFileName];
+
+      if (!cssAsset || cssAsset.type !== "asset" || typeof cssAsset.source !== "string") {
+        return;
+      }
+
+      const styleTag = `<style data-inline-entry-css>${cssAsset.source}</style>`;
+
+      htmlAsset.source = htmlAsset.source
+        .replace(stylesheetMatch[0], "")
+        .replace('<script type="module"', `${styleTag}\n    <script type="module"`);
+
+      delete bundle[cssFileName];
+    },
+  };
+}
+
 export default defineConfig(({ command, mode }) => {
   const includeManusRuntime = command === "serve" && mode !== "production";
   const plugins: Plugin[] = [
@@ -190,6 +231,7 @@ export default defineConfig(({ command, mode }) => {
     tailwindcss(),
     ...(includeManusRuntime ? [vitePluginManusRuntime()] : []),
     vitePluginManusDebugCollector(),
+    inlineEntrypointCss(),
     {
       name: "register-convert-api-routes",
       configureServer(server) {
