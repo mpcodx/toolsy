@@ -5,6 +5,7 @@ import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { defineConfig, type Plugin, type PreviewServer, type ViteDevServer } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import { generateAiPayload } from "./server/ai-tools";
 import { registerConvertRoutes, type ConvertRequestHandler } from "./server/register-tool-routes";
 
 // =============================================================================
@@ -179,8 +180,70 @@ function registerApiMiddleware(
   });
 }
 
+function readJsonRequestBody(req: IncomingMessage) {
+  return new Promise<unknown>((resolve, reject) => {
+    let body = "";
+
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+
+    req.on("end", () => {
+      if (!body.trim()) {
+        resolve({});
+        return;
+      }
+
+      try {
+        resolve(JSON.parse(body));
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    req.on("error", reject);
+  });
+}
+
+function registerAiGenerateMiddleware(server: ViteDevServer | PreviewServer) {
+  server.middlewares.use("/api/ai/generate", (req: IncomingMessage, res: ServerResponse, next) => {
+    if (req.method !== "POST") {
+      res.statusCode = 405;
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      res.end(JSON.stringify({ error: "Use POST /api/ai/generate." }));
+      return;
+    }
+
+    void (async () => {
+      try {
+        const body = await readJsonRequestBody(req);
+        const { status, payload } = await generateAiPayload(body);
+
+        res.statusCode = status;
+        res.setHeader("Content-Type", "application/json; charset=utf-8");
+        res.end(JSON.stringify(payload));
+      } catch (error) {
+        const isInvalidJson =
+          error instanceof SyntaxError &&
+          /JSON|Unexpected token|Unexpected end of JSON input/i.test(error.message);
+
+        res.statusCode = isInvalidJson ? 400 : 500;
+        res.setHeader("Content-Type", "application/json; charset=utf-8");
+        res.end(
+          JSON.stringify({
+            error: isInvalidJson
+              ? "Invalid JSON request body."
+              : "Unable to generate content right now.",
+          })
+        );
+      }
+    })();
+  });
+}
+
 function registerApiRoutes(server: ViteDevServer | PreviewServer) {
   registerConvertRoutes((route, handler) => registerApiMiddleware(server, route, handler));
+  registerAiGenerateMiddleware(server);
 }
 
 function inlineEntrypointCss(): Plugin {
@@ -233,7 +296,7 @@ export default defineConfig(({ command, mode }) => {
     vitePluginManusDebugCollector(),
     inlineEntrypointCss(),
     {
-      name: "register-convert-api-routes",
+      name: "register-api-routes",
       configureServer(server) {
         registerApiRoutes(server);
       },
