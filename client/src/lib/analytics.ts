@@ -5,7 +5,7 @@
 
 import { readCookieConsent } from "@/lib/cookie-consent";
 
-const DEFAULT_GOOGLE_TAG_ID = "G-SEVGK0TPTF";
+const STATIC_GOOGLE_TAG_ID = "G-SNEL6TMHFB";
 const UMAMI_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="umami"]';
 const GOOGLE_TAG_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="gtag"]';
 const GOOGLE_TAG_SCRIPT_URL = "https://www.googletagmanager.com/gtag/js";
@@ -158,7 +158,7 @@ function resolveUmamiScriptUrl(endpoint: string) {
 function isUsableGoogleTagId(tagId: string) {
   const trimmed = tagId.trim();
 
-  if (!trimmed || trimmed === "test" || trimmed.includes("%VITE_GOOGLE_TAG_ID")) {
+  if (!trimmed || trimmed === "test") {
     return false;
   }
 
@@ -166,7 +166,7 @@ function isUsableGoogleTagId(tagId: string) {
 }
 
 function getGoogleTagId() {
-  return import.meta.env.VITE_GOOGLE_TAG_ID?.trim() || DEFAULT_GOOGLE_TAG_ID;
+  return STATIC_GOOGLE_TAG_ID;
 }
 
 function bootstrapGoogleTag(tagId: string) {
