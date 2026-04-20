@@ -656,7 +656,7 @@ function AiGeneratorTool({ toolId }: { toolId: ToolId }) {
           payload.error ||
             (response.status === 404
               ? "The AI endpoint was not found. Make sure the dev server exposes POST /api/ai/generate."
-              : "Unable to generate content right now.")
+              : `Unable to generate content right now. Server responded with ${response.status}.`)
         );
       }
 
