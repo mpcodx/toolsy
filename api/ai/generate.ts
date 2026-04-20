@@ -1,49 +1,43 @@
 import { generateAiPayload } from "../../shared/ai-tools-core";
 
-const JSON_HEADERS = {
-  "Content-Type": "application/json; charset=utf-8",
-  "Cache-Control": "no-store",
+type VercelRequestLike = {
+  body?: unknown;
+  method?: string;
 };
 
-async function parseRequestBody(request: Request) {
-  const contentType = request.headers.get("content-type") || "";
+type VercelResponseLike = {
+  json: (body: unknown) => void;
+  setHeader: (name: string, value: string | string[]) => void;
+  status: (code: number) => VercelResponseLike;
+};
 
-  if (contentType.includes("application/json")) {
-    return request.json();
+function normalizeBody(body: unknown) {
+  if (typeof body !== "string") {
+    return body;
   }
 
-  const rawBody = await request.text();
-
-  if (!rawBody.trim()) {
+  if (!body.trim()) {
     return {};
   }
 
   try {
-    return JSON.parse(rawBody);
+    return JSON.parse(body);
   } catch {
     throw new SyntaxError("Invalid JSON request body.");
   }
 }
 
-export function GET() {
-  return new Response(JSON.stringify({ error: "Use POST /api/ai/generate." }), {
-    status: 405,
-    headers: {
-      ...JSON_HEADERS,
-      Allow: "POST",
-    },
-  });
-}
-
-export async function POST(request: Request) {
+export default async function handler(req: VercelRequestLike, res: VercelResponseLike) {
   try {
-    const body = await parseRequestBody(request);
-    const { status, payload } = await generateAiPayload(body);
+    if (req.method !== "POST") {
+      res.setHeader("Allow", "POST");
+      res.status(405).json({ error: "Use POST /api/ai/generate." });
+      return;
+    }
 
-    return new Response(JSON.stringify(payload), {
-      status,
-      headers: JSON_HEADERS,
-    });
+    const body = normalizeBody(req.body);
+    const { status, payload } = await generateAiPayload(body);
+    res.status(status).json(payload);
   } catch (error) {
     console.error("/api/ai/generate Vercel handler failed:", error);
 
@@ -53,16 +47,10 @@ export async function POST(request: Request) {
         error.message
       );
 
-    return new Response(
-      JSON.stringify({
-        error: isInvalidJson
-          ? "Invalid JSON request body."
-          : "Unable to generate content right now.",
-      }),
-      {
-        status: isInvalidJson ? 400 : 500,
-        headers: JSON_HEADERS,
-      }
-    );
+    res.status(isInvalidJson ? 400 : 500).json({
+      error: isInvalidJson
+        ? "Invalid JSON request body."
+        : "Unable to generate content right now.",
+    });
   }
 }
