@@ -15,6 +15,11 @@ type SupportedToolId =
   | "youtube-description-generator";
 
 type ToolInputs = Record<string, string>;
+type AiGeneratePayload = {
+  error?: string;
+  output?: string;
+  provider?: "openrouter" | "fallback";
+};
 
 const SUPPORTED_TOOL_IDS = new Set<SupportedToolId>([
   "ai-meta-generator",
@@ -737,36 +742,58 @@ async function callOpenRouter(toolId: SupportedToolId, inputs: ToolInputs) {
   return content || null;
 }
 
-export async function handleAiGenerateRoute(req: Request, res: Response) {
-  const toolId = getString(req.body?.toolId) as SupportedToolId;
-  const inputs = normalizeInputs(req.body?.inputs);
+export async function generateAiPayload(body: unknown): Promise<{
+  payload: AiGeneratePayload;
+  status: number;
+}> {
+  const requestBody =
+    body && typeof body === "object" ? (body as Record<string, unknown>) : {};
+  const toolId = getString(requestBody.toolId) as SupportedToolId;
+  const inputs = normalizeInputs(requestBody.inputs);
 
   if (!SUPPORTED_TOOL_IDS.has(toolId)) {
-    res.status(400).json({ error: "Unsupported tool ID." });
-    return;
+    return {
+      status: 400,
+      payload: {
+        error: "Unsupported tool ID.",
+      },
+    };
   }
 
   try {
     const aiOutput = await callOpenRouter(toolId, inputs);
 
     if (aiOutput) {
-      res.json({
-        output: aiOutput,
-        provider: "openrouter",
-      });
-      return;
+      return {
+        status: 200,
+        payload: {
+          output: aiOutput,
+          provider: "openrouter",
+        },
+      };
     }
 
-    res.json({
-      output: buildFallback(toolId, inputs),
-      provider: "fallback",
-    });
+    return {
+      status: 200,
+      payload: {
+        output: buildFallback(toolId, inputs),
+        provider: "fallback",
+      },
+    };
   } catch (error) {
     console.error("/api/ai/generate failed:", error);
 
-    res.json({
-      output: buildFallback(toolId, inputs),
-      provider: "fallback",
-    });
+    return {
+      status: 200,
+      payload: {
+        output: buildFallback(toolId, inputs),
+        provider: "fallback",
+      },
+    };
   }
+}
+
+export async function handleAiGenerateRoute(req: Request, res: Response) {
+  const { status, payload } = await generateAiPayload(req.body);
+  res.status(status).json(payload);
 }

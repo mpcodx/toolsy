@@ -33,6 +33,14 @@ async function startServer() {
   };
 
   registerConvertRoutes(registerPost);
+  app.all("/api/ai/generate", (req, res, next) => {
+    if (req.method === "POST") {
+      next();
+      return;
+    }
+
+    res.status(405).json({ error: "Use POST /api/ai/generate." });
+  });
   app.post("/api/ai/generate", handleAiGenerateRoute);
 
   // Serve static files from dist/public in production

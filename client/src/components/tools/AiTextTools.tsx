@@ -632,14 +632,32 @@ function AiGeneratorTool({ toolId }: { toolId: ToolId }) {
         }),
       });
 
-      const payload = (await response.json()) as {
+      const rawPayload = await response.text();
+      let payload: {
         error?: string;
         output?: string;
         provider?: string;
-      };
+      } = {};
+
+      if (rawPayload.trim()) {
+        try {
+          payload = JSON.parse(rawPayload) as typeof payload;
+        } catch {
+          throw new Error(
+            response.status === 404
+              ? "The AI endpoint was not found. Make sure the dev server exposes POST /api/ai/generate."
+              : "The server returned an invalid response."
+          );
+        }
+      }
 
       if (!response.ok || !payload.output) {
-        throw new Error(payload.error || "Unable to generate content right now.");
+        throw new Error(
+          payload.error ||
+            (response.status === 404
+              ? "The AI endpoint was not found. Make sure the dev server exposes POST /api/ai/generate."
+              : "Unable to generate content right now.")
+        );
       }
 
       setOutput(payload.output);
