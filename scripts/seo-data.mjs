@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import ts from "typescript";
 
-export const SITE_URL = "https://www.toolsylab.xyz";
+export const SITE_URL = "https://toolsy.rayonweb.com";
 export const SITE_NAME = "Toolsy";
 export const SITE_IMAGE =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp";
