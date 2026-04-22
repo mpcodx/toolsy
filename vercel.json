@@ -17,10 +17,10 @@
       "has": [
         {
           "type": "host",
-          "value": "www.toolsylab.xyz"
+          "value": "toolsylab.xyz"
         }
       ],
-      "destination": "https://toolsylab.xyz/",
+      "destination": "https://www.toolsylab.xyz/",
       "statusCode": 308
     },
     {
@@ -28,10 +28,10 @@
       "has": [
         {
           "type": "host",
-          "value": "www.toolsylab.xyz"
+          "value": "toolsylab.xyz"
         }
       ],
-      "destination": "https://toolsylab.xyz/:path*",
+      "destination": "https://www.toolsylab.xyz/:path*",
       "statusCode": 308
     }
   ],
