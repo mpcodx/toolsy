@@ -5,4 +5,4 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://www.toolsylab.xyz/sitemap.xml
+Sitemap: https://toolsylab.xyz/sitemap.xml
