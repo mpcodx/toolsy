@@ -21,8 +21,7 @@
         }
       ],
       "destination": "https://www.toolsylab.xyz/:path*",
-      "statusCode": 308,
-      "preserveQueryParams": true
+      "statusCode": 308
     }
   ],
   "headers": [
