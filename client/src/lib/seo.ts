@@ -212,9 +212,10 @@ export const STRUCTURED_DATA = {
 
 export const ROBOTS_TXT = `User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api
-Disallow: /private
+
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
 
 Sitemap: https://www.toolsylab.xyz/sitemap.xml`;
 

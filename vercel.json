@@ -1,20 +1,71 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm build",
   "outputDirectory": "dist/public",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "build": {
     "env": {
       "VITE_ANALYTICS_ENDPOINT": "https://cloud.umami.is",
       "VITE_ANALYTICS_WEBSITE_ID": "717ff38c-4238-4627-b275-d61f87854be4"
     }
   },
-  "routes": [
+  "redirects": [
     {
-      "handle": "filesystem"
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "toolsylab.xyz"
+        }
+      ],
+      "destination": "https://www.toolsylab.xyz/:path*",
+      "statusCode": 308,
+      "preserveQueryParams": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/api/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|favicon.svg|logo.svg|robots.txt|sitemap.xml).*)",
+      "destination": "/index.html"
     }
   ]
 }

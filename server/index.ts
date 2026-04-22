@@ -1,5 +1,6 @@
 import express from "express";
 import { createServer } from "http";
+import { existsSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { handleAiGenerateRoute } from "./ai-tools";
@@ -52,7 +53,19 @@ async function startServer() {
   app.use(express.static(staticPath));
 
   // Handle client-side routing - serve index.html for all routes
-  app.get("*", (_req, res) => {
+  app.get("*", (req, res) => {
+    if (!path.extname(req.path) && req.path !== "/") {
+      const routeHtmlPath = path.resolve(staticPath, `${req.path.slice(1)}.html`);
+
+      if (
+        routeHtmlPath.startsWith(`${staticPath}${path.sep}`) &&
+        existsSync(routeHtmlPath)
+      ) {
+        res.sendFile(routeHtmlPath);
+        return;
+      }
+    }
+
     res.sendFile(path.join(staticPath, "index.html"));
   });
 

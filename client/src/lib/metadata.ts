@@ -9,9 +9,9 @@ export interface MetadataConfig {
 }
 
 const DEFAULT_METADATA: MetadataConfig = {
-  title: "Toolsy - Free PDF, Video & Image Tools",
+  title: "Toolsy - Free AI, SEO, Developer, Social, PDF & Media Tools",
   description:
-    "Toolsy is a free online hub for PDF, video, and image tools. Merge PDFs, split files, trim videos, convert video to audio, make thumbnails, and use browser-safe downloads. No signup required.",
+    "Toolsy is a free online hub for AI, SEO, developer, social media, PDF, video, and image tools. Generate metadata, cluster keywords, explain regex, write captions, and handle file workflows with no signup required.",
   keywords: [
     "PDF converter",
     "image converter",
@@ -37,7 +37,8 @@ const DEFAULT_METADATA: MetadataConfig = {
     "online tools",
     "free converter",
   ],
-  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
+  image:
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
   url: "https://www.toolsylab.xyz",
   type: "website",
   canonical: "https://www.toolsylab.xyz/",
@@ -52,6 +53,12 @@ export function updateMetadata(config: Partial<MetadataConfig> = {}) {
   // Update or create meta tags
   updateMetaTag("description", metadata.description);
   updateMetaTag("keywords", metadata.keywords.join(", "));
+  updateMetaTag("robots", "index, follow");
+  updateMetaTag(
+    "googlebot",
+    "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+  );
+  updateMetaTag("og:site_name", "Toolsy", "property");
   updateMetaTag("og:title", metadata.title, "property");
   updateMetaTag("og:description", metadata.description, "property");
   updateMetaTag("og:image", metadata.image || "", "property");
@@ -61,7 +68,13 @@ export function updateMetadata(config: Partial<MetadataConfig> = {}) {
   updateMetaTag("twitter:description", metadata.description, "name");
   updateMetaTag("twitter:image", metadata.image || "", "name");
   updateMetaTag("twitter:card", "summary_large_image", "name");
+  updateMetaTag(
+    "twitter:url",
+    metadata.url || metadata.canonical || "",
+    "name"
+  );
   updateLinkTag("canonical", metadata.canonical || metadata.url || "");
+  updateLinkTag("sitemap", "/sitemap.xml");
 }
 
 function updateMetaTag(
@@ -71,7 +84,9 @@ function updateMetaTag(
 ) {
   if (!content) return;
 
-  let tag = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
+  let tag = document.querySelector(
+    `meta[${attribute}="${name}"]`
+  ) as HTMLMetaElement;
 
   if (!tag) {
     tag = document.createElement("meta");
@@ -85,7 +100,9 @@ function updateMetaTag(
 function updateLinkTag(rel: string, href: string) {
   if (!href) return;
 
-  let tag = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement | null;
+  let tag = document.querySelector(
+    `link[rel="${rel}"]`
+  ) as HTMLLinkElement | null;
 
   if (!tag) {
     tag = document.createElement("link");

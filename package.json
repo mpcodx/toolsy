@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node ./scripts/vite-with-crypto-hash.mjs --host",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
-    "build": "npm run generate:sitemap && node ./scripts/vite-with-crypto-hash.mjs build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "prerender:seo": "node scripts/prerender-seo.mjs",
+    "build": "node scripts/generate-sitemap.mjs && node ./scripts/vite-with-crypto-hash.mjs build && node scripts/prerender-seo.mjs && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "node ./scripts/vite-with-crypto-hash.mjs preview --host",
     "check": "tsc --noEmit",
