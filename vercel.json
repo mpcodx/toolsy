@@ -20,7 +20,18 @@
           "value": "toolsylab.xyz"
         }
       ],
-      "destination": "https://www.toolsylab.xyz/",
+      "destination": "https://toolsy.rayonweb.com/",
+      "statusCode": 308
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.toolsylab.xyz"
+        }
+      ],
+      "destination": "https://toolsy.rayonweb.com/",
       "statusCode": 308
     },
     {
@@ -31,7 +42,18 @@
           "value": "toolsylab.xyz"
         }
       ],
-      "destination": "https://www.toolsylab.xyz/:path*",
+      "destination": "https://toolsy.rayonweb.com/:path*",
+      "statusCode": 308
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.toolsylab.xyz"
+        }
+      ],
+      "destination": "https://toolsy.rayonweb.com/:path*",
       "statusCode": 308
     }
   ],
