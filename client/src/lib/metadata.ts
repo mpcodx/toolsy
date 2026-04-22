@@ -39,9 +39,9 @@ const DEFAULT_METADATA: MetadataConfig = {
   ],
   image:
     "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
-  url: "https://toolsylab.xyz",
+  url: "https://www.toolsylab.xyz",
   type: "website",
-  canonical: "https://toolsylab.xyz/",
+  canonical: "https://www.toolsylab.xyz/",
 };
 
 export function updateMetadata(config: Partial<MetadataConfig> = {}) {

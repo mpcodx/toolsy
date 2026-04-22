@@ -205,7 +205,7 @@ const SITE_PAGES: Record<SitePageId, SitePageContent> = {
     summaryCards: [
       { label: "Best for", value: "Bug reports, privacy requests, and business conversations" },
       { label: "Helpful detail", value: "Include the exact page URL, device, and reproduction steps" },
-      { label: "Current site", value: "https://toolsylab.xyz" },
+      { label: "Current site", value: "https://www.toolsylab.xyz" },
     ],
     sections: [
       {
