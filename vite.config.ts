@@ -288,7 +288,8 @@ function inlineEntrypointCss(): Plugin {
         .replace(stylesheetMatch[0], "")
         .replace('<script type="module"', `${styleTag}\n    <script type="module"`);
 
-      delete bundle[cssFileName];
+      // Keep the emitted CSS asset for Vite's async chunk preload map.
+      // Lazy routes still reference it even though the entry HTML is inlined.
     },
   };
 }
