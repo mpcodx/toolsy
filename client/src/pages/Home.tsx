@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { updateMetadata } from "@/lib/metadata";
 import { SITE_CONFIG, STRUCTURED_DATA } from "@/lib/seo";
+import { CATEGORIES, TOOLS } from "@/lib/tools";
 import { lazy, Suspense } from "react";
 import {
   CheckCircle2,
@@ -15,17 +16,19 @@ import { useLocation } from "wouter";
 const HomeCatalog = lazy(() => import("@/components/home/HomeCatalog"));
 
 const quickSearches = [
-  "ai meta generator",
+  "meta title generator",
+  "meta description generator",
   "keyword clustering tool",
-  "schema markup generator",
-  "commit message generator",
-  "regex explainer",
+  "reel hook generator",
+  "youtube shorts script generator",
+  "clip idea generator",
   "instagram caption generator",
+  "video trimmer no watermark",
   "pdf merger",
 ];
 
-const TOOL_COUNT_LABEL = "40+";
-const CATEGORY_COUNT_LABEL = "10+";
+const TOOL_COUNT_LABEL = `${TOOLS.length}`;
+const CATEGORY_COUNT_LABEL = `${CATEGORIES.length}`;
 
 function scrollToTools() {
   document.getElementById("tools-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -97,18 +100,19 @@ export default function Home() {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="max-w-3xl">
                 <Badge className="rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-accent hover:bg-accent/10">
-                  {TOOL_COUNT_LABEL} free tools for AI, SEO, developer, social, PDF, and media work
+                  {TOOL_COUNT_LABEL} free tools for AI SEO, creator growth, PDFs, and video workflows
                 </Badge>
 
                 <h1 className="mt-6 text-4xl md:text-6xl font-display font-bold leading-tight text-foreground">
-                  Toolsy: free tools for{" "}
-                  <span className="text-accent">SEO, AI workflows, creators, and everyday files</span>.
+                  Toolsy: free{" "}
+                  <span className="text-accent">AI, SEO, creator, PDF, and video tools</span> for
+                  everyday growth and file workflows.
                 </h1>
 
                 <p className="mt-5 text-lg md:text-xl leading-relaxed text-muted-foreground">
-                  Search tools for meta generation, keyword clustering, regex explanations, captions,
-                  hashtags, PDF workflows, video utilities, and image conversion. Each page is built to
-                  solve one real problem with clear UX and strong SEO intent.
+                  Use AI meta title and meta description generators, keyword clustering, schema markup,
+                  Instagram captions, YouTube Shorts scripts, reel hooks, clip ideas, video trimming,
+                  and PDF conversion tools without signup.
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -133,7 +137,7 @@ export default function Home() {
                     <Input
                       value={searchQuery}
                       onChange={(event) => handleSearch(event.currentTarget.value)}
-                      placeholder="Search ai meta generator, regex explainer, pdf merger..."
+                      placeholder="Search meta description generator, reel hook generator, pdf merger..."
                       className="h-14 rounded-2xl border-border bg-background/95 pl-12 pr-4 text-base shadow-sm"
                     />
                   </div>
@@ -166,7 +170,7 @@ export default function Home() {
                     {TOOL_COUNT_LABEL}
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Free utilities for AI drafting, SEO, developer work, social media, PDFs, videos, and images.
+                    Free utilities for meta tags, creator content, SEO research, developer workflows, PDFs, videos, and images.
                   </p>
                 </div>
 
@@ -178,7 +182,7 @@ export default function Home() {
                     {CATEGORY_COUNT_LABEL}
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    AI, SEO, developer, social media, document, video, image, archive, utility, and text tools.
+                    AI, SEO, developer, social media, PDF, document, video, image, archive, utility, and text tools.
                   </p>
                 </div>
 
@@ -195,8 +199,9 @@ export default function Home() {
                     </div>
                   </div>
                   <p className="mt-4 text-sm leading-relaxed text-white/75">
-                    The catalog now spans AI generators, SEO helpers, developer utilities, social media drafts,
-                    and classic file tools. That mix gives you more organic entry points without making the UX noisy.
+                    The catalog now spans AI generators, SEO helpers, creator growth tools, developer
+                    utilities, and classic file workflows. That mix gives you more high-intent entry
+                    points without making the UX noisy.
                   </p>
                 </div>
               </div>
@@ -207,11 +212,14 @@ export default function Home() {
         <section className="border-b border-border bg-card/30 py-6">
           <div className="container flex flex-wrap items-center justify-center gap-2">
             {[
-              "ai meta generator",
+              "meta title generator",
+              "meta description generator",
+              "clip idea generator",
+              "reel hook generator",
+              "youtube shorts script generator",
               "keyword clustering tool",
-              "schema markup generator",
-              "regex explainer",
               "instagram caption generator",
+              "video trimmer no watermark",
               "pdf merger",
             ].map(
               (keyword) => (

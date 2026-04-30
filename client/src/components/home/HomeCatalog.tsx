@@ -2,51 +2,37 @@ import Footer from "@/components/Footer";
 import ToolCard from "@/components/ToolCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getToolIcon } from "@/lib/tool-icons";
 import { CATEGORIES, TOOLS, getTool, searchTools, type Tool } from "@/lib/tools";
 import {
   ArrowRight,
-  Film,
-  Image,
-  Link2,
   Search,
-  Scissors,
   ShieldCheck,
-  Video,
 } from "lucide-react";
 import { useMemo } from "react";
 
-const creatorTools = [
-  {
-    title: "Direct MP4 Downloader",
-    description: "Paste a direct public MP4 file URL and download it with a browser link.",
-    href: "/tool/direct-mp4-downloader",
-    icon: Link2,
-  },
-  {
-    title: "Video to Audio",
-    description: "Extract audio from uploaded videos in a few clicks.",
-    href: "/tool/video-to-audio",
-    icon: Video,
-  },
-  {
-    title: "Thumbnail Maker",
-    description: "Capture a frame and download a sharp thumbnail image.",
-    href: "/tool/video-thumbnail-maker",
-    icon: Image,
-  },
-  {
-    title: "Video to Frames",
-    description: "Export a time range as a ZIP of PNG frames.",
-    href: "/tool/video-to-frames",
-    icon: Film,
-  },
-  {
-    title: "Video Clip Cutter",
-    description: "Trim an uploaded video into a shorter, watermark-free clip.",
-    href: "/tool/video-clipper",
-    icon: Scissors,
-  },
+const creatorClipToolIds = [
+  "direct-mp4-downloader",
+  "video-to-audio",
+  "video-thumbnail-maker",
+  "video-to-frames",
+  "video-clipper",
 ] as const;
+
+const creatorPlanningToolIds = [
+  "clip-idea-generator",
+  "video-hook-generator",
+  "shorts-script-generator",
+  "content-calendar-generator",
+] as const;
+
+const creatorClipTools = creatorClipToolIds
+  .map((toolId) => getTool(toolId))
+  .filter((tool): tool is Tool => Boolean(tool));
+
+const creatorPlanningTools = creatorPlanningToolIds
+  .map((toolId) => getTool(toolId))
+  .filter((tool): tool is Tool => Boolean(tool));
 
 const spotlightToolIds = [
   "ai-meta-generator",
@@ -155,47 +141,87 @@ export default function HomeCatalog({
                 Creator workflow
               </Badge>
               <h2 className="mt-4 text-3xl font-display font-bold text-foreground md:text-4xl">
-                Video thumbnails, frame ZIPs, and clips from uploaded files
+                Video clips, reel hooks, Shorts scripts, and creator planning in one stack
               </h2>
               <p className="mt-4 max-w-xl text-muted-foreground leading-relaxed">
-                We support local video files for audio extraction, thumbnail capture, frame export, and clip
-                trimming. Downloading media from YouTube or Instagram is not included, which keeps the workflow
-                focused on content you own or have rights to use.
+                Repurpose podcasts, local video files, interviews, and webinars into clip ideas, reel
+                hooks, YouTube Shorts scripts, captions, and content calendar drafts. Local media tools
+                also cover audio extraction, frame capture, and no-watermark video trimming for files you
+                already own or are allowed to use.
               </p>
 
               <a
-                href="/tool/video-thumbnail-maker"
+                href="/tool/clip-idea-generator"
                 className="mt-6 inline-flex h-10 items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground shadow-xs transition-[color,box-shadow] hover:bg-accent/90"
               >
-                Open video tools
+                Try clip idea generator
               </a>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
-              {creatorTools.map((tool) => {
-                const Icon = tool.icon;
-                return (
-                  <a
-                    key={tool.title}
-                    href={tool.href}
-                    className="group rounded-3xl border border-border bg-card p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="rounded-2xl bg-accent/10 p-3 text-accent">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="text-lg font-semibold text-foreground group-hover:text-accent">
-                          {tool.title}
-                        </h3>
-                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                          {tool.description}
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                );
-              })}
+            <div className="space-y-6">
+              <div>
+                <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                  Clip utilities
+                </p>
+                <div className="mt-3 grid gap-4 md:grid-cols-2">
+                  {creatorClipTools.map((tool) => {
+                    const Icon = getToolIcon(tool.icon);
+                    return (
+                      <a
+                        key={tool.id}
+                        href={`/tool/${tool.id}`}
+                        className="group rounded-3xl border border-border bg-card p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg"
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className="rounded-2xl bg-accent/10 p-3 text-accent">
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="text-lg font-semibold text-foreground group-hover:text-accent">
+                              {tool.name}
+                            </h3>
+                            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                              {tool.description}
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                  Creator copy
+                </p>
+                <div className="mt-3 grid gap-4 md:grid-cols-2">
+                  {creatorPlanningTools.map((tool) => {
+                    const Icon = getToolIcon(tool.icon);
+                    return (
+                      <a
+                        key={tool.id}
+                        href={`/tool/${tool.id}`}
+                        className="group rounded-3xl border border-border bg-card p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg"
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className="rounded-2xl bg-accent/10 p-3 text-accent">
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="text-lg font-semibold text-foreground group-hover:text-accent">
+                              {tool.name}
+                            </h3>
+                            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                              {tool.description}
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </div>

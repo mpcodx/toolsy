@@ -555,6 +555,66 @@ function getToolProfile(tool: Tool): ToolProfile {
       };
     }
 
+    if (tool.id === "clip-idea-generator") {
+      return {
+        focus: "turn long videos, podcasts, and interviews into short-form clip ideas",
+        supportedInput: "topics, source formats, audiences, and clip goals",
+        supportedOutput: "clip idea lists with hooks and call-to-action angles",
+        extraKeywords: [
+          "clip idea generator",
+          "podcast clip ideas",
+          "short-form content ideas",
+          "video clip ideas",
+        ],
+        trustBadges: ["Free", "No Signup", "Creator Ready"],
+      };
+    }
+
+    if (tool.id === "video-hook-generator") {
+      return {
+        focus: "create opening hooks for reels, shorts, and talking-head videos",
+        supportedInput: "topics, audiences, platforms, and tone preferences",
+        supportedOutput: "scroll-stopping hook ideas",
+        extraKeywords: [
+          "video hook generator",
+          "reels hook generator",
+          "youtube shorts hook ideas",
+          "tiktok hook generator",
+        ],
+        trustBadges: ["Free", "No Signup", "Creator Ready"],
+      };
+    }
+
+    if (tool.id === "shorts-script-generator") {
+      return {
+        focus: "draft short-form video scripts with hooks, beats, and calls to action",
+        supportedInput: "topics, takeaways, platforms, clip lengths, and CTA notes",
+        supportedOutput: "shorts and reels script drafts",
+        extraKeywords: [
+          "shorts script generator",
+          "youtube shorts script generator",
+          "reels script generator",
+          "short video script",
+        ],
+        trustBadges: ["Free", "No Signup", "Creator Ready"],
+      };
+    }
+
+    if (tool.id === "content-calendar-generator") {
+      return {
+        focus: "plan creator content calendars across short-form platforms and posting cycles",
+        supportedInput: "niches, platforms, offers, goals, and timeframes",
+        supportedOutput: "content calendar ideas and posting plans",
+        extraKeywords: [
+          "content calendar generator",
+          "creator content planner",
+          "social media content calendar",
+          "monthly content ideas",
+        ],
+        trustBadges: ["Free", "No Signup", "Creator Ready"],
+      };
+    }
+
     if (tool.id === "instagram-caption-generator") {
       return {
         focus: "create Instagram captions with hooks, body copy, and calls to action",

@@ -10,7 +10,11 @@ export type SupportedToolId =
   | "curl-command-generator"
   | "hashtag-generator"
   | "instagram-caption-generator"
-  | "youtube-description-generator";
+  | "youtube-description-generator"
+  | "clip-idea-generator"
+  | "video-hook-generator"
+  | "shorts-script-generator"
+  | "content-calendar-generator";
 
 type ToolInputs = Record<string, string>;
 export type AiGeneratePayload = {
@@ -32,6 +36,10 @@ const SUPPORTED_TOOL_IDS = new Set<SupportedToolId>([
   "hashtag-generator",
   "instagram-caption-generator",
   "youtube-description-generator",
+  "clip-idea-generator",
+  "video-hook-generator",
+  "shorts-script-generator",
+  "content-calendar-generator",
 ]);
 
 const LOCAL_ONLY_TOOL_IDS = new Set<SupportedToolId>([
@@ -579,6 +587,186 @@ function buildYoutubeDescription(inputs: ToolInputs) {
     .join("\n");
 }
 
+function buildClipIdeaCta(goal: string) {
+  switch (goal) {
+    case "More saves":
+      return "Ask viewers to save the clip for later.";
+    case "More follows":
+      return "Ask viewers to follow for the next creator tip.";
+    case "Drive clicks":
+      return "Point viewers to the full video, episode, or link in bio.";
+    default:
+      return "Invite viewers to watch the full breakdown.";
+  }
+}
+
+function buildClipIdeas(inputs: ToolInputs) {
+  const topic = inputs.topic || "your source content";
+  const sourceType = inputs.sourceType || "Podcast";
+  const audience = inputs.audience || "your audience";
+  const goal = inputs.goal || "More views";
+  const count = Number.parseInt(inputs.count || "8", 10);
+  const angles = [
+    `The one takeaway about ${topic} that ${audience} can use today`,
+    `A myth-versus-reality moment from this ${sourceType.toLowerCase()} on ${topic}`,
+    `A fast mistake-to-fix clip about ${topic}`,
+    `A strong quote or contrarian opinion tied to ${topic}`,
+    `A step-by-step clip that makes ${topic} feel simpler`,
+    `A before-and-after story that shows progress with ${topic}`,
+    `A “nobody tells you this” insight for ${audience}`,
+    `A short checklist pulled from the ${sourceType.toLowerCase()}`,
+    `A plain-English explanation that reframes ${topic}`,
+    `A quick answer to the biggest question about ${topic}`,
+  ];
+  const hookTemplates = [
+    `If ${topic} still feels messy, start here.`,
+    `Most people overcomplicate ${topic}.`,
+    `This is the clip I would post first about ${topic}.`,
+    `One detail about ${topic} changes everything.`,
+    `Here is the part of ${topic} people usually miss.`,
+  ];
+
+  return angles
+    .slice(0, Number.isFinite(count) ? count : 8)
+    .map((angle, index) =>
+      [
+        `Clip ${index + 1}: ${angle}`,
+        `Hook: ${sentenceCase(hookTemplates[index % hookTemplates.length])}`,
+        `Best cut moment: Start right before the cleanest insight, example, or quote about ${topic}.`,
+        `CTA: ${buildClipIdeaCta(goal)}`,
+      ].join("\n")
+    )
+    .join("\n\n");
+}
+
+function buildVideoHooks(inputs: ToolInputs) {
+  const topic = inputs.topic || "your topic";
+  const audience = inputs.audience || "your audience";
+  const platform = inputs.platform || "YouTube Shorts";
+  const tone = inputs.tone || "Bold";
+  const count = Number.parseInt(inputs.count || "15", 10);
+  const templates = [
+    `Stop scrolling if ${topic} is still harder than it should be.`,
+    `Most ${audience} get ${topic} wrong at first.`,
+    `Nobody talks about this part of ${topic}.`,
+    `If you only fix one thing about ${topic}, make it this.`,
+    `This one shift can change how you handle ${topic}.`,
+    `The ${tone.toLowerCase()} truth about ${topic}: it is simpler than it looks.`,
+    `If you are posting on ${platform}, this matters more than you think.`,
+    `Here is the fastest way to make ${topic} click.`,
+    `The mistake ruining most content about ${topic} is this.`,
+    `You do not need more tools to improve ${topic}. You need this.`,
+    `This is the clip angle I would test first for ${topic}.`,
+    `If ${audience} want faster results, start with this.`,
+    `The best creator lesson about ${topic} is not what most people expect.`,
+    `Here is why your ${topic} content is not landing yet.`,
+    `One better way to explain ${topic} starts here.`,
+    `Before you post another video about ${topic}, hear this.`,
+    `This tiny change makes ${topic} more watchable instantly.`,
+    `The hook I wish I used sooner for ${topic} is this.`,
+    `Let me save you time on ${topic}.`,
+    `This is what your audience actually wants to hear about ${topic}.`,
+  ];
+
+  return templates
+    .slice(0, Number.isFinite(count) ? count : 15)
+    .map((hook, index) => `${index + 1}. ${sentenceCase(hook)}`)
+    .join("\n");
+}
+
+function buildShortsScript(inputs: ToolInputs) {
+  const topic = inputs.topic || "your topic";
+  const takeaway = inputs.takeaway || "Share the clearest lesson from the clip.";
+  const platform = inputs.platform || "YouTube Shorts";
+  const duration = inputs.duration || "30 seconds";
+  const cta = inputs.cta || "Follow for more creator workflow tips.";
+
+  return [
+    `Platform: ${platform}`,
+    `Target length: ${duration}`,
+    "",
+    `Hook: ${sentenceCase(`Most people make ${topic} harder than it needs to be.`)}`,
+    `Beat 1: ${sentenceCase(`Open with the core promise or problem around ${topic}.`)}`,
+    `Beat 2: ${sentenceCase(takeaway)}`,
+    "Beat 3: Add one example, proof point, or contrast that makes the message believable.",
+    "On-screen text: Use a short line that names the problem and the payoff.",
+    `CTA: ${sentenceCase(cta)}`,
+  ].join("\n");
+}
+
+function buildCalendarGoalCta(goal: string, offer: string) {
+  if (goal === "Lead generation") {
+    return offer ? `Point viewers to ${offer}.` : "Bridge viewers to a checklist, lead magnet, or DM keyword.";
+  }
+
+  if (goal === "Sales") {
+    return offer ? `Mention ${offer} with a direct next step.` : "Move viewers toward the product or service.";
+  }
+
+  if (goal === "Engagement") {
+    return "Ask a question or invite comments, duets, or replies.";
+  }
+
+  return "Prompt viewers to follow, save, or share the post.";
+}
+
+function buildContentCalendar(inputs: ToolInputs) {
+  const niche = inputs.niche || "your niche";
+  const platforms = splitList(inputs.platforms);
+  const platformList = platforms.length ? platforms : ["Instagram Reels", "TikTok", "YouTube Shorts"];
+  const offer = inputs.offer || "";
+  const goal = inputs.goal || "Audience growth";
+  const timeframe = inputs.timeframe || "2 weeks";
+  const entryCount =
+    timeframe === "1 week" ? 5 : timeframe === "1 month" ? 12 : 8;
+  const formats = [
+    "Quick tip",
+    "Myth bust",
+    "Checklist",
+    "Storytime",
+    "Tutorial",
+    "Hot take",
+    "Behind the scenes",
+    "Case study",
+    "Q&A",
+    "Template",
+    "Trend remix",
+    "Launch teaser",
+  ];
+  const themes = [
+    `The biggest mistake creators make in ${niche}`,
+    `A simple workflow that saves time in ${niche}`,
+    `What most people misunderstand about ${niche}`,
+    `A beginner-friendly checklist for ${niche}`,
+    `A quick win your audience can copy today`,
+    `A before-and-after example from your process`,
+    `A myth versus reality post for ${niche}`,
+    `A strong opinion or hot take about ${niche}`,
+    `A tool, template, or setup breakdown`,
+    `A short case study or lesson learned`,
+    `A behind-the-scenes creator moment`,
+    `A soft promotion tied to a recent win`,
+  ];
+
+  return Array.from({ length: entryCount }, (_, index) => {
+    const platform = platformList[index % platformList.length];
+    const format = formats[index % formats.length];
+    const theme = themes[index % themes.length];
+    const label =
+      timeframe === "1 month"
+        ? `Week ${Math.floor(index / 3) + 1}, Post ${index + 1}`
+        : `Day ${index + 1}`;
+
+    return [
+      label,
+      `Platform: ${platform}`,
+      `Format: ${format}`,
+      `Angle: ${theme}`,
+      `CTA: ${buildCalendarGoalCta(goal, offer)}`,
+    ].join("\n");
+  }).join("\n\n");
+}
+
 function buildFallback(toolId: SupportedToolId, inputs: ToolInputs) {
   switch (toolId) {
     case "ai-meta-generator":
@@ -605,6 +793,14 @@ function buildFallback(toolId: SupportedToolId, inputs: ToolInputs) {
       return buildInstagramCaption(inputs);
     case "youtube-description-generator":
       return buildYoutubeDescription(inputs);
+    case "clip-idea-generator":
+      return buildClipIdeas(inputs);
+    case "video-hook-generator":
+      return buildVideoHooks(inputs);
+    case "shorts-script-generator":
+      return buildShortsScript(inputs);
+    case "content-calendar-generator":
+      return buildContentCalendar(inputs);
     default:
       return "This tool is not supported.";
   }
@@ -674,6 +870,30 @@ function buildPrompt(toolId: SupportedToolId, inputs: ToolInputs) {
         system:
           "You write keyword-aware YouTube descriptions. Return plain text only with clear spacing and a CTA.",
         user: `Inputs:\n${inputSummary}\n\nBaseline description:\n${fallback}`,
+      };
+    case "clip-idea-generator":
+      return {
+        system:
+          "You create short-form clip concepts from long-form content. Return plain text only. For each idea include a title, hook, cut angle, and CTA.",
+        user: `Inputs:\n${inputSummary}\n\nBaseline clip ideas:\n${fallback}`,
+      };
+    case "video-hook-generator":
+      return {
+        system:
+          "You write short-form video hooks for creators. Return plain text only as a numbered list of hook lines.",
+        user: `Inputs:\n${inputSummary}\n\nBaseline hook ideas:\n${fallback}`,
+      };
+    case "shorts-script-generator":
+      return {
+        system:
+          "You write tight short-form video scripts. Return plain text only with labeled sections for hook, beats, and CTA.",
+        user: `Inputs:\n${inputSummary}\n\nBaseline script:\n${fallback}`,
+      };
+    case "content-calendar-generator":
+      return {
+        system:
+          "You plan creator content calendars. Return plain text only with a simple schedule, platform notes, content angle, and CTA.",
+        user: `Inputs:\n${inputSummary}\n\nBaseline calendar:\n${fallback}`,
       };
     default:
       return {

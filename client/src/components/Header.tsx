@@ -34,7 +34,7 @@ export default function Header() {
           />
           <div className="hidden sm:flex flex-col">
             <h1 className="text-lg font-display font-bold text-foreground">Toolsy</h1>
-            <p className="text-xs text-muted-foreground">PDF, video & image tools</p>
+            <p className="text-xs text-muted-foreground">AI, creator, PDF & video tools</p>
           </div>
         </button>
 
@@ -43,7 +43,7 @@ export default function Header() {
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Search tools..."
+              placeholder="Search meta titles, reel hooks, PDF tools..."
               className="pl-10 pr-4 py-2 bg-secondary/50 border-secondary focus:border-accent focus:ring-1 focus:ring-accent"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
