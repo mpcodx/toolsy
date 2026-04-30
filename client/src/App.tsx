@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 
@@ -57,6 +57,20 @@ function RouteFallback() {
   );
 }
 
+function ScrollToTopOnRouteChange() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location]);
+
+  return null;
+}
+
 function App() {
   const [showEnhancements, setShowEnhancements] = useState(false);
 
@@ -92,6 +106,7 @@ function App() {
 
   return (
     <ErrorBoundary>
+      <ScrollToTopOnRouteChange />
       <Router />
       {showEnhancements ? (
         <Suspense fallback={null}>

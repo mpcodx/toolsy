@@ -49,6 +49,10 @@ const toolComponents: Record<string, any> = {
   "hashtag-generator": lazyNamed(() => import("./tools/AiTextTools"), "HashtagGenerator"),
   "instagram-caption-generator": lazyNamed(() => import("./tools/AiTextTools"), "InstagramCaptionGenerator"),
   "youtube-description-generator": lazyNamed(() => import("./tools/AiTextTools"), "YoutubeDescriptionGenerator"),
+  "clip-idea-generator": lazyNamed(() => import("./tools/AiTextTools"), "ClipIdeaGenerator"),
+  "video-hook-generator": lazyNamed(() => import("./tools/AiTextTools"), "VideoHookGenerator"),
+  "shorts-script-generator": lazyNamed(() => import("./tools/AiTextTools"), "ShortsScriptGenerator"),
+  "content-calendar-generator": lazyNamed(() => import("./tools/AiTextTools"), "ContentCalendarGenerator"),
 };
 
 interface ToolLoaderProps {

@@ -6,6 +6,7 @@ export interface Tool {
   icon: string;
   color: string;
   featured?: boolean;
+  searchAliases?: string[];
 }
 
 export const TOOLS: Tool[] = [
@@ -149,6 +150,7 @@ export const TOOLS: Tool[] = [
     icon: "Video",
     color: "from-emerald-500 to-teal-600",
     featured: true,
+    searchAliases: ["audio extractor", "extract audio from video", "video sound", "creator audio"],
   },
   {
     id: "video-thumbnail-maker",
@@ -158,6 +160,7 @@ export const TOOLS: Tool[] = [
     icon: "Image",
     color: "from-fuchsia-500 to-fuchsia-600",
     featured: true,
+    searchAliases: ["video thumbnail generator", "frame grabber", "video to image", "video snapshot"],
   },
   {
     id: "video-to-frames",
@@ -167,6 +170,7 @@ export const TOOLS: Tool[] = [
     icon: "Film",
     color: "from-cyan-500 to-sky-600",
     featured: true,
+    searchAliases: ["frame extractor", "video to images", "clip frames", "storyboard frames"],
   },
   {
     id: "video-clipper",
@@ -176,6 +180,7 @@ export const TOOLS: Tool[] = [
     icon: "Scissors",
     color: "from-emerald-600 to-lime-500",
     featured: true,
+    searchAliases: ["video trimmer", "clip cutter", "cut clips", "short clip editor", "clip tool"],
   },
   {
     id: "direct-mp4-downloader",
@@ -364,6 +369,7 @@ export const TOOLS: Tool[] = [
     icon: "Hash",
     color: "from-fuchsia-500 to-pink-600",
     featured: true,
+    searchAliases: ["content creator hashtags", "reels hashtags", "tiktok hashtags", "short video hashtags"],
   },
   {
     id: "instagram-caption-generator",
@@ -373,6 +379,7 @@ export const TOOLS: Tool[] = [
     icon: "Instagram",
     color: "from-pink-500 to-rose-600",
     featured: true,
+    searchAliases: ["content creator captions", "reels caption generator", "short video captions"],
   },
   {
     id: "youtube-description-generator",
@@ -382,6 +389,75 @@ export const TOOLS: Tool[] = [
     icon: "Youtube",
     color: "from-red-500 to-orange-600",
     featured: true,
+    searchAliases: ["youtube shorts description", "creator video description", "video seo description"],
+  },
+  {
+    id: "clip-idea-generator",
+    name: "Clip Idea Generator",
+    description: "Turn long videos or podcasts into short-form clip ideas with hooks and CTA angles",
+    category: "Social Media",
+    icon: "Film",
+    color: "from-orange-500 to-rose-600",
+    searchAliases: [
+      "clip ideas",
+      "content creator",
+      "content creators",
+      "content creater",
+      "creator clips",
+      "podcast clips",
+      "reels ideas",
+      "shorts ideas",
+      "short form content",
+    ],
+  },
+  {
+    id: "video-hook-generator",
+    name: "Video Hook Generator",
+    description: "Create opening hooks for Reels, Shorts, TikTok videos, and talking-head clips",
+    category: "Social Media",
+    icon: "Sparkles",
+    color: "from-amber-500 to-pink-600",
+    searchAliases: [
+      "clip hooks",
+      "content creator hooks",
+      "content creater hooks",
+      "reels hooks",
+      "shorts hooks",
+      "tiktok hooks",
+      "video opener",
+    ],
+  },
+  {
+    id: "shorts-script-generator",
+    name: "Shorts Script Generator",
+    description: "Draft short-form video scripts with a hook, beats, CTA, and on-screen text cues",
+    category: "Social Media",
+    icon: "FilePenLine",
+    color: "from-sky-500 to-indigo-600",
+    searchAliases: [
+      "content creator scripts",
+      "content creater scripts",
+      "youtube shorts script",
+      "reels script",
+      "tiktok script",
+      "short form video script",
+    ],
+  },
+  {
+    id: "content-calendar-generator",
+    name: "Content Calendar Generator",
+    description: "Plan weekly or monthly creator content ideas across Shorts, Reels, TikTok, and more",
+    category: "Social Media",
+    icon: "Table",
+    color: "from-emerald-500 to-cyan-600",
+    searchAliases: [
+      "content creator planner",
+      "content creator calendar",
+      "content creater planner",
+      "social media planner",
+      "creator workflow",
+      "creator calendar",
+    ],
   },
 ];
 
@@ -407,14 +483,79 @@ export function getTool(id: string): Tool | undefined {
   return TOOLS.find((tool) => tool.id === id);
 }
 
+const SEARCH_STOP_WORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "for",
+  "in",
+  "of",
+  "on",
+  "related",
+  "the",
+  "to",
+  "tool",
+  "tools",
+  "with",
+]);
+
+const SEARCH_TOKEN_NORMALIZATIONS: Record<string, string> = {
+  clips: "clip",
+  creater: "creator",
+  creators: "creator",
+  reels: "reel",
+  videos: "video",
+};
+
+function normalizeSearchText(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function normalizeSearchToken(value: string) {
+  return SEARCH_TOKEN_NORMALIZATIONS[value] ?? value;
+}
+
+function getSearchTokens(value: string) {
+  return normalizeSearchText(value)
+    .split(" ")
+    .map((token) => token.trim())
+    .filter(Boolean)
+    .map(normalizeSearchToken)
+    .filter((token) => !SEARCH_STOP_WORDS.has(token));
+}
+
 export function searchTools(query: string): Tool[] {
-  const lowerQuery = query.toLowerCase();
-  return TOOLS.filter(
-    (tool) =>
-      tool.name.toLowerCase().includes(lowerQuery) ||
-      tool.description.toLowerCase().includes(lowerQuery) ||
-      tool.category.toLowerCase().includes(lowerQuery)
-  );
+  const normalizedQuery = normalizeSearchText(query);
+  const queryTokens = getSearchTokens(query);
+
+  if (!normalizedQuery) {
+    return TOOLS;
+  }
+
+  return TOOLS
+    .map((tool) => {
+      const searchableText = normalizeSearchText(
+        [tool.name, tool.description, tool.category, ...(tool.searchAliases ?? [])].join(" ")
+      );
+      const searchableTokens = new Set(getSearchTokens(searchableText));
+      const aliasPhraseMatch = (tool.searchAliases ?? []).some((alias) =>
+        normalizeSearchText(alias).includes(normalizedQuery)
+      );
+      const phraseMatch = searchableText.includes(normalizedQuery);
+      const matchedTokenCount = queryTokens.filter((token) => searchableTokens.has(token)).length;
+      const score = (phraseMatch ? 6 : 0) + (aliasPhraseMatch ? 3 : 0) + matchedTokenCount * 2;
+
+      return { matchedTokenCount, score, tool };
+    })
+    .filter(({ matchedTokenCount, score }) => {
+      if (queryTokens.length <= 1) {
+        return score > 0;
+      }
+
+      return matchedTokenCount >= Math.max(1, Math.ceil(queryTokens.length / 2)) || score >= 6;
+    })
+    .sort((left, right) => right.score - left.score || left.tool.name.localeCompare(right.tool.name))
+    .map(({ tool }) => tool);
 }
 
 export function getToolsByCategory(category: string): Tool[] {

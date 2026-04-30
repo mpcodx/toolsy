@@ -15,7 +15,11 @@ type ToolId =
   | "curl-command-generator"
   | "hashtag-generator"
   | "instagram-caption-generator"
-  | "youtube-description-generator";
+  | "youtube-description-generator"
+  | "clip-idea-generator"
+  | "video-hook-generator"
+  | "shorts-script-generator"
+  | "content-calendar-generator";
 
 type FieldType = "text" | "textarea" | "select";
 
@@ -556,6 +560,211 @@ const TOOL_CONFIGS: Record<ToolId, ToolConfig> = {
       },
     ],
   },
+  "clip-idea-generator": {
+    title: "Clip Idea Generator",
+    intro:
+      "Turn one topic, podcast, interview, or long video into multiple short-form clip angles with hooks and CTA ideas. This is useful when creators want more output from the same source material.",
+    submitLabel: "Generate clip ideas",
+    resultLabel: "Clip ideas",
+    resultFilename: "clip-ideas.txt",
+    helperPoints: [
+      "Start with the episode, topic, or source material you want to repurpose.",
+      "Choose the source format so the ideas fit the way the content was recorded.",
+      "Use the output to batch your next round of Shorts, Reels, or TikTok clips.",
+    ],
+    fields: [
+      {
+        key: "topic",
+        label: "Source topic or episode",
+        placeholder: "Podcast episode about building a faceless Shorts channel",
+        type: "text",
+        required: true,
+      },
+      {
+        key: "sourceType",
+        label: "Source format",
+        type: "select",
+        options: ["Podcast", "YouTube Video", "Interview", "Webinar", "Course Lesson"],
+      },
+      {
+        key: "audience",
+        label: "Target audience",
+        placeholder: "New creators trying to grow with short-form content",
+        type: "text",
+      },
+      {
+        key: "goal",
+        label: "Clip goal",
+        type: "select",
+        options: ["More views", "More saves", "More follows", "Drive clicks"],
+      },
+      {
+        key: "count",
+        label: "Number of ideas",
+        type: "select",
+        options: ["5", "8", "10"],
+      },
+    ],
+    defaults: {
+      sourceType: "Podcast",
+      goal: "More views",
+      count: "8",
+    },
+  },
+  "video-hook-generator": {
+    title: "Video Hook Generator",
+    intro:
+      "Create opening hooks for short-form videos, talking-head clips, tutorials, and promo posts. The tool gives you multiple first-line options so you can test different angles quickly.",
+    submitLabel: "Generate hooks",
+    resultLabel: "Hook ideas",
+    resultFilename: "video-hooks.txt",
+    helperPoints: [
+      "Use a clear topic so the hooks stay specific instead of generic.",
+      "Match the platform to the style you plan to record for.",
+      "Try a different tone to compare educational, bold, and curiosity-driven starts.",
+    ],
+    fields: [
+      {
+        key: "topic",
+        label: "Video topic",
+        placeholder: "Why most creators waste their best podcast clips",
+        type: "text",
+        required: true,
+      },
+      {
+        key: "audience",
+        label: "Audience",
+        placeholder: "Creators posting Reels and YouTube Shorts",
+        type: "text",
+      },
+      {
+        key: "platform",
+        label: "Platform",
+        type: "select",
+        options: ["Instagram Reels", "TikTok", "YouTube Shorts", "LinkedIn Video"],
+      },
+      {
+        key: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Bold", "Curious", "Educational", "Friendly", "Direct"],
+      },
+      {
+        key: "count",
+        label: "Number of hooks",
+        type: "select",
+        options: ["10", "15", "20"],
+      },
+    ],
+    defaults: {
+      platform: "YouTube Shorts",
+      tone: "Bold",
+      count: "15",
+    },
+  },
+  "shorts-script-generator": {
+    title: "Shorts Script Generator",
+    intro:
+      "Draft a tight short-form video script with a hook, fast beats, on-screen text ideas, and a CTA. It works well for Reels, Shorts, TikTok explainers, and simple creator promos.",
+    submitLabel: "Generate script",
+    resultLabel: "Short-form script",
+    resultFilename: "shorts-script.txt",
+    helperPoints: [
+      "Add the one takeaway the viewer should remember after the clip ends.",
+      "Pick the platform and target length so the structure fits the format.",
+      "Use the generated draft as a recording guide, then tighten it in your own voice.",
+    ],
+    fields: [
+      {
+        key: "topic",
+        label: "Clip topic",
+        placeholder: "How to turn one podcast into ten short clips",
+        type: "text",
+        required: true,
+      },
+      {
+        key: "takeaway",
+        label: "Main takeaway",
+        placeholder: "Creators should pull hooks, myths, and proof moments from long videos first",
+        type: "textarea",
+        rows: 4,
+        required: true,
+      },
+      {
+        key: "platform",
+        label: "Platform",
+        type: "select",
+        options: ["YouTube Shorts", "Instagram Reels", "TikTok", "LinkedIn Video"],
+      },
+      {
+        key: "duration",
+        label: "Target length",
+        type: "select",
+        options: ["15 seconds", "30 seconds", "45 seconds", "60 seconds"],
+      },
+      {
+        key: "cta",
+        label: "Call to action",
+        placeholder: "Follow for more creator workflow tips",
+        type: "text",
+      },
+    ],
+    defaults: {
+      platform: "YouTube Shorts",
+      duration: "30 seconds",
+    },
+  },
+  "content-calendar-generator": {
+    title: "Content Calendar Generator",
+    intro:
+      "Plan creator content across short-form platforms with post angles, formats, and CTA ideas. Use it when you want a clearer weekly or monthly plan without opening a spreadsheet first.",
+    submitLabel: "Generate calendar",
+    resultLabel: "Content calendar",
+    resultFilename: "content-calendar.txt",
+    helperPoints: [
+      "List the platforms you want to show up on, not every platform on the internet.",
+      "Add your offer or lead magnet if you want the calendar to support growth or sales.",
+      "Choose a timeframe that matches the amount of content you realistically publish.",
+    ],
+    fields: [
+      {
+        key: "niche",
+        label: "Creator niche",
+        placeholder: "AI tools for content creators",
+        type: "text",
+        required: true,
+      },
+      {
+        key: "platforms",
+        label: "Platforms",
+        placeholder: "Instagram Reels, TikTok, YouTube Shorts",
+        type: "textarea",
+        rows: 4,
+      },
+      {
+        key: "offer",
+        label: "Offer, product, or lead magnet",
+        placeholder: "Free creator workflow checklist",
+        type: "text",
+      },
+      {
+        key: "goal",
+        label: "Primary goal",
+        type: "select",
+        options: ["Audience growth", "Lead generation", "Engagement", "Sales"],
+      },
+      {
+        key: "timeframe",
+        label: "Timeframe",
+        type: "select",
+        options: ["1 week", "2 weeks", "1 month"],
+      },
+    ],
+    defaults: {
+      goal: "Audience growth",
+      timeframe: "2 weeks",
+    },
+  },
 };
 
 function buildInitialValues(config: ToolConfig) {
@@ -878,4 +1087,20 @@ export function InstagramCaptionGenerator() {
 
 export function YoutubeDescriptionGenerator() {
   return <AiGeneratorTool toolId="youtube-description-generator" />;
+}
+
+export function ClipIdeaGenerator() {
+  return <AiGeneratorTool toolId="clip-idea-generator" />;
+}
+
+export function VideoHookGenerator() {
+  return <AiGeneratorTool toolId="video-hook-generator" />;
+}
+
+export function ShortsScriptGenerator() {
+  return <AiGeneratorTool toolId="shorts-script-generator" />;
+}
+
+export function ContentCalendarGenerator() {
+  return <AiGeneratorTool toolId="content-calendar-generator" />;
 }

@@ -23,7 +23,7 @@ export default function Footer() {
           <div>
             <h3 className="font-display font-bold text-foreground mb-2">Toolsy</h3>
             <p className="text-sm text-muted-foreground">
-              Free online tools for AI, SEO, developer, social, PDF, video, image, archive, and text workflows. No signup required.
+              Free online AI, SEO, creator, developer, PDF, video, image, archive, and text tools with no signup required.
             </p>
           </div>
 
@@ -78,6 +78,16 @@ export default function Footer() {
                   YouTube Description Generator
                 </a>
               </li>
+              <li>
+                <a href="/tool/clip-idea-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Clip Idea Generator
+                </a>
+              </li>
+              <li>
+                <a href="/tool/shorts-script-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Shorts Script Generator
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -86,8 +96,8 @@ export default function Footer() {
             <h4 className="font-semibold text-foreground mb-4">Search Tips</h4>
             <ul className="space-y-2">
               <li>
-                <a href="/?search=ai meta generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  AI meta generator
+                <a href="/?search=meta title generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Meta title generator
                 </a>
               </li>
               <li>
@@ -96,18 +106,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/?search=regex explainer" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Regex explainer
+                <a href="/?search=clip idea generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Clip idea generator
                 </a>
               </li>
               <li>
-                <a href="/?search=image compressor" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Image compressor
+                <a href="/?search=youtube shorts script generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  YouTube Shorts script generator
                 </a>
               </li>
               <li>
-                <a href="/?search=pdf merger" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  PDF merger
+                <a href="/?search=video trimmer no watermark" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Video trimmer no watermark
                 </a>
               </li>
             </ul>
