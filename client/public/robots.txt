@@ -5,4 +5,4 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://toolsy.rayonweb.com/sitemap.xml
+Sitemap: https://toolsylab.xyz/sitemap.xml

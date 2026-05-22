@@ -370,7 +370,7 @@ const TOOL_CONFIGS: Record<ToolId, ToolConfig> = {
       {
         key: "sample",
         label: "Sample text",
-        placeholder: "https://toolsy.rayonweb.com",
+        placeholder: "https://toolsylab.xyz",
         type: "text",
       },
       {
