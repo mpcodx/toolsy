@@ -159,9 +159,10 @@ Analytics are disabled unless you configure them. If you want Umami tracking or 
 | `VITE_ANALYTICS_WEBSITE_ID` | Umami website ID                             | No       |
 | `VITE_GOOGLE_TAG_ID`        | Google Analytics / Google tag measurement ID | No       |
 
-If these values are missing, the analytics scripts will not load.
+If these values are missing, the Umami and Google Analytics scripts will not load.
 On Vercel, the production build gets the same values from `vercel.json`, since `.env` is gitignored and not available to the hosted build by default.
 Vercel Web Analytics is also mounted through `@vercel/analytics`, but it stays behind the same cookie-consent gate and only runs after the user accepts analytics cookies.
+Vercel Speed Insights is mounted through `@vercel/speed-insights/react` and follows the same consent gate in this app.
 
 For Umami Cloud, set `VITE_ANALYTICS_ENDPOINT` to `https://cloud.umami.is` and the app will load `script.js` from that host with your website ID.
 

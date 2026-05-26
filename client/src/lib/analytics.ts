@@ -11,6 +11,8 @@ const GOOGLE_TAG_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="gtag"]';
 const GOOGLE_TAG_SCRIPT_URL = "https://www.googletagmanager.com/gtag/js";
 const VERCEL_ANALYTICS_SCRIPT_SELECTOR =
   'script[src*="/_vercel/insights/script.js"], script[src*="va.vercel-scripts.com/v1/script.debug.js"]';
+const VERCEL_SPEED_INSIGHTS_SCRIPT_SELECTOR =
+  'script[src*="/_vercel/speed-insights/script.js"], script[src*="va.vercel-scripts.com/v1/speed-insights/script.debug.js"], script[src*="va.vercel-scripts.com/v1/speed-insights/script.js"]';
 const UMAMI_DEFAULT_SCRIPT_PATH = "/script.js";
 type GtagCommand = IArguments;
 
@@ -319,6 +321,7 @@ export function disableAnalytics() {
   }
 
   disableVercelAnalytics();
+  disableVercelSpeedInsights();
   syncGoogleAnalyticsConsent("rejected");
 }
 
@@ -337,6 +340,21 @@ export function disableVercelAnalytics() {
   window.vam = undefined;
 }
 
+export function disableVercelSpeedInsights() {
+  if (typeof document === "undefined" || typeof window === "undefined") {
+    return;
+  }
+
+  const scripts = document.querySelectorAll<HTMLScriptElement>(
+    VERCEL_SPEED_INSIGHTS_SCRIPT_SELECTOR
+  );
+
+  scripts.forEach(script => script.remove());
+  window.si = undefined;
+  window.siq = undefined;
+  window.sil = undefined;
+}
+
 // Extend Window interface for Umami
 declare global {
   interface Window {
@@ -348,6 +366,9 @@ declare global {
     va?: (...args: unknown[]) => void;
     vaq?: unknown[][];
     vam?: string;
+    si?: (...args: unknown[]) => void;
+    siq?: unknown[][];
+    sil?: boolean;
   }
 }
 
