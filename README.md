@@ -2,7 +2,7 @@
 
 Toolsy is a free online hub for AI, SEO, developer, social media, PDF, video, image, text, archive, and utility tools. It is built for speed, clarity, and search visibility, with modern UI, SEO-friendly landing pages, and a simple workflow that works well on desktop and mobile.
 
-Live site: https://toolsylab.xyz/
+Live site: https://www.toolsylab.xyz/
 
 ## Overview
 
