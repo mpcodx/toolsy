@@ -28,7 +28,7 @@
       "has": [
         {
           "type": "host",
-          "value": "www.toolsylab.xyz"
+          "value": "toolsylab.xyz"
         }
       ],
       "destination": "https://toolsylab.xyz/",
@@ -50,7 +50,7 @@
       "has": [
         {
           "type": "host",
-          "value": "www.toolsylab.xyz"
+          "value": "toolsylab.xyz"
         }
       ],
       "destination": "https://toolsylab.xyz/:path*",
@@ -61,7 +61,7 @@
       "has": [
         {
           "type": "host",
-          "value": "www.toolsylab.xyz"
+          "value": "toolsylab.xyz"
         }
       ],
       "destination": "https://toolsylab.xyz/",
@@ -72,7 +72,7 @@
       "has": [
         {
           "type": "host",
-          "value": "www.toolsylab.xyz"
+          "value": "toolsylab.xyz"
         }
       ],
       "destination": "https://toolsylab.xyz/:path*",
