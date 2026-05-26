@@ -17,8 +17,6 @@ async function startServer() {
   const server = createServer(app);
   const canonicalHost = "toolsylab.xyz";
   const redirectHosts = new Set([
-    "toolsy.rayonweb.com",
-    "www.toolsy.rayonweb.com",
     "www.toolsylab.xyz",
   ]);
 

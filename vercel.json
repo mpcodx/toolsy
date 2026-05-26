@@ -17,7 +17,7 @@
       "has": [
         {
           "type": "host",
-          "value": "toolsy.rayonweb.com"
+          "value": "toolsylab.xyz"
         }
       ],
       "destination": "https://toolsylab.xyz/",
@@ -28,7 +28,7 @@
       "has": [
         {
           "type": "host",
-          "value": "www.toolsy.rayonweb.com"
+          "value": "www.toolsylab.xyz"
         }
       ],
       "destination": "https://toolsylab.xyz/",
@@ -39,7 +39,7 @@
       "has": [
         {
           "type": "host",
-          "value": "toolsy.rayonweb.com"
+          "value": "toolsylab.xyz"
         }
       ],
       "destination": "https://toolsylab.xyz/:path*",
@@ -50,7 +50,7 @@
       "has": [
         {
           "type": "host",
-          "value": "www.toolsy.rayonweb.com"
+          "value": "www.toolsylab.xyz"
         }
       ],
       "destination": "https://toolsylab.xyz/:path*",
@@ -114,6 +114,12 @@
           "value": "noindex, nofollow"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|favicon.svg|logo.svg|robots.txt|sitemap.xml).*)",
+      "destination": "/index.html"
     }
   ]
 }
