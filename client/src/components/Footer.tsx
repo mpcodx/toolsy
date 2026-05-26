@@ -16,38 +16,58 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-card mt-20" style={deferredFooterStyle}>
+    <footer
+      className="border-t border-border bg-card mt-20"
+      style={deferredFooterStyle}
+    >
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <h3 className="font-display font-bold text-foreground mb-2">Toolsy</h3>
+            <h3 className="font-display font-bold text-foreground mb-2">
+              Toolsy
+            </h3>
             <p className="text-sm text-muted-foreground">
-              Free online AI, SEO, creator, developer, PDF, video, image, archive, and text tools with no signup required.
+              Free online AI, SEO, creator, developer, PDF, video, image,
+              archive, and text tools with no signup required.
             </p>
           </div>
 
           {/* SEO and AI */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">SEO & AI Tools</h4>
+            <h4 className="font-semibold text-foreground mb-4">
+              SEO & AI Tools
+            </h4>
             <ul className="space-y-2">
               <li>
-                <a href="/tool/ai-meta-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/ai-meta-generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   AI Meta Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/keyword-clustering-tool" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/keyword-clustering-tool"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Keyword Clustering Tool
                 </a>
               </li>
               <li>
-                <a href="/tool/schema-markup-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/schema-markup-generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Schema Markup Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/faq-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/faq-generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   FAQ Generator
                 </a>
               </li>
@@ -56,35 +76,55 @@ export default function Footer() {
 
           {/* Developer and Social */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Creator & Dev Tools</h4>
+            <h4 className="font-semibold text-foreground mb-4">
+              Creator & Dev Tools
+            </h4>
             <ul className="space-y-2">
               <li>
-                <a href="/tool/regex-explainer" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/regex-explainer"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Regex Explainer
                 </a>
               </li>
               <li>
-                <a href="/tool/commit-message-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/commit-message-generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Commit Message Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/instagram-caption-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/instagram-caption-generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Instagram Caption Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/youtube-description-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/youtube-description-generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   YouTube Description Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/clip-idea-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/clip-idea-generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Clip Idea Generator
                 </a>
               </li>
               <li>
-                <a href="/tool/shorts-script-generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/shorts-script-generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Shorts Script Generator
                 </a>
               </li>
@@ -96,28 +136,51 @@ export default function Footer() {
             <h4 className="font-semibold text-foreground mb-4">Search Tips</h4>
             <ul className="space-y-2">
               <li>
-                <a href="/?search=meta title generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/?search=meta title generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Meta title generator
                 </a>
               </li>
               <li>
-                <a href="/?search=keyword clustering tool" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/?search=keyword clustering tool"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   Keyword clustering tool
                 </a>
               </li>
               <li>
-                <a href="/?search=clip idea generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Clip idea generator
+                <a
+                  href="/tool/video-clipper"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
+                  Clip cutter
                 </a>
               </li>
               <li>
-                <a href="/?search=youtube shorts script generator" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/tool/video-clipper"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
+                  Video cutter online
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/tool/pdf-merger"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
+                  Merge PDF free
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/?search=youtube shorts script generator"
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   YouTube Shorts script generator
-                </a>
-              </li>
-              <li>
-                <a href="/?search=video trimmer no watermark" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                  Video trimmer no watermark
                 </a>
               </li>
             </ul>
@@ -132,10 +195,11 @@ export default function Footer() {
             </p>
             <div className="flex flex-col items-center gap-3 text-center md:items-end md:text-right">
               <p className="text-sm text-muted-foreground">
-                Built for quick conversions, shareable tool pages, and search-friendly landing pages.
+                Built for quick conversions, shareable tool pages, and
+                search-friendly landing pages.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:justify-end">
-                {footerInfoLinks.map((link) => (
+                {footerInfoLinks.map(link => (
                   <a
                     key={link.href}
                     href={link.href}
@@ -147,7 +211,9 @@ export default function Footer() {
                 <button
                   type="button"
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS_EVENT))}
+                  onClick={() =>
+                    window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS_EVENT))
+                  }
                 >
                   Cookie settings
                 </button>

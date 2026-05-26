@@ -2,7 +2,7 @@
 
 Toolsy is a free online hub for AI, SEO, developer, social media, PDF, video, image, text, archive, and utility tools. It is built for speed, clarity, and search visibility, with modern UI, SEO-friendly landing pages, and a simple workflow that works well on desktop and mobile.
 
-Live site: https://toolsy.rayonweb.com/
+Live site: https://toolsylab.xyz/
 
 ## Overview
 
@@ -153,11 +153,11 @@ Blueprints for the new free-first AI and SEO catalog live in `docs/free-tool-blu
 
 Analytics are disabled unless you configure them. If you want Umami tracking or the Google tag, set:
 
-| Variable | Purpose | Required |
-| --- | --- | --- |
-| `VITE_ANALYTICS_ENDPOINT` | Umami base URL or direct tracker script URL | No |
-| `VITE_ANALYTICS_WEBSITE_ID` | Umami website ID | No |
-| `VITE_GOOGLE_TAG_ID` | Google Analytics / Google tag measurement ID | No |
+| Variable                    | Purpose                                      | Required |
+| --------------------------- | -------------------------------------------- | -------- |
+| `VITE_ANALYTICS_ENDPOINT`   | Umami base URL or direct tracker script URL  | No       |
+| `VITE_ANALYTICS_WEBSITE_ID` | Umami website ID                             | No       |
+| `VITE_GOOGLE_TAG_ID`        | Google Analytics / Google tag measurement ID | No       |
 
 If these values are missing, the analytics scripts will not load.
 On Vercel, the production build gets the same values from `vercel.json`, since `.env` is gitignored and not available to the hosted build by default.

@@ -6,16 +6,17 @@ import { updateMetadata } from "@/lib/metadata";
 import { SITE_CONFIG, STRUCTURED_DATA } from "@/lib/seo";
 import { CATEGORIES, TOOLS } from "@/lib/tools";
 import { lazy, Suspense } from "react";
-import {
-  CheckCircle2,
-  Search,
-} from "lucide-react";
+import { CheckCircle2, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
 const HomeCatalog = lazy(() => import("@/components/home/HomeCatalog"));
 
 const quickSearches = [
+  "clip cutter",
+  "video cutter online",
+  "merge pdf free",
+  "merge pdf",
   "meta title generator",
   "meta description generator",
   "keyword clustering tool",
@@ -24,14 +25,15 @@ const quickSearches = [
   "clip idea generator",
   "instagram caption generator",
   "video trimmer no watermark",
-  "pdf merger",
 ];
 
 const TOOL_COUNT_LABEL = `${TOOLS.length}`;
 const CATEGORY_COUNT_LABEL = `${CATEGORIES.length}`;
 
 function scrollToTools() {
-  document.getElementById("tools-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  document
+    .getElementById("tools-grid")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 export default function Home() {
@@ -61,7 +63,11 @@ export default function Home() {
     const script = document.createElement("script");
     script.id = scriptId;
     script.type = "application/ld+json";
-    script.textContent = JSON.stringify(STRUCTURED_DATA.website);
+    script.textContent = JSON.stringify([
+      STRUCTURED_DATA.website,
+      STRUCTURED_DATA.organization,
+      STRUCTURED_DATA.itemList,
+    ]);
     document.head.appendChild(script);
 
     return () => {
@@ -100,19 +106,24 @@ export default function Home() {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="max-w-3xl">
                 <Badge className="rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-accent hover:bg-accent/10">
-                  {TOOL_COUNT_LABEL} free tools for AI SEO, creator growth, PDFs, and video workflows
+                  {TOOL_COUNT_LABEL} free tools for AI SEO, creator growth,
+                  PDFs, and video workflows
                 </Badge>
 
                 <h1 className="mt-6 text-4xl md:text-6xl font-display font-bold leading-tight text-foreground">
                   Toolsy: free{" "}
-                  <span className="text-accent">AI, SEO, creator, PDF, and video tools</span> for
-                  everyday growth and file workflows.
+                  <span className="text-accent">
+                    AI, SEO, creator, PDF, and video tools
+                  </span>{" "}
+                  for everyday growth and file workflows.
                 </h1>
 
                 <p className="mt-5 text-lg md:text-xl leading-relaxed text-muted-foreground">
-                  Use AI meta title and meta description generators, keyword clustering, schema markup,
-                  Instagram captions, YouTube Shorts scripts, reel hooks, clip ideas, video trimming,
-                  and PDF conversion tools without signup.
+                  Use AI meta title and meta description generators, keyword
+                  clustering, schema markup, Instagram captions, YouTube Shorts
+                  scripts, reel hooks, clip ideas, clip cutter, video cutter
+                  online, merge PDF free, and PDF conversion tools without
+                  signup.
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -136,7 +147,9 @@ export default function Home() {
                     <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                     <Input
                       value={searchQuery}
-                      onChange={(event) => handleSearch(event.currentTarget.value)}
+                      onChange={event =>
+                        handleSearch(event.currentTarget.value)
+                      }
                       placeholder="Search meta description generator, reel hook generator, pdf merger..."
                       className="h-14 rounded-2xl border-border bg-background/95 pl-12 pr-4 text-base shadow-sm"
                     />
@@ -145,7 +158,7 @@ export default function Home() {
                     Popular searches:
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {quickSearches.map((query) => (
+                    {quickSearches.map(query => (
                       <Button
                         key={query}
                         type="button"
@@ -170,7 +183,8 @@ export default function Home() {
                     {TOOL_COUNT_LABEL}
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Free utilities for meta tags, creator content, SEO research, developer workflows, PDFs, videos, and images.
+                    Free utilities for meta tags, creator content, SEO research,
+                    developer workflows, PDFs, videos, and images.
                   </p>
                 </div>
 
@@ -182,7 +196,8 @@ export default function Home() {
                     {CATEGORY_COUNT_LABEL}
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    AI, SEO, developer, social media, PDF, document, video, image, archive, utility, and text tools.
+                    AI, SEO, developer, social media, PDF, document, video,
+                    image, archive, utility, and text tools.
                   </p>
                 </div>
 
@@ -195,13 +210,17 @@ export default function Home() {
                       <p className="text-sm uppercase tracking-[0.25em] text-white/70">
                         Free and focused
                       </p>
-                      <p className="text-lg font-semibold">No signup, clear search intent, and room to scale the catalog.</p>
+                      <p className="text-lg font-semibold">
+                        No signup, clear search intent, and room to scale the
+                        catalog.
+                      </p>
                     </div>
                   </div>
                   <p className="mt-4 text-sm leading-relaxed text-white/75">
-                    The catalog now spans AI generators, SEO helpers, creator growth tools, developer
-                    utilities, and classic file workflows. That mix gives you more high-intent entry
-                    points without making the UX noisy.
+                    The catalog now spans AI generators, SEO helpers, creator
+                    growth tools, developer utilities, and classic file
+                    workflows. That mix gives you more high-intent entry points
+                    without making the UX noisy.
                   </p>
                 </div>
               </div>
@@ -214,24 +233,25 @@ export default function Home() {
             {[
               "meta title generator",
               "meta description generator",
+              "clip cutter",
+              "video cutter online",
+              "merge pdf free",
+              "merge pdf",
               "clip idea generator",
               "reel hook generator",
               "youtube shorts script generator",
               "keyword clustering tool",
               "instagram caption generator",
               "video trimmer no watermark",
-              "pdf merger",
-            ].map(
-              (keyword) => (
-                <Badge
-                  key={keyword}
-                  variant="secondary"
-                  className="rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-medium text-muted-foreground"
-                >
-                  {keyword}
-                </Badge>
-              )
-            )}
+            ].map(keyword => (
+              <Badge
+                key={keyword}
+                variant="secondary"
+                className="rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-medium text-muted-foreground"
+              >
+                {keyword}
+              </Badge>
+            ))}
           </div>
         </section>
 

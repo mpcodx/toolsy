@@ -54,6 +54,10 @@ function isAiMetaGenerator(tool: Tool) {
   return tool.id === "ai-meta-generator";
 }
 
+function isPdfMerger(tool: Tool) {
+  return tool.id === "pdf-merger";
+}
+
 function getToolProfile(tool: Tool): ToolProfile {
   const name = normalizePhrase(tool.name);
   const description = normalizePhrase(tool.description);
@@ -98,6 +102,23 @@ function getToolProfile(tool: Tool): ToolProfile {
   }
 
   if (tool.category === "PDF") {
+    if (isPdfMerger(tool)) {
+      return {
+        focus: "merge multiple PDF files into one clean document",
+        supportedInput: "multiple PDF files",
+        supportedOutput: "a single merged PDF document",
+        extraKeywords: [
+          "merge pdf",
+          "merge pdf free",
+          "merge pdf online",
+          "free pdf merger",
+          "pdf combiner",
+          "combine pdf files",
+        ],
+        trustBadges: ["Free", "Secure", "No Signup"],
+      };
+    }
+
     if (name.includes("to image")) {
       return {
         focus: "convert PDF pages into images",
@@ -118,16 +139,6 @@ function getToolProfile(tool: Tool): ToolProfile {
       };
     }
 
-    if (name.includes("merg")) {
-      return {
-        focus: "merge multiple PDF files into one document",
-        supportedInput: "multiple PDF files",
-        supportedOutput: "a single merged PDF",
-        extraKeywords: ["pdf merger", "merge pdf files", "combine pdfs"],
-        trustBadges: ["Free", "Secure", "No Signup"],
-      };
-    }
-
     if (name.includes("split")) {
       return {
         focus: "split a PDF into individual pages or page ranges",
@@ -143,7 +154,11 @@ function getToolProfile(tool: Tool): ToolProfile {
         focus: "add text or image watermarks to PDF documents",
         supportedInput: "PDF files",
         supportedOutput: "watermarked PDF files",
-        extraKeywords: ["pdf watermark", "add watermark to pdf", "pdf security"],
+        extraKeywords: [
+          "pdf watermark",
+          "add watermark to pdf",
+          "pdf security",
+        ],
         trustBadges: ["Free", "Secure", "No Signup"],
       };
     }
@@ -183,7 +198,11 @@ function getToolProfile(tool: Tool): ToolProfile {
         focus: "convert spreadsheets into PDF documents",
         supportedInput: "XLSX and XLS spreadsheets",
         supportedOutput: "PDF documents",
-        extraKeywords: ["excel to pdf", "spreadsheet to pdf", "sheet converter"],
+        extraKeywords: [
+          "excel to pdf",
+          "spreadsheet to pdf",
+          "sheet converter",
+        ],
         trustBadges: ["Free", "Secure", "No Signup"],
       };
     }
@@ -225,7 +244,11 @@ function getToolProfile(tool: Tool): ToolProfile {
         focus: "compress images while preserving quality",
         supportedInput: "JPG, PNG, or WebP images",
         supportedOutput: "smaller image files",
-        extraKeywords: ["image compressor", "compress image", "image optimizer"],
+        extraKeywords: [
+          "image compressor",
+          "compress image",
+          "image optimizer",
+        ],
         trustBadges: ["Free", "Secure", "No Signup"],
       };
     }
@@ -277,7 +300,27 @@ function getToolProfile(tool: Tool): ToolProfile {
         focus: "export video frames as a ZIP archive of images",
         supportedInput: "uploaded video files",
         supportedOutput: "a ZIP archive of image frames",
-        extraKeywords: ["video to frames", "video to images", "frame extractor"],
+        extraKeywords: [
+          "video to frames",
+          "video to images",
+          "frame extractor",
+        ],
+        trustBadges: ["Free", "Secure", "No Signup"],
+      };
+    }
+
+    if (tool.id === "video-compressor") {
+      return {
+        focus: "compress video files online to reduce file size",
+        supportedInput: "uploaded MP4, MOV, WebM, M4V, MKV, or AVI video files",
+        supportedOutput: "smaller video files",
+        extraKeywords: [
+          "video compressor",
+          "compress video online",
+          "reduce video size",
+          "online video compressor",
+          "video file compressor",
+        ],
         trustBadges: ["Free", "Secure", "No Signup"],
       };
     }
@@ -359,7 +402,11 @@ function getToolProfile(tool: Tool): ToolProfile {
         focus: "create barcodes in several formats",
         supportedInput: "text or numeric values",
         supportedOutput: "barcode images",
-        extraKeywords: ["barcode generator", "barcode maker", "barcode creator"],
+        extraKeywords: [
+          "barcode generator",
+          "barcode maker",
+          "barcode creator",
+        ],
         trustBadges: ["Free", "Secure", "No Signup"],
       };
     }
@@ -389,7 +436,11 @@ function getToolProfile(tool: Tool): ToolProfile {
         focus: "convert common measurements and units",
         supportedInput: "numbers and measurement units",
         supportedOutput: "converted values",
-        extraKeywords: ["unit converter", "measurement converter", "conversion tool"],
+        extraKeywords: [
+          "unit converter",
+          "measurement converter",
+          "conversion tool",
+        ],
         trustBadges: ["Free", "Secure", "No Signup"],
       };
     }
@@ -408,8 +459,10 @@ function getToolProfile(tool: Tool): ToolProfile {
   if (tool.category === "AI") {
     if (tool.id === "ai-meta-generator") {
       return {
-        focus: "generate SEO meta titles and descriptions from a topic and keyword list",
-        supportedInput: "page topics, target keywords, audience notes, and tone preferences",
+        focus:
+          "generate SEO meta titles and descriptions from a topic and keyword list",
+        supportedInput:
+          "page topics, target keywords, audience notes, and tone preferences",
         supportedOutput: "meta title and description drafts",
         extraKeywords: [
           "ai meta generator",
@@ -454,7 +507,8 @@ function getToolProfile(tool: Tool): ToolProfile {
   if (tool.category === "SEO") {
     if (tool.id === "keyword-clustering-tool") {
       return {
-        focus: "group related keywords into SEO clusters for topical authority planning",
+        focus:
+          "group related keywords into SEO clusters for topical authority planning",
         supportedInput: "keyword lists and topic hints",
         supportedOutput: "keyword clusters and content group ideas",
         extraKeywords: [
@@ -469,7 +523,8 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "schema-markup-generator") {
       return {
-        focus: "create JSON-LD schema markup for tool pages, articles, products, and FAQs",
+        focus:
+          "create JSON-LD schema markup for tool pages, articles, products, and FAQs",
         supportedInput: "schema type selections and page details",
         supportedOutput: "JSON-LD schema markup",
         extraKeywords: [
@@ -483,7 +538,8 @@ function getToolProfile(tool: Tool): ToolProfile {
     }
 
     return {
-      focus: "generate SEO-friendly FAQ copy for landing pages and content hubs",
+      focus:
+        "generate SEO-friendly FAQ copy for landing pages and content hubs",
       supportedInput: "page topics, keywords, audience notes, and FAQ counts",
       supportedOutput: "FAQ question and answer drafts",
       extraKeywords: [
@@ -499,7 +555,8 @@ function getToolProfile(tool: Tool): ToolProfile {
   if (tool.category === "Developer") {
     if (tool.id === "commit-message-generator") {
       return {
-        focus: "turn rough change summaries into clean conventional commit messages",
+        focus:
+          "turn rough change summaries into clean conventional commit messages",
         supportedInput: "change summaries, scopes, and commit types",
         supportedOutput: "formatted commit messages",
         extraKeywords: [
@@ -513,8 +570,10 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "regex-explainer") {
       return {
-        focus: "explain regular expressions in plain English with token breakdowns",
-        supportedInput: "regex patterns, optional sample text, and regex flavor notes",
+        focus:
+          "explain regular expressions in plain English with token breakdowns",
+        supportedInput:
+          "regex patterns, optional sample text, and regex flavor notes",
         supportedOutput: "regex explanations",
         extraKeywords: [
           "regex explainer",
@@ -527,7 +586,8 @@ function getToolProfile(tool: Tool): ToolProfile {
     }
 
     return {
-      focus: "build cURL commands from request details without hand-writing terminal flags",
+      focus:
+        "build cURL commands from request details without hand-writing terminal flags",
       supportedInput: "request URLs, methods, headers, and JSON bodies",
       supportedOutput: "ready-to-run cURL commands",
       extraKeywords: [
@@ -557,7 +617,8 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "clip-idea-generator") {
       return {
-        focus: "turn long videos, podcasts, and interviews into short-form clip ideas",
+        focus:
+          "turn long videos, podcasts, and interviews into short-form clip ideas",
         supportedInput: "topics, source formats, audiences, and clip goals",
         supportedOutput: "clip idea lists with hooks and call-to-action angles",
         extraKeywords: [
@@ -572,7 +633,8 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "video-hook-generator") {
       return {
-        focus: "create opening hooks for reels, shorts, and talking-head videos",
+        focus:
+          "create opening hooks for reels, shorts, and talking-head videos",
         supportedInput: "topics, audiences, platforms, and tone preferences",
         supportedOutput: "scroll-stopping hook ideas",
         extraKeywords: [
@@ -587,8 +649,10 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "shorts-script-generator") {
       return {
-        focus: "draft short-form video scripts with hooks, beats, and calls to action",
-        supportedInput: "topics, takeaways, platforms, clip lengths, and CTA notes",
+        focus:
+          "draft short-form video scripts with hooks, beats, and calls to action",
+        supportedInput:
+          "topics, takeaways, platforms, clip lengths, and CTA notes",
         supportedOutput: "shorts and reels script drafts",
         extraKeywords: [
           "shorts script generator",
@@ -602,7 +666,8 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "content-calendar-generator") {
       return {
-        focus: "plan creator content calendars across short-form platforms and posting cycles",
+        focus:
+          "plan creator content calendars across short-form platforms and posting cycles",
         supportedInput: "niches, platforms, offers, goals, and timeframes",
         supportedOutput: "content calendar ideas and posting plans",
         extraKeywords: [
@@ -617,7 +682,8 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "instagram-caption-generator") {
       return {
-        focus: "create Instagram captions with hooks, body copy, and calls to action",
+        focus:
+          "create Instagram captions with hooks, body copy, and calls to action",
         supportedInput: "post topics, offers, CTAs, and tone preferences",
         supportedOutput: "Instagram caption drafts",
         extraKeywords: [
@@ -630,7 +696,8 @@ function getToolProfile(tool: Tool): ToolProfile {
     }
 
     return {
-      focus: "write YouTube descriptions with keyword coverage and channel calls to action",
+      focus:
+        "write YouTube descriptions with keyword coverage and channel calls to action",
       supportedInput: "video titles, summaries, keywords, and CTA notes",
       supportedOutput: "YouTube description drafts",
       extraKeywords: [
@@ -660,6 +727,10 @@ function buildIntro(tool: Tool, profile: ToolProfile) {
     return "Toolsy's free online video trimmer helps you cut the exact part you need without opening a heavy editor. Upload a local file, choose the start and end points, and download a clean, watermark-free WebM clip. The workflow is fast, secure, and does not require signup.";
   }
 
+  if (isPdfMerger(tool)) {
+    return "Toolsy's PDF Merger gives you a simple way to merge PDF files free online without adding account friction. Upload the documents you want to combine, keep them in the right order, and export one cleaner PDF for sharing, storage, or review.";
+  }
+
   if (tool.id === "direct-mp4-downloader") {
     return "Paste a direct public MP4 file URL and download it with a clean browser link. The page is limited to direct file URLs, not platform pages.";
   }
@@ -681,6 +752,14 @@ function buildHighlights(tool: Tool, profile: ToolProfile) {
       "Trim videos online with a focused tool built for fast, everyday cuts.",
       `Input: ${profile.supportedInput}. Output: ${profile.supportedOutput}.`,
       "Secure browser processing, no signup, and no watermark on the exported clip.",
+    ];
+  }
+
+  if (isPdfMerger(tool)) {
+    return [
+      "Merge PDF files online with a workflow that stays focused on one clear job.",
+      `Input: ${profile.supportedInput}. Output: ${profile.supportedOutput}.`,
+      "Useful when you need one shareable PDF for contracts, reports, invoices, or combined exports.",
     ];
   }
 
@@ -713,6 +792,14 @@ function buildSteps(tool: Tool, profile: ToolProfile) {
       `Upload a local video file such as ${profile.supportedInput}.`,
       "Set the start and end time for the section you want to keep.",
       `Download the trimmed ${profile.supportedOutput}.`,
+    ];
+  }
+
+  if (isPdfMerger(tool)) {
+    return [
+      "Upload the PDF files you want to combine into one document.",
+      "Arrange the files in the order you want them to appear.",
+      "Merge the PDFs and download the final combined document.",
     ];
   }
 
@@ -792,6 +879,36 @@ function buildFaqs(tool: Tool, profile: ToolProfile): ToolSeoFaq[] {
     ];
   }
 
+  if (isPdfMerger(tool)) {
+    return [
+      {
+        question: "Can I merge PDF free online with this tool?",
+        answer:
+          "Yes. Toolsy works as a free online PDF merger so you can combine multiple PDF files without signup.",
+      },
+      {
+        question: "Is there a limit to how I arrange files before merging?",
+        answer:
+          "You can put the files in the order you want before creating the final merged PDF, which helps when combining reports, invoices, or multi-part exports.",
+      },
+      {
+        question: "What does the PDF merger output?",
+        answer:
+          "The output is one combined PDF document created from the files you uploaded for the merge workflow.",
+      },
+      {
+        question: "Is this a PDF combiner and a PDF merger?",
+        answer:
+          "Yes. People search for both terms, but the result is the same: one final PDF assembled from multiple source PDF files.",
+      },
+      {
+        question: "Do I need to install software to merge PDFs?",
+        answer:
+          "No. Open the page in your browser, upload the files, and run the merge workflow online.",
+      },
+    ];
+  }
+
   const commonFaqs: ToolSeoFaq[] = [
     {
       question: `Is ${tool.name} free?`,
@@ -799,7 +916,8 @@ function buildFaqs(tool: Tool, profile: ToolProfile): ToolSeoFaq[] {
     },
     {
       question: "Do I need an account?",
-      answer: "No account is needed. Open the page, add your input, and run the tool.",
+      answer:
+        "No account is needed. Open the page, add your input, and run the tool.",
     },
     {
       question: `What input and output does ${tool.name} support?`,
@@ -862,6 +980,9 @@ function buildSearchPhrases(tool: Tool, profile: ToolProfile) {
   if (isVideoClipper(tool)) {
     return unique([
       "free online video trimmer",
+      "clip cutter",
+      "clipcutter",
+      "clips cutter",
       "video cutter online",
       "trim video online",
       "video clip cutter",
@@ -876,6 +997,20 @@ function buildSearchPhrases(tool: Tool, profile: ToolProfile) {
       "watermark-free video cutter",
       "trim uploaded video privately",
       "fast video trimmer",
+      tool.name,
+    ]);
+  }
+
+  if (isPdfMerger(tool)) {
+    return unique([
+      "merge pdf",
+      "merge pdf free",
+      "merge pdf online",
+      "pdf merger",
+      "free pdf merger",
+      "pdf combiner",
+      "combine pdf files",
+      "combine pdf online",
       tool.name,
     ]);
   }
@@ -986,6 +1121,25 @@ function buildSections(tool: Tool, profile: ToolProfile): ToolSeoSection[] {
     ];
   }
 
+  if (isPdfMerger(tool)) {
+    return [
+      {
+        heading: "Why people search for merge PDF free",
+        paragraphs: [
+          "When someone needs to combine documents quickly, they usually do not want a full document suite. They want a direct answer to one task: merge PDF files into one clean output. That is why search terms like merge PDF, merge PDF free, and PDF combiner tend to convert well. The visitor already knows the outcome they need, and a focused tool page can solve it in a few steps.",
+          "Toolsy is built around that kind of high-intent workflow. Instead of hiding the action behind signup or multi-step navigation, the page makes the job obvious. That clarity matters for both search engines and users because the title, body copy, and interface all line up with the same intent.",
+        ],
+      },
+      {
+        heading: "A cleaner PDF merger workflow",
+        paragraphs: [
+          "A practical PDF merger should help you upload files, keep them in the right order, and export one document without confusion. That is especially helpful for people combining invoices, proposals, reports, onboarding packets, or exported scans. In each case, the goal is not editing every page. It is simply producing one organized file that is easier to send and store.",
+          "That focused experience also helps the page stand out in search. When Google sees a route that clearly targets PDF merging with relevant headings, metadata, and supporting copy, it has a better reason to treat the page as a specific result instead of a duplicate utility page.",
+        ],
+      },
+    ];
+  }
+
   return [
     {
       heading: `${tool.name} for fast everyday workflows`,
@@ -1001,22 +1155,24 @@ function buildMetadata(tool: Tool, profile: ToolProfile): MetadataConfig {
   const canonical = `${SITE_CONFIG.url}/tool/${tool.id}`;
 
   return {
-    title:
-      isAiMetaGenerator(tool)
-        ? "AI Meta Generator for SEO Titles & Descriptions"
-        : isVideoClipper(tool)
-        ? "Video Clip Cutter - Free Online Video Trimmer, No Watermark | Toolsy"
-        : tool.id === "direct-mp4-downloader"
-        ? "Direct MP4 Downloader - Download Public MP4 File URLs"
-        : `${tool.name} - Free ${tool.category} Tool | Toolsy`,
-    description:
-      isAiMetaGenerator(tool)
-        ? "Generate SEO titles and meta descriptions in seconds with Toolsy's AI Meta Generator. Great for blogs, landing pages, product pages, and ecommerce SEO workflows."
-        : isVideoClipper(tool)
-        ? "Trim videos online in seconds with Toolsy. Free, secure, fast, and no watermark. No signup needed. Supports MP4, MOV, WebM, MKV, and AVI."
-        : tool.id === "direct-mp4-downloader"
-        ? "Paste a direct public MP4 file URL and use a browser-safe download link to save it locally. Direct file URLs only, no platform pages."
-        : `Use ${tool.name} to ${profile.focus}. Free ${tool.category.toLowerCase()} tool with no signup required.`,
+    title: isAiMetaGenerator(tool)
+      ? "AI Meta Generator for SEO Titles & Descriptions"
+      : isVideoClipper(tool)
+        ? "Video Clip Cutter - Free Online Video Cutter & Trimmer | Toolsy"
+        : isPdfMerger(tool)
+          ? "Merge PDF Free - Online PDF Merger & Combiner | Toolsy"
+          : tool.id === "direct-mp4-downloader"
+            ? "Direct MP4 Downloader - Download Public MP4 File URLs"
+            : `${tool.name} - Free ${tool.category} Tool | Toolsy`,
+    description: isAiMetaGenerator(tool)
+      ? "Generate SEO titles and meta descriptions in seconds with Toolsy's AI Meta Generator. Great for blogs, landing pages, product pages, and ecommerce SEO workflows."
+      : isVideoClipper(tool)
+        ? "Use Toolsy as a free online clip cutter and video cutter to trim local videos fast. No watermark, no signup. Supports MP4, MOV, WebM, MKV, and AVI."
+        : isPdfMerger(tool)
+          ? "Merge PDF free online with Toolsy. Combine multiple PDF files into one document fast with no signup."
+          : tool.id === "direct-mp4-downloader"
+            ? "Paste a direct public MP4 file URL and use a browser-safe download link to save it locally. Direct file URLs only, no platform pages."
+            : `Use ${tool.name} to ${profile.focus}. Free ${tool.category.toLowerCase()} tool with no signup required.`,
     keywords: unique([
       tool.name,
       tool.description,
@@ -1033,7 +1189,9 @@ function buildMetadata(tool: Tool, profile: ToolProfile): MetadataConfig {
 
 function buildSchemas(tool: Tool, content: ToolSeoContent) {
   const canonical = `${SITE_CONFIG.url}/tool/${tool.id}`;
-  const applicationCategory = isVideoClipper(tool) ? "MultimediaApplication" : tool.category;
+  const applicationCategory = isVideoClipper(tool)
+    ? "MultimediaApplication"
+    : tool.category;
 
   return [
     {
@@ -1044,7 +1202,9 @@ function buildSchemas(tool: Tool, content: ToolSeoContent) {
       url: canonical,
       applicationCategory,
       operatingSystem: "Web",
-      browserRequirements: isVideoClipper(tool) ? "Modern browser with HTML5 video support" : undefined,
+      browserRequirements: isVideoClipper(tool)
+        ? "Modern browser with HTML5 video support"
+        : undefined,
       isAccessibleForFree: true,
       offers: {
         "@type": "Offer",
@@ -1080,7 +1240,7 @@ function buildSchemas(tool: Tool, content: ToolSeoContent) {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: content.faqs.map((faq) => ({
+      mainEntity: content.faqs.map(faq => ({
         "@type": "Question",
         name: faq.question,
         acceptedAnswer: {

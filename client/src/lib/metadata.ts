@@ -11,7 +11,7 @@ export interface MetadataConfig {
 const DEFAULT_METADATA: MetadataConfig = {
   title: "Free AI, SEO, Creator, Developer, PDF & Video Tools | Toolsy",
   description:
-    "Free online AI, SEO, creator, developer, PDF, and video tools for meta titles, keyword clusters, reel hooks, Shorts scripts, captions, and file conversion. No signup required.",
+    "Free online AI, SEO, creator, developer, PDF, and video tools for meta titles, keyword clusters, clip cutter, merge PDF free, Shorts scripts, captions, and file conversion. No signup required.",
   keywords: [
     "free AI tools",
     "SEO tools",
@@ -33,6 +33,12 @@ const DEFAULT_METADATA: MetadataConfig = {
     "creator content calendar",
     "video trimmer no watermark",
     "video clip cutter",
+    "clip cutter",
+    "clipcutter",
+    "clips cutter",
+    "video cutter online",
+    "merge pdf",
+    "merge pdf free",
     "direct mp4 downloader",
     "PDF to image",
     "image to PDF",

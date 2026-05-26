@@ -14,7 +14,7 @@ export const HOME_ROUTE = {
   priority: 1,
   title: "Free AI, SEO, Creator, Developer, PDF & Video Tools | Toolsy",
   description:
-    "Free online AI, SEO, creator, developer, PDF, and video tools for meta titles, keyword clusters, reel hooks, Shorts scripts, captions, and file conversion. No signup required.",
+    "Free online AI, SEO, creator, developer, PDF, and video tools for meta titles, keyword clusters, clip cutter, merge PDF free, Shorts scripts, captions, and file conversion. No signup required.",
   keywords: [
     "Toolsy",
     "free AI tools",
@@ -25,7 +25,14 @@ export const HOME_ROUTE = {
     "meta description generator",
     "reel hook generator",
     "clip idea generator",
+    "clip cutter",
+    "clipcutter",
+    "clips cutter",
+    "video cutter online",
     "youtube shorts script generator",
+    "merge pdf",
+    "merge pdf free",
+    "free pdf merger",
     "PDF converter",
     "video trimmer no watermark",
     "direct mp4 downloader",
@@ -112,6 +119,12 @@ function getLiteralValue(expression) {
     return expression.text;
   }
 
+  if (ts.isArrayLiteralExpression(expression)) {
+    return expression.elements
+      .map(getLiteralValue)
+      .filter(value => typeof value === "string");
+  }
+
   if (expression.kind === ts.SyntaxKind.TrueKeyword) {
     return true;
   }
@@ -189,7 +202,11 @@ function getToolTitle(tool) {
   }
 
   if (tool.id === "video-clipper") {
-    return "Video Clip Cutter - Free Online Video Trimmer, No Watermark | Toolsy";
+    return "Video Clip Cutter - Free Online Video Cutter & Trimmer | Toolsy";
+  }
+
+  if (tool.id === "pdf-merger") {
+    return "Merge PDF Free - Online PDF Merger & Combiner | Toolsy";
   }
 
   if (tool.id === "direct-mp4-downloader") {
@@ -205,7 +222,11 @@ function getToolDescription(tool) {
   }
 
   if (tool.id === "video-clipper") {
-    return "Trim videos online in seconds with Toolsy. Free, secure, fast, and no watermark. No signup needed. Supports MP4, MOV, WebM, MKV, and AVI.";
+    return "Use Toolsy as a free online clip cutter and video cutter to trim local videos fast. No watermark, no signup. Supports MP4, MOV, WebM, MKV, and AVI.";
+  }
+
+  if (tool.id === "pdf-merger") {
+    return "Merge PDF free online with Toolsy. Combine multiple PDF files into one document fast with no signup.";
   }
 
   if (tool.id === "direct-mp4-downloader") {
@@ -216,12 +237,17 @@ function getToolDescription(tool) {
 }
 
 function getToolKeywords(tool) {
+  const searchAliases = Array.isArray(tool.searchAliases)
+    ? tool.searchAliases
+    : [];
+
   return [
     tool.name,
     tool.description,
     `${tool.category} tool`,
     "free online tool",
     "Toolsy",
+    ...searchAliases,
   ].filter(Boolean);
 }
 
@@ -244,6 +270,10 @@ export function getRouteEntries() {
 
 export function getSchemas(entry) {
   if (entry.path === "/") {
+    const featuredTools = getTools()
+      .filter(tool => tool.featured)
+      .slice(0, 12);
+
     return [
       {
         "@context": "https://schema.org",
@@ -266,6 +296,17 @@ export function getSchemas(entry) {
         name: SITE_NAME,
         url: SITE_URL,
         logo: `${SITE_URL}/logo.svg`,
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Popular Toolsy tools",
+        itemListElement: featuredTools.map((tool, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: tool.name,
+          url: `${SITE_URL}/tool/${tool.id}`,
+        })),
       },
     ];
   }

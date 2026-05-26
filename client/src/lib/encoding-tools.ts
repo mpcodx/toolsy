@@ -2,7 +2,7 @@ const textEncoder = new TextEncoder();
 const textDecoder = new TextDecoder();
 
 function bytesToHex(bytes: Uint8Array) {
-  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+  return Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
 function stringToBytes(value: string) {
@@ -45,7 +45,13 @@ function md5Step(
   s: number,
   t: number
 ) {
-  return addUnsigned(rotateLeft(addUnsigned(addUnsigned(a, func(b, c, d)), addUnsigned(x, t)), s), b);
+  return addUnsigned(
+    rotateLeft(
+      addUnsigned(addUnsigned(a, func(b, c, d)), addUnsigned(x, t)),
+      s
+    ),
+    b
+  );
 }
 
 function md5F(x: number, y: number, z: number) {
@@ -65,14 +71,14 @@ function md5I(x: number, y: number, z: number) {
 }
 
 function md5ToWords(bytes: Uint8Array) {
-  const words = new Array<number>((bytes.length + 8 >> 2) + 1).fill(0);
+  const words = new Array<number>(((bytes.length + 8) >> 2) + 1).fill(0);
 
   for (let index = 0; index < bytes.length; index += 1) {
     words[index >> 2] |= bytes[index] << ((index % 4) * 8);
   }
 
   words[bytes.length >> 2] |= 0x80 << ((bytes.length % 4) * 8);
-  words[((bytes.length + 8) >> 6 << 4) + 14] = bytes.length * 8;
+  words[(((bytes.length + 8) >> 6) << 4) + 14] = bytes.length * 8;
   return words;
 }
 
@@ -164,9 +170,14 @@ function md5HexBytes(bytes: Uint8Array) {
   }
 
   return [a, b, c, d]
-    .flatMap((value) => {
+    .flatMap(value => {
       const hex = value.toString(16).padStart(8, "0");
-      return [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6), hex.slice(6, 8)];
+      return [
+        hex.slice(0, 2),
+        hex.slice(2, 4),
+        hex.slice(4, 6),
+        hex.slice(6, 8),
+      ];
     })
     .join("");
 }
@@ -185,7 +196,10 @@ export async function digestHex(
   return bytesToHex(new Uint8Array(digest));
 }
 
-export function hashText(algorithm: "MD5" | "SHA-1" | "SHA-256" | "SHA-512", text: string) {
+export function hashText(
+  algorithm: "MD5" | "SHA-1" | "SHA-256" | "SHA-512",
+  text: string
+) {
   return digestHex(algorithm, text);
 }
 
@@ -212,7 +226,7 @@ function clamp(value: number, min = 0, max = 255) {
 }
 
 export function rgbToHex(r: number, g: number, b: number) {
-  return `#${[r, g, b].map((value) => clamp(Math.round(value)).toString(16).padStart(2, "0")).join("")}`;
+  return `#${[r, g, b].map(value => clamp(Math.round(value)).toString(16).padStart(2, "0")).join("")}`;
 }
 
 export function rgbToHsl(r: number, g: number, b: number) {
@@ -301,14 +315,17 @@ export function parseColor(input: string): ParsedColor | null {
       hex.length === 3 || hex.length === 4
         ? hex
             .split("")
-            .map((character) => character + character)
+            .map(character => character + character)
             .join("")
         : hex;
 
     const red = Number.parseInt(expanded.slice(0, 2), 16);
     const green = Number.parseInt(expanded.slice(2, 4), 16);
     const blue = Number.parseInt(expanded.slice(4, 6), 16);
-    const alpha = expanded.length === 8 ? Number.parseInt(expanded.slice(6, 8), 16) / 255 : 1;
+    const alpha =
+      expanded.length === 8
+        ? Number.parseInt(expanded.slice(6, 8), 16) / 255
+        : 1;
     const { h, s, l } = rgbToHsl(red, green, blue);
 
     return {
@@ -335,7 +352,9 @@ export function parseColor(input: string): ParsedColor | null {
     const red = clamp(parseChannel(rgbMatch[1]));
     const green = clamp(parseChannel(rgbMatch[2]));
     const blue = clamp(parseChannel(rgbMatch[3]));
-    const alpha = rgbMatch[4] ? Math.min(1, Math.max(0, Number.parseFloat(rgbMatch[4]))) : 1;
+    const alpha = rgbMatch[4]
+      ? Math.min(1, Math.max(0, Number.parseFloat(rgbMatch[4])))
+      : 1;
     const { h, s, l } = rgbToHsl(red, green, blue);
 
     return {
@@ -355,9 +374,17 @@ export function parseColor(input: string): ParsedColor | null {
   );
   if (hslMatch) {
     const hue = ((Number.parseFloat(hslMatch[1]) % 360) + 360) % 360;
-    const saturation = Math.min(100, Math.max(0, Number.parseFloat(hslMatch[2])));
-    const lightness = Math.min(100, Math.max(0, Number.parseFloat(hslMatch[3])));
-    const alpha = hslMatch[4] ? Math.min(1, Math.max(0, Number.parseFloat(hslMatch[4]))) : 1;
+    const saturation = Math.min(
+      100,
+      Math.max(0, Number.parseFloat(hslMatch[2]))
+    );
+    const lightness = Math.min(
+      100,
+      Math.max(0, Number.parseFloat(hslMatch[3]))
+    );
+    const alpha = hslMatch[4]
+      ? Math.min(1, Math.max(0, Number.parseFloat(hslMatch[4])))
+      : 1;
     const { r, g, b } = hslToRgb(hue, saturation, lightness);
 
     return {
@@ -524,16 +551,23 @@ export function formatNumber(value: number, precision = 6) {
 
 export function encodeBase64Text(value: string, urlSafe = false) {
   const bytes = stringToBytes(value);
-  const encoded = btoa(String.fromCharCode(...bytes));
-  return urlSafe ? encoded.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "") : encoded;
+  const encoded = btoa(String.fromCharCode(...Array.from(bytes)));
+  return urlSafe
+    ? encoded.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "")
+    : encoded;
 }
 
 export function decodeBase64Text(value: string, urlSafe = false) {
   const normalized = urlSafe
-    ? value.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(value.length / 4) * 4, "=")
+    ? value
+        .replace(/-/g, "+")
+        .replace(/_/g, "/")
+        .padEnd(Math.ceil(value.length / 4) * 4, "=")
     : value;
 
-  const bytes = Uint8Array.from(atob(normalized), (character) => character.charCodeAt(0));
+  const bytes = Uint8Array.from(atob(normalized), character =>
+    character.charCodeAt(0)
+  );
   return bytesToString(bytes);
 }
 
@@ -562,15 +596,17 @@ export function base64ToBlob(
   urlSafe = false
 ) {
   const normalized = urlSafe
-    ? base64.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(base64.length / 4) * 4, "=")
+    ? base64
+        .replace(/-/g, "+")
+        .replace(/_/g, "/")
+        .padEnd(Math.ceil(base64.length / 4) * 4, "=")
     : base64;
 
   const binary = atob(normalized);
-  const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+  const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
   return new Blob([bytes], { type: mimeType });
 }
 
 export function base64ToText(base64: string, urlSafe = false) {
   return decodeBase64Text(base64, urlSafe);
 }
-
