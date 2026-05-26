@@ -45,6 +45,16 @@ export const TOOLS: Tool[] = [
     category: "PDF",
     icon: "Layers",
     color: "from-emerald-500 to-emerald-600",
+    featured: true,
+    searchAliases: [
+      "merge pdf",
+      "merge pdf free",
+      "merge pdf online",
+      "combine pdf",
+      "combine pdf files",
+      "free pdf merger",
+      "pdf combiner",
+    ],
   },
   {
     id: "pdf-splitter",
@@ -61,6 +71,22 @@ export const TOOLS: Tool[] = [
     category: "PDF",
     icon: "Stamp",
     color: "from-indigo-500 to-indigo-600",
+  },
+  {
+    id: "pdf-page-remover",
+    name: "PDF Page Remover",
+    description:
+      "Remove selected pages from PDF files and download a cleaner document",
+    category: "PDF",
+    icon: "Split",
+    color: "from-orange-500 to-red-600",
+    searchAliases: [
+      "delete pages from pdf",
+      "remove page from pdf",
+      "pdf page delete",
+      "pdf page remover",
+      "remove pdf pages online",
+    ],
   },
 
   // Document Conversion
@@ -97,7 +123,6 @@ export const TOOLS: Tool[] = [
     icon: "FileType",
     color: "from-red-500 to-red-600",
   },
-
   // Image Tools
   {
     id: "image-resizer",
@@ -150,42 +175,89 @@ export const TOOLS: Tool[] = [
     icon: "Video",
     color: "from-emerald-500 to-teal-600",
     featured: true,
-    searchAliases: ["audio extractor", "extract audio from video", "video sound", "creator audio"],
+    searchAliases: [
+      "audio extractor",
+      "extract audio from video",
+      "video sound",
+      "creator audio",
+    ],
   },
   {
     id: "video-thumbnail-maker",
     name: "Thumbnail Maker",
-    description: "Capture a frame from your uploaded video and save it as a thumbnail",
+    description:
+      "Capture a frame from your uploaded video and save it as a thumbnail",
     category: "Video",
     icon: "Image",
     color: "from-fuchsia-500 to-fuchsia-600",
     featured: true,
-    searchAliases: ["video thumbnail generator", "frame grabber", "video to image", "video snapshot"],
+    searchAliases: [
+      "video thumbnail generator",
+      "frame grabber",
+      "video to image",
+      "video snapshot",
+    ],
   },
   {
     id: "video-to-frames",
     name: "Video to Frames",
-    description: "Export video frames as a ZIP of images from a selected time range",
+    description:
+      "Export video frames as a ZIP of images from a selected time range",
     category: "Video",
     icon: "Film",
     color: "from-cyan-500 to-sky-600",
     featured: true,
-    searchAliases: ["frame extractor", "video to images", "clip frames", "storyboard frames"],
+    searchAliases: [
+      "frame extractor",
+      "video to images",
+      "clip frames",
+      "storyboard frames",
+    ],
   },
   {
     id: "video-clipper",
     name: "Video Clip Cutter",
-    description: "Trim uploaded videos into shorter clips with a free, secure, fast, no-watermark workflow",
+    description:
+      "Trim uploaded videos into shorter clips with a free, secure, fast, no-watermark workflow",
     category: "Video",
     icon: "Scissors",
     color: "from-emerald-600 to-lime-500",
     featured: true,
-    searchAliases: ["video trimmer", "clip cutter", "cut clips", "short clip editor", "clip tool"],
+    searchAliases: [
+      "video trimmer",
+      "clip cutter",
+      "clipcutter",
+      "clips cutter",
+      "video cutter online",
+      "online video cutter",
+      "video cutter",
+      "cut clips",
+      "short clip editor",
+      "clip tool",
+    ],
+  },
+  {
+    id: "video-compressor",
+    name: "Video Compressor",
+    description:
+      "Compress video files online to reduce size while keeping quality usable",
+    category: "Video",
+    icon: "Minimize2",
+    color: "from-teal-500 to-cyan-600",
+    featured: true,
+    searchAliases: [
+      "compress video",
+      "video file compressor",
+      "reduce video size",
+      "online video compressor",
+      "video optimizer",
+    ],
   },
   {
     id: "direct-mp4-downloader",
     name: "Direct MP4 Downloader",
-    description: "Download direct public MP4 file URLs with a browser download link",
+    description:
+      "Download direct public MP4 file URLs with a browser download link",
     category: "Video",
     icon: "Link2",
     color: "from-sky-500 to-cyan-500",
@@ -280,7 +352,8 @@ export const TOOLS: Tool[] = [
   {
     id: "ai-meta-generator",
     name: "AI Meta Generator",
-    description: "Generate SEO meta titles and descriptions from a topic and target keywords",
+    description:
+      "Generate SEO meta titles and descriptions from a topic and target keywords",
     category: "AI",
     icon: "Sparkles",
     color: "from-cyan-500 to-blue-600",
@@ -289,7 +362,8 @@ export const TOOLS: Tool[] = [
   {
     id: "ai-paragraph-rewriter",
     name: "AI Paragraph Rewriter",
-    description: "Rewrite paragraphs for clarity, tone, and readability in seconds",
+    description:
+      "Rewrite paragraphs for clarity, tone, and readability in seconds",
     category: "AI",
     icon: "FilePenLine",
     color: "from-violet-500 to-indigo-600",
@@ -298,7 +372,8 @@ export const TOOLS: Tool[] = [
   {
     id: "ai-title-generator",
     name: "AI Title Generator",
-    description: "Create catchy blog, landing page, and video titles from a simple prompt",
+    description:
+      "Create catchy blog, landing page, and video titles from a simple prompt",
     category: "AI",
     icon: "Heading1",
     color: "from-sky-500 to-cyan-600",
@@ -308,7 +383,8 @@ export const TOOLS: Tool[] = [
   {
     id: "keyword-clustering-tool",
     name: "Keyword Clustering Tool",
-    description: "Group related keywords into SEO clusters for content planning and internal links",
+    description:
+      "Group related keywords into SEO clusters for content planning and internal links",
     category: "SEO",
     icon: "SearchCheck",
     color: "from-emerald-500 to-teal-600",
@@ -317,7 +393,8 @@ export const TOOLS: Tool[] = [
   {
     id: "schema-markup-generator",
     name: "Schema Markup Generator",
-    description: "Create JSON-LD schema markup for articles, FAQs, products, and software pages",
+    description:
+      "Create JSON-LD schema markup for articles, FAQs, products, and software pages",
     category: "SEO",
     icon: "Braces",
     color: "from-amber-500 to-orange-600",
@@ -326,7 +403,8 @@ export const TOOLS: Tool[] = [
   {
     id: "faq-generator",
     name: "FAQ Generator",
-    description: "Generate SEO-friendly frequently asked questions and answers for landing pages",
+    description:
+      "Generate SEO-friendly frequently asked questions and answers for landing pages",
     category: "SEO",
     icon: "MessageCircleQuestion",
     color: "from-lime-500 to-green-600",
@@ -336,7 +414,8 @@ export const TOOLS: Tool[] = [
   {
     id: "commit-message-generator",
     name: "Commit Message Generator",
-    description: "Turn change summaries into clean conventional commits with optional body text",
+    description:
+      "Turn change summaries into clean conventional commits with optional body text",
     category: "Developer",
     icon: "GitCommitHorizontal",
     color: "from-slate-600 to-slate-800",
@@ -345,7 +424,8 @@ export const TOOLS: Tool[] = [
   {
     id: "regex-explainer",
     name: "Regex Explainer",
-    description: "Explain what a regular expression does in plain English with token breakdowns",
+    description:
+      "Explain what a regular expression does in plain English with token breakdowns",
     category: "Developer",
     icon: "ScanSearch",
     color: "from-red-500 to-rose-600",
@@ -354,7 +434,8 @@ export const TOOLS: Tool[] = [
   {
     id: "curl-command-generator",
     name: "cURL Command Generator",
-    description: "Build ready-to-run cURL requests from URL, headers, method, and JSON body input",
+    description:
+      "Build ready-to-run cURL requests from URL, headers, method, and JSON body input",
     category: "Developer",
     icon: "TerminalSquare",
     color: "from-zinc-700 to-zinc-900",
@@ -364,37 +445,54 @@ export const TOOLS: Tool[] = [
   {
     id: "hashtag-generator",
     name: "Hashtag Generator",
-    description: "Generate niche, branded, and discovery hashtags for posts and short videos",
+    description:
+      "Generate niche, branded, and discovery hashtags for posts and short videos",
     category: "Social Media",
     icon: "Hash",
     color: "from-fuchsia-500 to-pink-600",
     featured: true,
-    searchAliases: ["content creator hashtags", "reels hashtags", "tiktok hashtags", "short video hashtags"],
+    searchAliases: [
+      "content creator hashtags",
+      "reels hashtags",
+      "tiktok hashtags",
+      "short video hashtags",
+    ],
   },
   {
     id: "instagram-caption-generator",
     name: "Instagram Caption Generator",
-    description: "Create scroll-stopping Instagram captions with hooks, CTAs, and hashtags",
+    description:
+      "Create scroll-stopping Instagram captions with hooks, CTAs, and hashtags",
     category: "Social Media",
     icon: "Instagram",
     color: "from-pink-500 to-rose-600",
     featured: true,
-    searchAliases: ["content creator captions", "reels caption generator", "short video captions"],
+    searchAliases: [
+      "content creator captions",
+      "reels caption generator",
+      "short video captions",
+    ],
   },
   {
     id: "youtube-description-generator",
     name: "YouTube Description Generator",
-    description: "Write keyword-aware YouTube descriptions with chapters, CTAs, and hashtags",
+    description:
+      "Write keyword-aware YouTube descriptions with chapters, CTAs, and hashtags",
     category: "Social Media",
     icon: "Youtube",
     color: "from-red-500 to-orange-600",
     featured: true,
-    searchAliases: ["youtube shorts description", "creator video description", "video seo description"],
+    searchAliases: [
+      "youtube shorts description",
+      "creator video description",
+      "video seo description",
+    ],
   },
   {
     id: "clip-idea-generator",
     name: "Clip Idea Generator",
-    description: "Turn long videos or podcasts into short-form clip ideas with hooks and CTA angles",
+    description:
+      "Turn long videos or podcasts into short-form clip ideas with hooks and CTA angles",
     category: "Social Media",
     icon: "Film",
     color: "from-orange-500 to-rose-600",
@@ -413,7 +511,8 @@ export const TOOLS: Tool[] = [
   {
     id: "video-hook-generator",
     name: "Video Hook Generator",
-    description: "Create opening hooks for Reels, Shorts, TikTok videos, and talking-head clips",
+    description:
+      "Create opening hooks for Reels, Shorts, TikTok videos, and talking-head clips",
     category: "Social Media",
     icon: "Sparkles",
     color: "from-amber-500 to-pink-600",
@@ -430,7 +529,8 @@ export const TOOLS: Tool[] = [
   {
     id: "shorts-script-generator",
     name: "Shorts Script Generator",
-    description: "Draft short-form video scripts with a hook, beats, CTA, and on-screen text cues",
+    description:
+      "Draft short-form video scripts with a hook, beats, CTA, and on-screen text cues",
     category: "Social Media",
     icon: "FilePenLine",
     color: "from-sky-500 to-indigo-600",
@@ -446,7 +546,8 @@ export const TOOLS: Tool[] = [
   {
     id: "content-calendar-generator",
     name: "Content Calendar Generator",
-    description: "Plan weekly or monthly creator content ideas across Shorts, Reels, TikTok, and more",
+    description:
+      "Plan weekly or monthly creator content ideas across Shorts, Reels, TikTok, and more",
     category: "Social Media",
     icon: "Table",
     color: "from-emerald-500 to-cyan-600",
@@ -475,12 +576,12 @@ const CATEGORY_ORDER = [
   "Utility",
 ];
 
-export const CATEGORIES = CATEGORY_ORDER.filter((category) =>
-  TOOLS.some((tool) => tool.category === category)
+export const CATEGORIES = CATEGORY_ORDER.filter(category =>
+  TOOLS.some(tool => tool.category === category)
 );
 
 export function getTool(id: string): Tool | undefined {
-  return TOOLS.find((tool) => tool.id === id);
+  return TOOLS.find(tool => tool.id === id);
 }
 
 const SEARCH_STOP_WORDS = new Set([
@@ -508,7 +609,10 @@ const SEARCH_TOKEN_NORMALIZATIONS: Record<string, string> = {
 };
 
 function normalizeSearchText(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 }
 
 function normalizeSearchToken(value: string) {
@@ -518,10 +622,10 @@ function normalizeSearchToken(value: string) {
 function getSearchTokens(value: string) {
   return normalizeSearchText(value)
     .split(" ")
-    .map((token) => token.trim())
+    .map(token => token.trim())
     .filter(Boolean)
     .map(normalizeSearchToken)
-    .filter((token) => !SEARCH_STOP_WORDS.has(token));
+    .filter(token => !SEARCH_STOP_WORDS.has(token));
 }
 
 export function searchTools(query: string): Tool[] {
@@ -532,36 +636,52 @@ export function searchTools(query: string): Tool[] {
     return TOOLS;
   }
 
-  return TOOLS
-    .map((tool) => {
-      const searchableText = normalizeSearchText(
-        [tool.name, tool.description, tool.category, ...(tool.searchAliases ?? [])].join(" ")
-      );
-      const searchableTokens = new Set(getSearchTokens(searchableText));
-      const aliasPhraseMatch = (tool.searchAliases ?? []).some((alias) =>
-        normalizeSearchText(alias).includes(normalizedQuery)
-      );
-      const phraseMatch = searchableText.includes(normalizedQuery);
-      const matchedTokenCount = queryTokens.filter((token) => searchableTokens.has(token)).length;
-      const score = (phraseMatch ? 6 : 0) + (aliasPhraseMatch ? 3 : 0) + matchedTokenCount * 2;
+  return TOOLS.map(tool => {
+    const searchableText = normalizeSearchText(
+      [
+        tool.name,
+        tool.description,
+        tool.category,
+        ...(tool.searchAliases ?? []),
+      ].join(" ")
+    );
+    const searchableTokens = new Set(getSearchTokens(searchableText));
+    const aliasPhraseMatch = (tool.searchAliases ?? []).some(alias =>
+      normalizeSearchText(alias).includes(normalizedQuery)
+    );
+    const phraseMatch = searchableText.includes(normalizedQuery);
+    const matchedTokenCount = queryTokens.filter(token =>
+      searchableTokens.has(token)
+    ).length;
+    const score =
+      (phraseMatch ? 6 : 0) +
+      (aliasPhraseMatch ? 3 : 0) +
+      matchedTokenCount * 2;
 
-      return { matchedTokenCount, score, tool };
-    })
+    return { matchedTokenCount, score, tool };
+  })
     .filter(({ matchedTokenCount, score }) => {
       if (queryTokens.length <= 1) {
         return score > 0;
       }
 
-      return matchedTokenCount >= Math.max(1, Math.ceil(queryTokens.length / 2)) || score >= 6;
+      return (
+        matchedTokenCount >= Math.max(1, Math.ceil(queryTokens.length / 2)) ||
+        score >= 6
+      );
     })
-    .sort((left, right) => right.score - left.score || left.tool.name.localeCompare(right.tool.name))
+    .sort(
+      (left, right) =>
+        right.score - left.score ||
+        left.tool.name.localeCompare(right.tool.name)
+    )
     .map(({ tool }) => tool);
 }
 
 export function getToolsByCategory(category: string): Tool[] {
-  return TOOLS.filter((tool) => tool.category === category);
+  return TOOLS.filter(tool => tool.category === category);
 }
 
 export function getFeaturedTools(): Tool[] {
-  return TOOLS.filter((tool) => tool.featured);
+  return TOOLS.filter(tool => tool.featured);
 }

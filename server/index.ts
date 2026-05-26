@@ -4,7 +4,10 @@ import { existsSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { handleAiGenerateRoute } from "./ai-tools";
-import { registerConvertRoutes, type ConvertRequestHandler } from "./register-tool-routes";
+import {
+  registerConvertRoutes,
+  type ConvertRequestHandler,
+} from "./register-tool-routes";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,15 +15,30 @@ const __dirname = path.dirname(__filename);
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  const canonicalHost = "toolsylab.xyz";
+  const redirectHosts = new Set([
+    "toolsy.rayonweb.com",
+    "www.toolsy.rayonweb.com",
+    "www.toolsylab.xyz",
+  ]);
 
   app.use(express.json({ limit: "1mb" }));
 
-  const registerPost = (
-    route: string,
-    handler: ConvertRequestHandler
-  ) => {
+  app.use((req, res, next) => {
+    const hostHeader = req.headers.host;
+    const host = hostHeader?.split(":")[0];
+
+    if (host && redirectHosts.has(host)) {
+      res.redirect(308, `https://${canonicalHost}${req.originalUrl}`);
+      return;
+    }
+
+    next();
+  });
+
+  const registerPost = (route: string, handler: ConvertRequestHandler) => {
     app.post(route, (req, res) => {
-      void handler(req, res).catch((error) => {
+      void handler(req, res).catch(error => {
         console.error(`${route} failed:`, error);
 
         if (!res.headersSent) {
@@ -55,7 +73,10 @@ async function startServer() {
   // Handle client-side routing - serve index.html for all routes
   app.get("*", (req, res) => {
     if (!path.extname(req.path) && req.path !== "/") {
-      const routeHtmlPath = path.resolve(staticPath, `${req.path.slice(1)}.html`);
+      const routeHtmlPath = path.resolve(
+        staticPath,
+        `${req.path.slice(1)}.html`
+      );
 
       if (
         routeHtmlPath.startsWith(`${staticPath}${path.sep}`) &&

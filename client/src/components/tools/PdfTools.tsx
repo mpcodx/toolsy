@@ -18,7 +18,7 @@ function PdfUploadCard({
   hint = "PDF files up to 100MB are supported",
 }: {
   file: File | null;
-  onFile: (file: File | undefined) => void;
+  onFile: (file: File | null) => void;
   onClear?: () => void;
   accept?: string;
   multiple?: boolean;
@@ -31,10 +31,10 @@ function PdfUploadCard({
     <div
       className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:border-accent hover:bg-accent/5 transition-all"
       onClick={() => fileInputRef.current?.click()}
-      onDragOver={(event) => event.preventDefault()}
-      onDrop={(event) => {
+      onDragOver={event => event.preventDefault()}
+      onDrop={event => {
         event.preventDefault();
-        onFile(event.dataTransfer.files?.[0]);
+        onFile(event.dataTransfer.files?.[0] ?? null);
       }}
     >
       <input
@@ -42,8 +42,8 @@ function PdfUploadCard({
         type="file"
         accept={accept}
         multiple={multiple}
-        onChange={(event) => {
-          onFile(event.target.files?.[0]);
+        onChange={event => {
+          onFile(event.target.files?.[0] ?? null);
           event.target.value = "";
         }}
         className="hidden"
@@ -56,7 +56,7 @@ function PdfUploadCard({
       {file && onClear ? (
         <button
           type="button"
-          onClick={(event) => {
+          onClick={event => {
             event.stopPropagation();
             onClear();
           }}
@@ -175,7 +175,7 @@ export function PdfCompressor() {
         </label>
         <select
           value={preset}
-          onChange={(event) => setPreset(event.target.value)}
+          onChange={event => setPreset(event.target.value)}
           className="w-full p-3 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         >
           <option value="screen">Screen - smallest size</option>
@@ -211,21 +211,22 @@ export function PdfMerger() {
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const addFiles = (selectedFiles: FileList | File[] | undefined) => {
+  const addFiles = (selectedFiles: FileList | File[] | null | undefined) => {
     const nextFiles = Array.from(selectedFiles ?? []).filter(
-      (file) =>
-        file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")
+      file =>
+        file.type === "application/pdf" ||
+        file.name.toLowerCase().endsWith(".pdf")
     );
 
     if (nextFiles.length === 0) {
       return;
     }
 
-    setFiles((previous) => [...previous, ...nextFiles]);
+    setFiles(previous => [...previous, ...nextFiles]);
   };
 
   const moveFile = (index: number, direction: "up" | "down") => {
-    setFiles((previous) => {
+    setFiles(previous => {
       const next = [...previous];
       if (direction === "up" && index > 0) {
         [next[index], next[index - 1]] = [next[index - 1], next[index]];
@@ -243,7 +244,7 @@ export function PdfMerger() {
     setLoading(true);
     try {
       const formData = new FormData();
-      files.forEach((file) => formData.append("files", file));
+      files.forEach(file => formData.append("files", file));
       await downloadToolBlob("/api/convert/pdf-merge", formData, "merged.pdf");
       alert("PDF files merged successfully. Download started.");
     } catch (error) {
@@ -258,8 +259,8 @@ export function PdfMerger() {
       <div
         className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:border-accent hover:bg-accent/5 transition-all"
         onClick={() => fileInputRef.current?.click()}
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event) => {
+        onDragOver={event => event.preventDefault()}
+        onDrop={event => {
           event.preventDefault();
           addFiles(event.dataTransfer.files);
         }}
@@ -269,7 +270,7 @@ export function PdfMerger() {
           type="file"
           accept=".pdf,application/pdf"
           multiple
-          onChange={(event) => {
+          onChange={event => {
             addFiles(event.target.files);
             event.target.value = "";
           }}
@@ -287,7 +288,11 @@ export function PdfMerger() {
       <PdfFileList
         files={files}
         onMove={moveFile}
-        onRemove={(index) => setFiles((previous) => previous.filter((_, itemIndex) => itemIndex !== index))}
+        onRemove={index =>
+          setFiles(previous =>
+            previous.filter((_, itemIndex) => itemIndex !== index)
+          )
+        }
       />
 
       <Button
@@ -357,7 +362,7 @@ export function PdfSplitter() {
         </label>
         <input
           value={pages}
-          onChange={(event) => setPages(event.target.value)}
+          onChange={event => setPages(event.target.value)}
           placeholder="all or 1-3,5,8-10"
           className="w-full p-3 rounded-lg border border-border bg-card text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
@@ -374,7 +379,7 @@ export function PdfSplitter() {
           {[
             { value: "zip", label: "ZIP of pages" },
             { value: "pdf", label: "Single PDF" },
-          ].map((option) => (
+          ].map(option => (
             <button
               key={option.value}
               type="button"
@@ -468,7 +473,7 @@ export function PdfWatermark() {
         </label>
         <input
           value={watermarkText}
-          onChange={(event) => setWatermarkText(event.target.value)}
+          onChange={event => setWatermarkText(event.target.value)}
           placeholder="CONFIDENTIAL"
           className="w-full p-3 rounded-lg border border-border bg-card text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
@@ -481,7 +486,7 @@ export function PdfWatermark() {
           </label>
           <select
             value={position}
-            onChange={(event) => setPosition(event.target.value)}
+            onChange={event => setPosition(event.target.value)}
             className="w-full p-3 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
           >
             <option value="center">Center</option>
@@ -501,7 +506,7 @@ export function PdfWatermark() {
             ref={imageInputRef}
             type="file"
             accept="image/png,image/jpeg,image/webp"
-            onChange={(event) => {
+            onChange={event => {
               setWatermarkImage(event.target.files?.[0] ?? null);
               event.target.value = "";
             }}
@@ -524,7 +529,7 @@ export function PdfWatermark() {
           min="0"
           max="100"
           value={opacity}
-          onChange={(event) => setOpacity(Number(event.target.value))}
+          onChange={event => setOpacity(Number(event.target.value))}
           className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer"
         />
       </div>
@@ -538,7 +543,7 @@ export function PdfWatermark() {
           min="12"
           max="180"
           value={size}
-          onChange={(event) => setSize(Number(event.target.value))}
+          onChange={event => setSize(Number(event.target.value))}
           className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer"
         />
       </div>
@@ -552,14 +557,16 @@ export function PdfWatermark() {
           min="-90"
           max="90"
           value={rotation}
-          onChange={(event) => setRotation(Number(event.target.value))}
+          onChange={event => setRotation(Number(event.target.value))}
           className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer"
         />
       </div>
 
       <Button
         onClick={handleWatermark}
-        disabled={!file || loading || (!watermarkText.trim() && !watermarkImage)}
+        disabled={
+          !file || loading || (!watermarkText.trim() && !watermarkImage)
+        }
         className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-3 text-base font-medium"
       >
         {loading ? (
@@ -599,7 +606,11 @@ function OfficeToPdfTool({
     try {
       const formData = new FormData();
       formData.append("file", file);
-      await downloadToolBlob(endpoint, formData, `${getBaseName(file.name)}.pdf`);
+      await downloadToolBlob(
+        endpoint,
+        formData,
+        `${getBaseName(file.name)}.pdf`
+      );
       alert(`${title} converted successfully. Download started.`);
     } catch (error) {
       alert(error instanceof Error ? error.message : "Conversion failed.");
@@ -612,8 +623,8 @@ function OfficeToPdfTool({
     <div className="space-y-6">
       <PdfUploadCard
         file={file}
-        onFile={(selected) => {
-          if (!selected) {
+        onFile={selected => {
+          if (selected === null) {
             setFile(null);
             return;
           }
@@ -732,4 +743,3 @@ export function PdfToWord() {
     </div>
   );
 }
-

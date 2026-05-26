@@ -84,7 +84,7 @@ function UploadCard({
   multiple = false,
 }: {
   file: File | null;
-  onFile: (file: File | undefined) => void;
+  onFile: (file: File | null) => void;
   onClear?: () => void;
   accept: string;
   title: string;
@@ -97,10 +97,10 @@ function UploadCard({
     <div
       className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:border-accent hover:bg-accent/5 transition-all"
       onClick={() => inputRef.current?.click()}
-      onDragOver={(event) => event.preventDefault()}
-      onDrop={(event) => {
+      onDragOver={event => event.preventDefault()}
+      onDrop={event => {
         event.preventDefault();
-        onFile(event.dataTransfer.files?.[0]);
+        onFile(event.dataTransfer.files?.[0] ?? null);
       }}
     >
       <input
@@ -108,8 +108,8 @@ function UploadCard({
         type="file"
         accept={accept}
         multiple={multiple}
-        onChange={(event) => {
-          onFile(event.target.files?.[0]);
+        onChange={event => {
+          onFile(event.target.files?.[0] ?? null);
           event.target.value = "";
         }}
         className="hidden"
@@ -122,7 +122,7 @@ function UploadCard({
       {file && onClear ? (
         <button
           type="button"
-          onClick={(event) => {
+          onClick={event => {
             event.stopPropagation();
             onClear();
           }}
@@ -141,14 +141,14 @@ export function ZipCreator() {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const addFiles = (selectedFiles: FileList | File[] | undefined) => {
+  const addFiles = (selectedFiles: FileList | File[] | null | undefined) => {
     const nextFiles = Array.from(selectedFiles ?? []);
     if (nextFiles.length === 0) return;
-    setFiles((previous) => [...previous, ...nextFiles]);
+    setFiles(previous => [...previous, ...nextFiles]);
   };
 
   const moveFile = (index: number, direction: "up" | "down") => {
-    setFiles((previous) => {
+    setFiles(previous => {
       const next = [...previous];
       if (direction === "up" && index > 0) {
         [next[index], next[index - 1]] = [next[index - 1], next[index]];
@@ -165,7 +165,7 @@ export function ZipCreator() {
     setLoading(true);
     try {
       const formData = new FormData();
-      files.forEach((file) => {
+      files.forEach(file => {
         formData.append("files", file);
         const relativePath =
           (file as File & { webkitRelativePath?: string }).webkitRelativePath ||
@@ -173,7 +173,11 @@ export function ZipCreator() {
         formData.append("paths", relativePath);
       });
 
-      await downloadToolBlob("/api/convert/zip-create", formData, "archive.zip");
+      await downloadToolBlob(
+        "/api/convert/zip-create",
+        formData,
+        "archive.zip"
+      );
       alert("ZIP archive created successfully. Download started.");
     } catch (error) {
       alert(error instanceof Error ? error.message : "ZIP creation failed.");
@@ -187,8 +191,8 @@ export function ZipCreator() {
       <div
         className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:border-accent hover:bg-accent/5 transition-all"
         onClick={() => inputRef.current?.click()}
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event) => {
+        onDragOver={event => event.preventDefault()}
+        onDrop={event => {
           event.preventDefault();
           addFiles(event.dataTransfer.files);
         }}
@@ -197,7 +201,7 @@ export function ZipCreator() {
           ref={inputRef}
           type="file"
           multiple
-          onChange={(event) => {
+          onChange={event => {
             addFiles(event.target.files);
             event.target.value = "";
           }}
@@ -215,7 +219,11 @@ export function ZipCreator() {
       <ArchiveFileList
         files={files}
         onMove={moveFile}
-        onRemove={(index) => setFiles((previous) => previous.filter((_, fileIndex) => fileIndex !== index))}
+        onRemove={index =>
+          setFiles(previous =>
+            previous.filter((_, fileIndex) => fileIndex !== index)
+          )
+        }
       />
 
       <Button
@@ -243,7 +251,13 @@ export function ZipExtractor() {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<
-    Array<{ path: string; name: string; size: number; mimeType: string; contentBase64: string }>
+    Array<{
+      path: string;
+      name: string;
+      size: number;
+      mimeType: string;
+      contentBase64: string;
+    }>
   >([]);
 
   const handleExtract = async () => {
@@ -254,7 +268,13 @@ export function ZipExtractor() {
       const formData = new FormData();
       formData.append("file", file);
       const payload = await fetchToolJson<{
-        files: Array<{ path: string; name: string; size: number; mimeType: string; contentBase64: string }>;
+        files: Array<{
+          path: string;
+          name: string;
+          size: number;
+          mimeType: string;
+          contentBase64: string;
+        }>;
       }>("/api/convert/zip-extract", formData);
 
       setFiles(payload.files);
@@ -315,7 +335,7 @@ export function ZipExtractor() {
             Extracted files ({files.length})
           </h3>
           <div className="space-y-2 max-h-[28rem] overflow-y-auto">
-            {files.map((entry) => (
+            {files.map(entry => (
               <div
                 key={entry.path}
                 className="flex items-center justify-between gap-3 p-3 rounded-lg border border-border bg-card/50"

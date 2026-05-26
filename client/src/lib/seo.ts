@@ -8,9 +8,10 @@ import { getTool, TOOLS } from "@/lib/tools";
 export const SITE_CONFIG = {
   title: "Free AI, SEO, Creator, Developer, PDF & Video Tools | Toolsy",
   description:
-    "Free online AI, SEO, creator, developer, PDF, and video tools for meta titles, keyword clusters, reel hooks, Shorts scripts, captions, and file conversion. No signup required.",
+    "Free online AI, SEO, creator, developer, PDF, and video tools for meta titles, keyword clusters, clip cutter, merge PDF free, Shorts scripts, captions, and file conversion. No signup required.",
   url: "https://toolsylab.xyz",
-  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
+  image:
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663075906499/HGEeKYb69GRxsTr6fzPE7i/hero-banner-i64GCUGHWUe83zmTExApQ7.webp",
   author: "Toolsy Team",
   keywords: [
     "Toolsy",
@@ -45,6 +46,13 @@ export const SITE_CONFIG = {
     "thumbnail maker",
     "video trimmer no watermark",
     "video clip cutter",
+    "clip cutter",
+    "clipcutter",
+    "clips cutter",
+    "video cutter online",
+    "merge pdf",
+    "merge pdf free",
+    "free pdf merger",
     "direct mp4 downloader",
     "PDF to image",
     "image to PDF",
@@ -57,7 +65,12 @@ export const TOOL_SEO_DATA: Record<string, any> = {
     title: "PDF to Image Converter - Convert PDF Pages to JPG, PNG, WebP",
     description:
       "Convert PDF pages to high-quality images. Support for JPG, PNG, and WebP formats. Fast, free, and no signup required.",
-    keywords: ["PDF to image", "PDF converter", "image conversion", "JPG converter"],
+    keywords: [
+      "PDF to image",
+      "PDF converter",
+      "image conversion",
+      "JPG converter",
+    ],
   },
   "image-to-pdf": {
     title: "Image to PDF Converter - Combine Images into PDF",
@@ -69,7 +82,12 @@ export const TOOL_SEO_DATA: Record<string, any> = {
     title: "PDF Compressor - Reduce PDF File Size Online",
     description:
       "Compress PDF files while maintaining quality. Reduce file size instantly with our free online PDF compressor.",
-    keywords: ["PDF compressor", "compress PDF", "reduce PDF size", "PDF optimizer"],
+    keywords: [
+      "PDF compressor",
+      "compress PDF",
+      "reduce PDF size",
+      "PDF optimizer",
+    ],
   },
   "word-to-pdf": {
     title: "Word to PDF Converter - Convert DOCX to PDF Online",
@@ -87,25 +105,45 @@ export const TOOL_SEO_DATA: Record<string, any> = {
     title: "Video to Audio Converter - Extract Audio from Video Files",
     description:
       "Extract audio from uploaded video files locally in your browser. Fast, private, and no signup required.",
-    keywords: ["video to audio", "audio extractor", "video converter", "media converter"],
+    keywords: [
+      "video to audio",
+      "audio extractor",
+      "video converter",
+      "media converter",
+    ],
   },
   "video-thumbnail-maker": {
     title: "Video Thumbnail Maker - Capture a Frame from Your Video",
     description:
       "Capture a frame from an uploaded video and download it as a thumbnail image. Works locally in your browser.",
-    keywords: ["thumbnail maker", "video thumbnail", "video to pic", "frame capture", "video to image"],
+    keywords: [
+      "thumbnail maker",
+      "video thumbnail",
+      "video to pic",
+      "frame capture",
+      "video to image",
+    ],
   },
   "video-to-frames": {
     title: "Video to Frames - Export Video Frames as a ZIP",
     description:
       "Export video frames from a selected time range into a ZIP archive of images. Great for storyboards and previews.",
-    keywords: ["video to frames", "video to images", "video to pic", "frame extractor", "ZIP frames"],
+    keywords: [
+      "video to frames",
+      "video to images",
+      "video to pic",
+      "frame extractor",
+      "ZIP frames",
+    ],
   },
   "video-clipper": {
-    title: "Video Clip Cutter - Free Online Video Trimmer, No Watermark",
+    title: "Video Clip Cutter - Free Online Video Cutter & Trimmer",
     description:
-      "Trim videos online in seconds with Toolsy. Free, secure, fast, and no watermark. No signup needed. Supports MP4, MOV, WebM, MKV, and AVI.",
+      "Use Toolsy as a free online clip cutter and video cutter to trim local videos fast. No watermark, no signup. Supports MP4, MOV, WebM, MKV, and AVI.",
     keywords: [
+      "clip cutter",
+      "clipcutter",
+      "clips cutter",
       "free online video trimmer",
       "video cutter online",
       "trim video online",
@@ -115,6 +153,20 @@ export const TOOL_SEO_DATA: Record<string, any> = {
       "browser-based video trimmer",
       "watermark-free video cutter",
       "trim uploaded video privately",
+    ],
+  },
+  "pdf-merger": {
+    title: "Merge PDF Free - Online PDF Merger & Combiner",
+    description:
+      "Merge PDF free online with Toolsy. Combine multiple PDF files into one document fast with no signup.",
+    keywords: [
+      "merge pdf",
+      "merge pdf free",
+      "merge pdf online",
+      "pdf merger",
+      "free pdf merger",
+      "pdf combiner",
+      "combine pdf files",
     ],
   },
   "direct-mp4-downloader": {
@@ -133,30 +185,38 @@ export const TOOL_SEO_DATA: Record<string, any> = {
     title: "Image Compressor - Compress Images Online",
     description:
       "Compress images without losing quality. Support for JPG, PNG, WebP, and more. Reduce file size instantly.",
-    keywords: ["image compressor", "compress image", "image optimizer", "file size reducer"],
+    keywords: [
+      "image compressor",
+      "compress image",
+      "image optimizer",
+      "file size reducer",
+    ],
   },
 };
 
 export function generateMetaTags(toolId?: string) {
   const tool = toolId ? getTool(toolId) : undefined;
-  const config = toolId && TOOL_SEO_DATA[toolId]
-    ? TOOL_SEO_DATA[toolId]
-    : tool
-      ? {
-          title: `${tool.name} - Free Online Tool | Toolsy`,
-          description: tool.description,
-          keywords: [
-            tool.name.toLowerCase(),
-            tool.category.toLowerCase(),
-            "free tool",
-            "online tool",
-            ...SITE_CONFIG.keywords,
-          ],
-          image: SITE_CONFIG.image,
-          url: `${SITE_CONFIG.url}/tool/${tool.id}`,
-        }
-      : SITE_CONFIG;
-  const url = config.url || (tool ? `${SITE_CONFIG.url}/tool/${tool.id}` : SITE_CONFIG.url);
+  const config =
+    toolId && TOOL_SEO_DATA[toolId]
+      ? TOOL_SEO_DATA[toolId]
+      : tool
+        ? {
+            title: `${tool.name} - Free Online Tool | Toolsy`,
+            description: tool.description,
+            keywords: [
+              tool.name.toLowerCase(),
+              tool.category.toLowerCase(),
+              "free tool",
+              "online tool",
+              ...SITE_CONFIG.keywords,
+            ],
+            image: SITE_CONFIG.image,
+            url: `${SITE_CONFIG.url}/tool/${tool.id}`,
+          }
+        : SITE_CONFIG;
+  const url =
+    config.url ||
+    (tool ? `${SITE_CONFIG.url}/tool/${tool.id}` : SITE_CONFIG.url);
 
   return {
     title: config.title,
@@ -203,6 +263,19 @@ export const STRUCTURED_DATA = {
       query_input: "required name=search_term_string",
     },
   },
+  itemList: {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Popular Toolsy tools",
+    itemListElement: TOOLS.filter(tool => tool.featured)
+      .slice(0, 12)
+      .map((tool, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: tool.name,
+        url: `${SITE_CONFIG.url}/tool/${tool.id}`,
+      })),
+  },
 };
 
 export const ROBOTS_TXT = `User-agent: *
@@ -216,7 +289,7 @@ Sitemap: https://toolsylab.xyz/sitemap.xml`;
 
 export const SITEMAP_URLS = [
   { url: "/", priority: 1.0, changefreq: "daily" },
-  ...TOOLS.map((tool) => ({
+  ...TOOLS.map(tool => ({
     url: `/tool/${tool.id}`,
     priority: tool.featured ? 0.9 : 0.8,
     changefreq: "weekly" as const,

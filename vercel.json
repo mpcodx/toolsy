@@ -115,11 +115,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/((?!api/|assets/|favicon.svg|logo.svg|robots.txt|sitemap.xml).*)",
-      "destination": "/index.html"
-    }
   ]
 }
