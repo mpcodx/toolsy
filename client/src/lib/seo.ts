@@ -285,7 +285,7 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://toolsylab.xyz/sitemap.xml`;
+Sitemap: https://www.toolsylab.xyz/sitemap.xml`;
 
 export const SITEMAP_URLS = [
   { url: "/", priority: 1.0, changefreq: "daily" },
