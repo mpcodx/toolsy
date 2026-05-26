@@ -17,7 +17,7 @@ async function startServer() {
   const server = createServer(app);
   const canonicalHost = "toolsylab.xyz";
   const redirectHosts = new Set([
-    "www.toolsylab.xyz",
+    "toolsylab.xyz",
   ]);
 
   app.use(express.json({ limit: "1mb" }));
