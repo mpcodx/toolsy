@@ -161,6 +161,7 @@ Analytics are disabled unless you configure them. If you want Umami tracking or 
 
 If these values are missing, the analytics scripts will not load.
 On Vercel, the production build gets the same values from `vercel.json`, since `.env` is gitignored and not available to the hosted build by default.
+Vercel Web Analytics is also mounted through `@vercel/analytics`, but it stays behind the same cookie-consent gate and only runs after the user accepts analytics cookies.
 
 For Umami Cloud, set `VITE_ANALYTICS_ENDPOINT` to `https://cloud.umami.is` and the app will load `script.js` from that host with your website ID.
 

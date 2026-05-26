@@ -9,6 +9,8 @@ const STATIC_GOOGLE_TAG_ID = "G-SNEL6TMHFB";
 const UMAMI_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="umami"]';
 const GOOGLE_TAG_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="gtag"]';
 const GOOGLE_TAG_SCRIPT_URL = "https://www.googletagmanager.com/gtag/js";
+const VERCEL_ANALYTICS_SCRIPT_SELECTOR =
+  'script[src*="/_vercel/insights/script.js"], script[src*="va.vercel-scripts.com/v1/script.debug.js"]';
 const UMAMI_DEFAULT_SCRIPT_PATH = "/script.js";
 type GtagCommand = IArguments;
 
@@ -215,7 +217,9 @@ function initializeUmamiAnalytics() {
     return;
   }
 
-  const existingScript = document.querySelector<HTMLScriptElement>(UMAMI_SCRIPT_SELECTOR);
+  const existingScript = document.querySelector<HTMLScriptElement>(
+    UMAMI_SCRIPT_SELECTOR
+  );
 
   if (existingScript) {
     umamiScriptLoaded = true;
@@ -308,13 +312,29 @@ export function disableAnalytics() {
     UMAMI_SCRIPT_SELECTOR
   );
 
-  scripts.forEach((script) => script.remove());
+  scripts.forEach(script => script.remove());
 
   if (window.umami) {
     window.umami = undefined;
   }
 
+  disableVercelAnalytics();
   syncGoogleAnalyticsConsent("rejected");
+}
+
+export function disableVercelAnalytics() {
+  if (typeof document === "undefined" || typeof window === "undefined") {
+    return;
+  }
+
+  const scripts = document.querySelectorAll<HTMLScriptElement>(
+    VERCEL_ANALYTICS_SCRIPT_SELECTOR
+  );
+
+  scripts.forEach(script => script.remove());
+  window.va = undefined;
+  window.vaq = undefined;
+  window.vam = undefined;
 }
 
 // Extend Window interface for Umami
@@ -325,6 +345,9 @@ declare global {
     };
     dataLayer?: GtagCommand[];
     gtag?: (...args: unknown[]) => void;
+    va?: (...args: unknown[]) => void;
+    vaq?: unknown[][];
+    vam?: string;
   }
 }
 
@@ -335,7 +358,8 @@ declare global {
 
 export class ToolStatistics {
   private static instance: ToolStatistics;
-  private stats: Map<string, { count: number; successCount: number }> = new Map();
+  private stats: Map<string, { count: number; successCount: number }> =
+    new Map();
 
   static getInstance(): ToolStatistics {
     if (!ToolStatistics.instance) {
@@ -368,7 +392,8 @@ export class ToolStatistics {
     this.stats.forEach((stat, toolId) => {
       result[toolId] = {
         count: stat.count,
-        successRate: stat.count > 0 ? (stat.successCount / stat.count) * 100 : 0,
+        successRate:
+          stat.count > 0 ? (stat.successCount / stat.count) * 100 : 0,
       };
     });
 
@@ -390,8 +415,11 @@ export class ToolStatistics {
 
 export class ErrorTracker {
   private static instance: ErrorTracker;
-  private errors: Array<{ message: string; stack?: string; timestamp: number }> =
-    [];
+  private errors: Array<{
+    message: string;
+    stack?: string;
+    timestamp: number;
+  }> = [];
 
   static getInstance(): ErrorTracker {
     if (!ErrorTracker.instance) {
