@@ -15,10 +15,8 @@ const __dirname = path.dirname(__filename);
 async function startServer() {
   const app = express();
   const server = createServer(app);
-  const canonicalHost = "toolsylab.xyz";
-  const redirectHosts = new Set([
-    "toolsylab.xyz",
-  ]);
+  const canonicalHost = "www.toolsylab.xyz";
+  const redirectHosts = new Set(["toolsylab.xyz"]);
 
   app.use(express.json({ limit: "1mb" }));
 

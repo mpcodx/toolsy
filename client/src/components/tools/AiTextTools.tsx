@@ -370,7 +370,7 @@ const TOOL_CONFIGS: Record<ToolId, ToolConfig> = {
       {
         key: "sample",
         label: "Sample text",
-        placeholder: "https://toolsylab.xyz",
+        placeholder: "https://www.toolsylab.xyz",
         type: "text",
       },
       {
