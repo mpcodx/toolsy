@@ -5,7 +5,7 @@
 
 import { readCookieConsent } from "@/lib/cookie-consent";
 
-const STATIC_GOOGLE_TAG_ID = "G-SNEL6TMHFB";
+const STATIC_GOOGLE_TAG_ID = "G-WJ6Q8HMBRD";
 const UMAMI_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="umami"]';
 const GOOGLE_TAG_SCRIPT_SELECTOR = 'script[data-toolsy-analytics="gtag"]';
 const GOOGLE_TAG_SCRIPT_URL = "https://www.googletagmanager.com/gtag/js";

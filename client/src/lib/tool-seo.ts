@@ -680,6 +680,38 @@ function getToolProfile(tool: Tool): ToolProfile {
       };
     }
 
+    if (tool.id === "clip-duration-calculator") {
+      return {
+        focus: "calculate script word counts and pacing speed to optimize for 60-second vertical videos",
+        supportedInput: "video scripts, custom pacing speeds, and platform limits",
+        supportedOutput: "estimated duration, limit usage progress bars, and pacing ratings",
+        extraKeywords: [
+          "clip duration calculator",
+          "pacing calculator",
+          "shorts pacing tool",
+          "video script word count",
+          "shorts length calculator",
+        ],
+        trustBadges: ["Free", "No Signup", "Creator Ready"],
+      };
+    }
+
+    if (tool.id === "clip-safezone-visualizer") {
+      return {
+        focus: "visualize vertical safe zone overlays for TikTok, Instagram Reels, and YouTube Shorts to keep captions readable",
+        supportedInput: "mobile viewport selections, highlights triggers, and mock frame uploads",
+        supportedOutput: "interactive 9:16 canvas mockups with overlaid safe zone markings",
+        extraKeywords: [
+          "vertical safe zone",
+          "shorts safe zone mockup",
+          "tiktok safe zone overlays",
+          "instagram reels layout safe zone",
+          "captions safe zone helper",
+        ],
+        trustBadges: ["Free", "No Signup", "Visual Preview"],
+      };
+    }
+
     if (tool.id === "instagram-caption-generator") {
       return {
         focus:
@@ -706,6 +738,64 @@ function getToolProfile(tool: Tool): ToolProfile {
         "youtube seo description tool",
       ],
       trustBadges: ["Free", "No Signup", "Creator Ready"],
+    };
+  }
+
+  if (tool.category === "GEO & AEO") {
+    if (tool.id === "geo-content-optimizer") {
+      return {
+        focus: "optimize text content to maximize visibility and citations in Generative AI Search Engines",
+        supportedInput: "draft articles, landing page copy, or product details",
+        supportedOutput: "citation-optimized text drafts and GEO score reports",
+        extraKeywords: [
+          "geo content optimizer",
+          "generative engine optimization",
+          "optimize content for gemini",
+          "perplexity citation optimization",
+          "llm search optimizer",
+        ],
+        trustBadges: ["Free", "No Signup", "GEO Scored"],
+      };
+    }
+    if (tool.id === "aeo-answer-generator") {
+      return {
+        focus: "generate concise, structured Q&A sets and FAQ schema optimized for answer engine visibility",
+        supportedInput: "page topics, target keywords, and voice tone preferences",
+        supportedOutput: "direct answer drafts and JSON-LD FAQ schema",
+        extraKeywords: [
+          "aeo answer generator",
+          "answer engine optimization",
+          "chatgpt search tool",
+          "conversational search faq builder",
+        ],
+        trustBadges: ["Free", "No Signup", "AEO Schema"],
+      };
+    }
+    if (tool.id === "brand-mention-optimizer") {
+      return {
+        focus: "optimize brand description and authority keywords to boost brand citations in generative summaries",
+        supportedInput: "brand names, company descriptions, niches, and unique selling points",
+        supportedOutput: "citation-optimized brand copy",
+        extraKeywords: [
+          "brand mention optimization",
+          "llm brand citation booster",
+          "perplexity brand mentions",
+          "ai search brand strategy",
+        ],
+        trustBadges: ["Free", "No Signup", "Authority Boost"],
+      };
+    }
+    return {
+      focus: "translate conversational questions into advanced search queries with search operators to gather source citations",
+      supportedInput: "conversational query prompts and search goals",
+      supportedOutput: "advanced search engine query strings with operators",
+      extraKeywords: [
+        "prompt to query converter",
+        "advanced search query builder",
+        "google search operators tool",
+        "citations search query maker",
+      ],
+      trustBadges: ["Free", "No Signup", "Operators Ready"],
     };
   }
 
@@ -948,6 +1038,28 @@ function buildFaqs(tool: Tool, profile: ToolProfile): ToolSeoFaq[] {
       question: "Can I copy or download the result?",
       answer:
         "Yes. The text tools are built for quick copy-and-download workflows so you can reuse the output immediately.",
+    });
+  } else if (tool.category === "GEO & AEO") {
+    commonFaqs.push({
+      question: "What is GEO / AEO and why is it important?",
+      answer:
+        "Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) are methodologies designed to structure and refine website content so that AI engines (like ChatGPT, Perplexity, and Gemini) can easily read, summarize, and cite it as an authoritative source.",
+    });
+    commonFaqs.push({
+      question: "Do these optimization tools save or process my text on a server?",
+      answer:
+        "No. The live scoring analyzer runs completely client-side in your browser, and the optional AI enhancements run via stateless API calls that never store your input.",
+    });
+  } else if (tool.category === "Social Media") {
+    commonFaqs.push({
+      question: "Will these tools help grow my channel visibility?",
+      answer:
+        "Yes. Optimizing script pacing to fit under limits, avoiding covered safe-zones for captions, and writing engaging hooks are standard techniques to boost retention and trigger recommendation algorithms.",
+    });
+    commonFaqs.push({
+      question: "Can I use these clip tools on mobile devices?",
+      answer:
+        "Yes. Toolsy is designed to be fully responsive, so you can calculate script lengths, paste descriptions, and test vertical layouts directly on your phone.",
     });
   } else {
     commonFaqs.push({
