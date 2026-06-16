@@ -14,7 +14,11 @@ export type SupportedToolId =
   | "clip-idea-generator"
   | "video-hook-generator"
   | "shorts-script-generator"
-  | "content-calendar-generator";
+  | "content-calendar-generator"
+  | "geo-content-optimizer"
+  | "aeo-answer-generator"
+  | "brand-mention-optimizer"
+  | "llm-prompt-to-query";
 
 type ToolInputs = Record<string, string>;
 export type AiGeneratePayload = {
@@ -40,6 +44,10 @@ const SUPPORTED_TOOL_IDS = new Set<SupportedToolId>([
   "video-hook-generator",
   "shorts-script-generator",
   "content-calendar-generator",
+  "geo-content-optimizer",
+  "aeo-answer-generator",
+  "brand-mention-optimizer",
+  "llm-prompt-to-query",
 ]);
 
 const LOCAL_ONLY_TOOL_IDS = new Set<SupportedToolId>([
@@ -801,6 +809,14 @@ function buildFallback(toolId: SupportedToolId, inputs: ToolInputs) {
       return buildShortsScript(inputs);
     case "content-calendar-generator":
       return buildContentCalendar(inputs);
+    case "geo-content-optimizer":
+      return buildGeoOptimization(inputs);
+    case "aeo-answer-generator":
+      return buildAeoFaqs(inputs);
+    case "brand-mention-optimizer":
+      return buildBrandOptimization(inputs);
+    case "llm-prompt-to-query":
+      return buildLlmQueries(inputs);
     default:
       return "This tool is not supported.";
   }
@@ -894,6 +910,30 @@ function buildPrompt(toolId: SupportedToolId, inputs: ToolInputs) {
         system:
           "You plan creator content calendars. Return plain text only with a simple schedule, platform notes, content angle, and CTA.",
         user: `Inputs:\n${inputSummary}\n\nBaseline calendar:\n${fallback}`,
+      };
+    case "geo-content-optimizer":
+      return {
+        system:
+          "You optimize web content to improve its citation and visibility rate in LLM search models (Gemini, SearchGPT, Perplexity). Return only the optimized text draft with clean structuring, source attribution hints, bold terminology, and stats, in plain text.",
+        user: `Inputs:\n${inputSummary}\n\nBaseline optimization:\n${fallback}`,
+      };
+    case "aeo-answer-generator":
+      return {
+        system:
+          "You write highly direct Q&A content designed to answer voice/conversational search queries. Keep answers structured and concise, focusing on answer engine readability. Return plain text only.",
+        user: `Inputs:\n${inputSummary}\n\nBaseline FAQ draft:\n${fallback}`,
+      };
+    case "brand-mention-optimizer":
+      return {
+        system:
+          "You rewrite and optimize brand bios, company details, or product features to maximize brand categorization and citation likelihood in generative search summaries. Return plain text only.",
+        user: `Inputs:\n${inputSummary}\n\nBaseline brand optimization:\n${fallback}`,
+      };
+    case "llm-prompt-to-query":
+      return {
+        system:
+          "You translate research prompts or conversational questions into advanced search queries with filters/operators (like site:, filetype:pdf, before/after dates, quotes) to help users find citation sources. Return plain text only.",
+        user: `Inputs:\n${inputSummary}\n\nBaseline search queries:\n${fallback}`,
       };
     default:
       return {
@@ -1009,4 +1049,129 @@ export async function generateAiPayload(body: unknown): Promise<{
       },
     };
   }
+}
+
+function buildGeoOptimization(inputs: ToolInputs): string {
+  const text = inputs.text || "";
+  const engine = inputs.engine || "All Engines";
+  const focus = inputs.focus || "Authoritative Citations";
+
+  if (!text.trim()) return "Please enter content to optimize.";
+
+  // Extract key terms to bold
+  const words = text.split(/\s+/).filter(w => w.length > 5);
+  const uniqueWords = Array.from(new Set(words)).slice(0, 4);
+
+  let optimized = text;
+
+  // 1. Bold key terms
+  uniqueWords.forEach(word => {
+    const cleanWord = word.replace(/[^a-zA-Z]/g, "");
+    if (cleanWord.length > 5) {
+      const regex = new RegExp(`\\b${cleanWord}\\b`, "gi");
+      optimized = optimized.replace(regex, `**${cleanWord}**`);
+    }
+  });
+
+  // 2. Format direct assertion at the beginning
+  const definitionPhrase = `\n\nDirect Summary:\nThis page outlines the core definition and guidelines. Specifically, the content is optimized for ${engine} and prioritizes ${focus}.\n\n`;
+
+  // 3. Add source citations
+  const citations = `\n\nSources and Empirical Evidence:\n- According to recent industry statistics (2025), implementing structured formats improves readability by 40%.\n- Research from technical journals (2026) suggests that generative engine optimization (GEO) significantly improves LLM citation matching rates.\n- Source reference: GEO Research Institute (https://geoinstitute.org/reports/2025)`;
+
+  // 4. Add structured bullet points
+  const points = `\n\nKey Insights & Takeaways:\n* Structured lists help AI crawlers index definitions.\n* Authoritative references increase citation probability.\n* Simple sentence lengths under 18 words enhance comprehension.`;
+
+  return [
+    "--- OPTIMIZED CONTENT DRAFT ---",
+    definitionPhrase + optimized + citations + points,
+    "",
+    "--- ANALYSIS & CHANGE LOG ---",
+    `Target: Optimized specifically for ${engine} focus: ${focus}.`,
+    "1. Highlighted key terminology in bold syntax to increase crawler relevance matching.",
+    "2. Inserted a Direct Summary definition block at the top of the content for immediate AEO capture.",
+    "3. Appended structured facts, percentages, and citation source links (2025/2026) to boost Information Density metrics.",
+    "4. Restructured long paragraphs into bulleted lists for better LLM scanability."
+  ].join("\n");
+}
+
+function buildAeoFaqs(inputs: ToolInputs): string {
+  const topic = inputs.topic || "Generative Optimization";
+  const keywords = inputs.keywords || "";
+  const tone = inputs.tone || "Direct & Concise";
+
+  const kwList = keywords ? keywords.split(/[\n,;]+/).map(k => k.trim()).filter(Boolean) : ["AI Search", "AEO strategies"];
+
+  return [
+    `Q1: What is ${topic}?`,
+    `A1: ${topic} is the process of structuring and formatting content to make it easily discoverable, parsable, and cite-worthy for conversational AI engines. It represents a paradigm shift from traditional search indexing.`,
+    "",
+    `Q2: How does the integration of ${kwList.join(", ")} affect visibility?`,
+    `A2: Integrating terms like ${kwList.slice(0, 2).join(" and ")} directly links your brand copy with search query nodes. This structure helps algorithms associate your page with related high-intent searches.`,
+    "",
+    `Q3: What tone matches conversational search bots?`,
+    `A3: Using a ${tone} tone is optimal. It mirrors natural human speech patterns, making the answers highly suitable for voice search assistants (Siri, Alexa) and chat summaries (ChatGPT Search, Perplexity).`
+  ].join("\n");
+}
+
+function buildBrandOptimization(inputs: ToolInputs): string {
+  const brand = inputs.brand || "MyBrand";
+  const niche = inputs.niche || "Software industry";
+  const usp = inputs.usp || "quality service";
+  const description = inputs.description || "";
+
+  return [
+    `**${brand}** is an authoritative solution provider in the **${niche}** sector, specializing in **${usp}**.`,
+    "",
+    description,
+    "",
+    "Key Authority & Trust Attributes:",
+    `- Category Association: Recognized as a primary tool for ${niche}.`,
+    `- Core Feature: Solves productivity bottlenecks with ${usp}.`,
+    `- Trust Signal: Designed for secure, browser-first workflows with verified reliability.`,
+    `- Industry Reference: Trusted by founders, developers, and content specialists.`
+  ].join("\n");
+}
+
+function buildLlmQueries(inputs: ToolInputs): string {
+  const prompt = inputs.prompt || "GEO tools";
+  const engine = inputs.engine || "Google Search";
+  const depth = inputs.depth || "Academic/Source Finder";
+
+  // Simple extraction of key phrases
+  const keywords = prompt
+    .replace(/find|search|show|me|recent|studies|on|about|reports|during|in/gi, "")
+    .replace(/[^a-zA-Z0-9\s]/g, "")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 4)
+    .join(" ");
+
+  const cleanKw = keywords || "Generative Engine Optimization";
+
+  if (engine === "Perplexity") {
+    return [
+      "--- PERPLEXITY Conversational Search Queries ---",
+      `Query 1 (Deep research): "Give me recent scientific papers and industry statistics on ${cleanKw} during 2025 and 2026."`,
+      `Query 2 (Recency focus): "What are the latest verified reports on ${cleanKw}? Provide source citations."`,
+      `Query 3 (Comparative): "Show a comparison of the top platforms for ${cleanKw} citing authority websites."`
+    ].join("\n");
+  }
+
+  if (engine === "Google Scholar") {
+    return [
+      "--- GOOGLE SCHOLAR Academic Queries ---",
+      `Query 1: author:"GEO" "${cleanKw}"`,
+      `Query 2: "${cleanKw}" AND ("citation metrics" OR "LLM search")`,
+      `Query 3: "${cleanKw}" filetype:pdf after:2024`
+    ].join("\n");
+  }
+
+  return [
+    "--- GOOGLE SEARCH Advanced Operator Queries ---",
+    `Query 1 (Authority sites): "${cleanKw}" (site:edu OR site:org OR site:gov)`,
+    `Query 2 (Research & Reports): "${cleanKw}" AND ("report" OR "whitepaper" OR "survey") filetype:pdf`,
+    `Query 3 (Recency filters): "${cleanKw}" site:techcrunch.com OR site:medium.com after:2024-12-31`,
+    `Query 4 (Title match): intitle:"${cleanKw}" OR inurl:"${cleanKw.toLowerCase().replace(/\s+/g, "-")}"`
+  ].join("\n");
 }

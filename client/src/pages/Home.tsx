@@ -4,7 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { updateMetadata } from "@/lib/metadata";
 import { SITE_CONFIG, STRUCTURED_DATA } from "@/lib/seo";
-import { CATEGORIES, TOOLS } from "@/lib/tools";
+import { CATEGORIES, TOOLS, searchTools } from "@/lib/tools";
+import { getToolIcon } from "@/lib/tool-icons";
 import { lazy, Suspense } from "react";
 import { CheckCircle2, Search } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -40,6 +41,8 @@ export default function Home() {
   const [location, setLocation] = useLocation();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const suggestions = searchQuery.trim() ? searchTools(searchQuery).slice(0, 5) : [];
 
   useEffect(() => {
     updateMetadata({
@@ -143,7 +146,7 @@ export default function Home() {
                 </div>
 
                 <div className="mt-8 space-y-3">
-                  <div className="relative max-w-2xl">
+                  <div className="relative max-w-2xl z-30">
                     <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                     <Input
                       value={searchQuery}
@@ -151,8 +154,40 @@ export default function Home() {
                         handleSearch(event.currentTarget.value)
                       }
                       placeholder="Search meta description generator, reel hook generator, pdf merger..."
-                      className="h-14 rounded-2xl border-border bg-background/95 pl-12 pr-4 text-base shadow-sm"
+                      className="h-14 rounded-2xl border-border bg-background/95 pl-12 pr-4 text-base shadow-sm focus:ring-2 focus:ring-accent/25 focus:border-accent"
                     />
+
+                    {/* Instant Search Suggestions Dropdown */}
+                    {suggestions.length > 0 && (
+                      <div className="absolute top-full left-0 right-0 mt-2 rounded-2xl border border-border bg-card/95 backdrop-blur-md shadow-xl overflow-hidden z-50 divide-y divide-border/60">
+                        {suggestions.map((tool) => {
+                          const IconComp = getToolIcon(tool.icon);
+                          return (
+                            <button
+                              key={tool.id}
+                              type="button"
+                              onClick={() => setLocation(`/tool/${tool.id}`)}
+                              className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-accent/10 transition-colors duration-200 group"
+                            >
+                              <div className={`p-2 rounded-lg bg-gradient-to-br ${tool.color} text-white shrink-0 transition-transform group-hover:scale-110`}>
+                                <IconComp className="h-4 w-4" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-semibold text-foreground truncate group-hover:text-accent transition-colors">
+                                  {tool.name}
+                                </p>
+                                <p className="text-xs text-muted-foreground truncate">
+                                  {tool.description}
+                                </p>
+                              </div>
+                              <span className="text-[10px] uppercase font-bold text-muted-foreground bg-secondary/80 px-2 py-0.5 rounded-full shrink-0">
+                                {tool.category}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                   <p className="text-sm text-muted-foreground">
                     Popular searches:

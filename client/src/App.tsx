@@ -77,12 +77,15 @@ function App() {
   useEffect(() => {
     const loadEnhancements = () => {
       setShowEnhancements(true);
-      void Promise.all([import("./lib/alerts"), import("./lib/analytics")]).then(
-        ([alerts, analytics]) => {
-          alerts.installSweetAlertBridge();
-          analytics.initializeAnalytics();
-        }
-      );
+      void Promise.all([
+        import("./lib/alerts"),
+        import("./lib/analytics"),
+        import("./lib/lazy-ads"),
+      ]).then(([alerts, analytics, lazyAds]) => {
+        alerts.installSweetAlertBridge();
+        analytics.initializeAnalytics();
+        lazyAds.initializeAdSenseLazy();
+      });
     };
 
     if (typeof window === "undefined") {
