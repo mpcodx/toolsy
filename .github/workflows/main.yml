@@ -1,0 +1,16 @@
+stages:
+  - test
+
+run_ctat:
+  stage: test
+  script:
+    - echo "Running CTAT specific steps..."
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "ctat"'
+
+run_mtat:
+  stage: test
+  script:
+    - echo "Running MTAT specific steps..."
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "mtat"'
