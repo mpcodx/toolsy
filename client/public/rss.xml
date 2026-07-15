@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Toolsy - Free Privacy-First Browser Tools</title>
+  <link>https://www.toolsylab.xyz</link>
+  <description>Free browser-based online tools for AI, SEO, content creators, developers, PDF, and video workflows.</description>
+  <language>en-us</language>
+  <lastBuildDate>Wed, 15 Jul 2026 12:00:00 GMT</lastBuildDate>
+  <atom:link href="https://www.toolsylab.xyz/rss.xml" rel="self" type="application/rss+xml" />
+  
+  <item>
+    <title>GEO Content Optimizer</title>
+    <link>https://www.toolsylab.xyz/tool/geo-content-optimizer</link>
+    <description>Optimize your web content to improve its citation and visibility rate in Generative AI Search Engines (Gemini, SearchGPT, Perplexity).</description>
+    <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
+    <guid>https://www.toolsylab.xyz/tool/geo-content-optimizer</guid>
+  </item>
+  <item>
+    <title>Video Clip Cutter</title>
+    <link>https://www.toolsylab.xyz/tool/video-clipper</link>
+    <description>Trim uploaded video files locally in your browser. Fast, secure, with no watermark and no server uploads.</description>
+    <pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate>
+    <guid>https://www.toolsylab.xyz/tool/video-clipper</guid>
+  </item>
+  <item>
+    <title>Merge PDF Free</title>
+    <link>https://www.toolsylab.xyz/tool/pdf-merger</link>
+    <description>Combine multiple PDF files into one clean document fast and securely without signups.</description>
+    <pubDate>Tue, 16 Jun 2026 00:00:00 GMT</pubDate>
+    <guid>https://www.toolsylab.xyz/tool/pdf-merger</guid>
+  </item>
+</channel>
+</rss>

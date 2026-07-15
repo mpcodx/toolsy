@@ -1,0 +1,80 @@
+# Toolsy
+
+> Free browser-based online tools for AI, SEO, content creators, developers, PDF, and video workflows. All processing runs privately client-side in the user's browser, with optional, stateless AI features. No registration, no cookies, no signup.
+
+## Core Information
+- [Home Page](https://www.toolsylab.xyz/) - Primary search interface and tool catalog.
+- [About Us](https://www.toolsylab.xyz/about-us) - Platform mission, technology stack (React, Vite, TailwindCSS, Client-Side WASM), and browser processing model.
+- [Contact Us](https://www.toolsylab.xyz/contact-us) - Support email, business queries, and feedback channels.
+- [Privacy Policy](https://www.toolsylab.xyz/privacy-policy) - Privacy-first terms: client-side execution, stateless API integrations, zero data retention.
+- [Terms & Conditions](https://www.toolsylab.xyz/terms-and-conditions) - Acceptable usage, code generation license, and limitation of liability.
+
+## Tool Categories & Popular Utilities
+
+### Generative Engine Optimization (GEO) & AEO
+- [GEO Content Optimizer](https://www.toolsylab.xyz/tool/geo-content-optimizer) - Restructures text content for maximum citation rate, information density, and semantic matching in generative engines (ChatGPT Search, Gemini, Perplexity).
+- [Answer Engine FAQ Generator](https://www.toolsylab.xyz/tool/aeo-answer-generator) - Generates highly direct Q&A blocks and ready-to-use FAQ schema.
+- [Brand Mention Optimizer](https://www.toolsylab.xyz/tool/brand-mention-optimizer) - Refines brand descriptions and bios to match entity recognition patterns of LLMs.
+- [Search to Prompt Converter](https://www.toolsylab.xyz/tool/llm-prompt-to-query) - Formulates advanced query operators (site:, filetype:, before:) to help AI search agents locate source citations.
+
+### AI Writing & SEO Content
+- [AI Meta Generator](https://www.toolsylab.xyz/tool/ai-meta-generator) - Generates optimized title tags and meta descriptions using target keywords.
+- [AI Paragraph Rewriter](https://www.toolsylab.xyz/tool/ai-paragraph-rewriter) - Refines paragraph flow, conciseness, and tone using model parameters.
+- [AI Title Generator](https://www.toolsylab.xyz/tool/ai-title-generator) - Generates click-worthy, intent-aligned headline ideas for blogs and landing pages.
+- [Keyword Clustering Tool](https://www.toolsylab.xyz/tool/keyword-clustering-tool) - Groups raw keyword lists into semantic clusters for architectural mapping.
+- [Schema Markup Generator](https://www.toolsylab.xyz/tool/schema-markup-generator) - Generates JSON-LD schema (SoftwareApplication, Article, Product, FAQPage) locally.
+- [FAQ Generator](https://www.toolsylab.xyz/tool/faq-generator) - Generates traditional SEO frequently asked questions.
+
+### Social Media & Video Creators
+- [Video Clip Cutter](https://www.toolsylab.xyz/tool/video-clipper) - Trims uploaded video files locally (MP4, MOV, WebM) without watermarks or server uploads.
+- [Vertical Clip Safe Zone Helper](https://www.toolsylab.xyz/tool/clip-safezone-visualizer) - Displays overlays for TikTok, Instagram Reels, and YouTube Shorts UI layouts.
+- [Clip Duration Calculator](https://www.toolsylab.xyz/tool/clip-duration-calculator) - Translates word counts to expected pacing timings.
+- [Clip Idea Generator](https://www.toolsylab.xyz/tool/clip-idea-generator) - Extracts short clips and talking points from transcripts.
+- [Video Hook Generator](https://www.toolsylab.xyz/tool/video-hook-generator) - Generates opening hook ideas.
+- [Shorts Script Generator](https://www.toolsylab.xyz/tool/shorts-script-generator) - Creates scripts with visual, audio, and pacing cues.
+- [Content Calendar Generator](https://www.toolsylab.xyz/tool/content-calendar-generator) - Builds 30-day creator schedules.
+- [Hashtag Generator](https://www.toolsylab.xyz/tool/hashtag-generator) - Generates hashtags categorized by reach.
+- [Instagram Caption Generator](https://www.toolsylab.xyz/tool/instagram-caption-generator) - Formats social posts.
+- [YouTube Description Generator](https://www.toolsylab.xyz/tool/youtube-description-generator) - Writes video descriptions with timestamps and links.
+
+### PDF & Document Workflows
+- [Merge PDF Free](https://www.toolsylab.xyz/tool/pdf-merger) - Joins multiple PDF files.
+- [PDF to Image](https://www.toolsylab.xyz/tool/pdf-to-image) - Converts PDF pages to JPG, PNG, or WebP.
+- [Image to PDF](https://www.toolsylab.xyz/tool/image-to-pdf) - Bundles images into a PDF.
+- [PDF Compressor](https://www.toolsylab.xyz/tool/pdf-compressor) - Lowers PDF size.
+- [PDF Splitter](https://www.toolsylab.xyz/tool/pdf-splitter) - Extracts page ranges.
+- [PDF Watermark](https://www.toolsylab.xyz/tool/pdf-watermark) - Adds watermarks.
+- [PDF Page Remover](https://www.toolsylab.xyz/tool/pdf-page-remover) - Deletes selected pages from PDFs.
+- [Word to PDF](https://www.toolsylab.xyz/tool/word-to-pdf) - Converts DOCX/DOC.
+- [Excel to PDF](https://www.toolsylab.xyz/tool/excel-to-pdf) - Converts XLSX/XLS.
+- [PPT to PDF](https://www.toolsylab.xyz/tool/ppt-to-pdf) - Converts PowerPoint.
+- [PDF to Word](https://www.toolsylab.xyz/tool/pdf-to-word) - Converts PDFs to editable DOCX.
+
+### Developer Utilities & Scripts
+- [Commit Message Generator](https://www.toolsylab.xyz/tool/commit-message-generator) - Generates conventional git commits.
+- [Regex Explainer](https://www.toolsylab.xyz/tool/regex-explainer) - Breaks down regular expression syntax in plain English.
+- [cURL Command Generator](https://www.toolsylab.xyz/tool/curl-command-generator) - Builds curl templates locally.
+- [JSON Formatter](https://www.toolsylab.xyz/tool/json-formatter) - Validates, minifies, and prints formatted JSON.
+- [Base64 Encoder/Decoder](https://www.toolsylab.xyz/tool/base64-encoder) - Encodes and decodes base64 strings.
+- [Hash Generator](https://www.toolsylab.xyz/tool/hash-generator) - Computes local MD5, SHA-1, SHA-256 hashes.
+
+### Images, Media & Archives
+- [Image Resizer](https://www.toolsylab.xyz/tool/image-resizer) - Resizes images locally.
+- [Image Compressor](https://www.toolsylab.xyz/tool/image-compressor) - Compresses images.
+- [Image Converter](https://www.toolsylab.xyz/tool/image-converter) - Formats converter.
+- [Image Cropper](https://www.toolsylab.xyz/tool/image-cropper) - Crops images.
+- [Video to Audio](https://www.toolsylab.xyz/tool/video-to-audio) - Extracts audio stream.
+- [Thumbnail Maker](https://www.toolsylab.xyz/tool/video-thumbnail-maker) - Extracts frames as video thumbnails.
+- [Video to Frames](https://www.toolsylab.xyz/tool/video-to-frames) - Exports frame ranges as ZIP.
+- [Video Compressor](https://www.toolsylab.xyz/tool/video-compressor) - Optimizes video files.
+- [Direct MP4 Downloader](https://www.toolsylab.xyz/tool/direct-mp4-downloader) - Saves direct public MP4 links.
+- [ZIP Extractor](https://www.toolsylab.xyz/tool/zip-extractor) - Extracts ZIP/RAR in-browser.
+- [ZIP Creator](https://www.toolsylab.xyz/tool/zip-creator) - Compresses archives.
+
+### Utility & Conversions
+- [QR Code Generator](https://www.toolsylab.xyz/tool/qr-code-generator) - Creates custom QR codes.
+- [Barcode Generator](https://www.toolsylab.xyz/tool/barcode-generator) - Generates barcode formats.
+- [Color Converter](https://www.toolsylab.xyz/tool/color-converter) - HEX, RGB, HSL converter.
+- [Unit Converter](https://www.toolsylab.xyz/tool/unit-converter) - Metric-imperial conversion.
+- [Text to Speech](https://www.toolsylab.xyz/tool/text-to-speech) - Text reader.
+- [Text Formatter](https://www.toolsylab.xyz/tool/text-formatter) - Case transformation and whitespace cleaner.

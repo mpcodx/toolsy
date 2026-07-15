@@ -1,0 +1,6 @@
+Contact: mailto:security@toolsylab.xyz
+Expires: 2027-12-31T23:59:59.000Z
+Encryption: https://www.toolsylab.xyz/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://www.toolsylab.xyz/.well-known/security.txt
+Policy: https://www.toolsylab.xyz/privacy-policy

@@ -1,0 +1,22 @@
+{
+  "short_name": "Toolsy",
+  "name": "Toolsy - Free Privacy-First Browser Tools",
+  "description": "Free browser-based online tools for AI, SEO, content creators, developers, PDF, and video workflows. Processing runs client-side in your browser.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#090d16",
+  "theme_color": "#06b6d4",
+  "display": "standalone",
+  "orientation": "portrait"
+}

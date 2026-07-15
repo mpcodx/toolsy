@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Toolsy - Free Privacy-First Browser Tools</title>
+  <subtitle>Free browser-based online tools for AI, SEO, content creators, developers, PDF, and video workflows.</subtitle>
+  <link href="https://www.toolsylab.xyz/atom.xml" rel="self"/>
+  <link href="https://www.toolsylab.xyz/"/>
+  <updated>2026-07-15T12:00:00Z</updated>
+  <id>https://www.toolsylab.xyz/</id>
+  <author>
+    <name>Toolsy Team</name>
+    <email>info@toolsylab.xyz</email>
+  </author>
+
+  <entry>
+    <title>GEO Content Optimizer</title>
+    <link href="https://www.toolsylab.xyz/tool/geo-content-optimizer"/>
+    <id>https://www.toolsylab.xyz/tool/geo-content-optimizer</id>
+    <updated>2026-07-01T00:00:00Z</updated>
+    <summary>Optimize your web content to improve its citation and visibility rate in Generative AI Search Engines (Gemini, SearchGPT, Perplexity).</summary>
+  </entry>
+  <entry>
+    <title>Video Clip Cutter</title>
+    <link href="https://www.toolsylab.xyz/tool/video-clipper"/>
+    <id>https://www.toolsylab.xyz/tool/video-clipper</id>
+    <updated>2026-06-24T00:00:00Z</updated>
+    <summary>Trim uploaded video files locally in your browser. Fast, secure, with no watermark and no server uploads.</summary>
+  </entry>
+  <entry>
+    <title>Merge PDF Free</title>
+    <link href="https://www.toolsylab.xyz/tool/pdf-merger"/>
+    <id>https://www.toolsylab.xyz/tool/pdf-merger</id>
+    <updated>2026-06-16T00:00:00Z</updated>
+    <summary>Combine multiple PDF files into one clean document fast and securely without signups.</summary>
+  </entry>
+</feed>

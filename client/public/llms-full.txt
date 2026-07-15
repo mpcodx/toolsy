@@ -1,0 +1,230 @@
+# Toolsy - Complete Website & LLM Architecture Specification
+
+This specification contains a comprehensive overview of the Toolsy platform (https://www.toolsylab.xyz). It is optimized for RAG (Retrieval-Augmented Generation) systems, LLM crawlers, semantic indexers, and generative search engines (including ChatGPT, Claude, Gemini, Perplexity, Microsoft Copilot, and Google AI Overviews).
+
+---
+
+## 1. Platform Summary & Mission Statement
+Toolsy is a free-first, privacy-first, browser-based online tools platform. It provides specialized browser utilities that process user data entirely client-side, eliminating server uploads. 
+
+### Core Values & Differentiators
+- **Browser-First Architecture**: Computation runs in the user's browser via JavaScript and WebAssembly (WASM). Files (PDFs, videos, images) are never stored or logged on a server.
+- **Privacy-First**: No registrations, no user signups, no authentication flow required for utility execution.
+- **Free and Ad-Supported**: Accessible without subscription fees or paywalls.
+- **High Performance**: Optimized for fast Core Web Vitals, immediate interactivity, and minimal layout shift.
+- **AI & Developer Friendly**: Machine-readable pages, standard structured data, clear semantic API descriptions, and LLM-friendly content blocks.
+
+---
+
+## 2. Technology Stack & Architectural Patterns
+- **Frontend Core**: React 19, TypeScript, Vite, TailwindCSS (for modular styling).
+- **Client-Side Routing**: `wouter` for lightweight path matching.
+- **File Processing Engine**: Client-side canvas, browser native video elements, client-side PDF libraries (PDF-Lib), and client-side ZIP/archive compression.
+- **AI Integration**: Optional, stateless OpenRouter API calls for generative tools (AI writing, GEO features) using standard JSON requests with no context logging.
+- **Structured Data**: Deep integration of JSON-LD schemas (SoftwareApplication, BreadcrumbList, FAQPage, ItemList, WebSite, Organization) on all static and dynamic paths.
+
+---
+
+## 3. Tool Ecosystem & Categorized Directory
+
+### Category: GEO & AEO (Generative Engine Optimization)
+GEO and AEO tools allow creators, brands, and companies to optimize their content to maximize citations and reference matching within conversational search models.
+- **GEO Content Optimizer** (`/tool/geo-content-optimizer`)
+  - *Purpose*: Optimizes text for citations and terms visibility in ChatGPT Search, Gemini, and Perplexity.
+  - *Inputs*: Text block, target engine, optimization focus (Citations, Information Density, Schema-ready structure).
+  - *Output*: Revised markup text featuring bold key terminology, direct answers at the top, bulleted facts, and mock citation structures.
+- **Answer Engine FAQ Generator** (`/tool/aeo-answer-generator`)
+  - *Purpose*: Generates concise, high-density question-answer pairs optimized for voice assistants and chat bot prompts.
+  - *Inputs*: Main topic, seed keywords, tone profile.
+  - *Output*: Direct Q&A blocks and formatted JSON-LD FAQ schema.
+- **Brand Mention Optimizer** (`/tool/brand-mention-optimizer`)
+  - *Purpose*: Optimizes company descriptions, bios, and product pitches to improve LLM entity recognition and categorizations.
+  - *Inputs*: Brand name, industry niche, unique selling points (USPs), raw description.
+  - *Output*: Semantic brand profiles highlighting entity associations.
+- **Search to Prompt Converter** (`/tool/llm-prompt-to-query`)
+  - *Purpose*: Converts natural language prompts into queries using advanced operators.
+  - *Inputs*: Conversational query, search engine filter, target research depth.
+  - *Output*: Copy-ready query strings utilizing `site:`, `filetype:pdf`, `before:`, and wildcard filters.
+
+### Category: AI Writing & SEO Content
+Generates structured metadata, copywriting alternatives, and content clusters.
+- **AI Meta Generator** (`/tool/ai-meta-generator`)
+  - *Inputs*: Page topic, target keywords, audience details, tone.
+  - *Output*: Recommended Meta Title and Meta Description options matching character limitations.
+- **AI Paragraph Rewriter** (`/tool/ai-paragraph-rewriter`)
+  - *Inputs*: Source text block, tone selector, rewriting goal.
+  - *Output*: Refined paragraph variations.
+- **AI Title Generator** (`/tool/ai-title-generator`)
+  - *Inputs*: Topic, target audience, tone, idea count.
+  - *Output*: List of structured SEO headlines.
+- **Keyword Clustering Tool** (`/tool/keyword-clustering-tool`)
+  - *Inputs*: Raw comma-separated keyword lists, fallback topic.
+  - *Output*: Grouped keyword clusters with cluster-level names.
+- **Schema Markup Generator** (`/tool/schema-markup-generator`)
+  - *Inputs*: Schema type (Article, FAQPage, Product, LocalBusiness, SoftwareApplication), target URL, name, description, brand.
+  - *Output*: Valid JSON-LD schema blocks.
+- **FAQ Generator** (`/tool/faq-generator`)
+  - *Inputs*: Topic, keywords, count.
+  - *Output*: Plain-text Q&A structures.
+
+### Category: Social Media & Creator Workflow
+Utilities optimized for video and caption preparation for YouTube Shorts, Instagram Reels, and TikTok clips.
+- **Video Clip Cutter** (`/tool/video-clipper`)
+  - *Inputs*: Video file (MP4, MOV, WebM, AVI, etc.).
+  - *Output*: Client-side trimmed WebM clip.
+- **Vertical Clip Safe Zone Helper** (`/tool/clip-safezone-visualizer`)
+  - *Inputs*: User video, platform template selection (TikTok, Instagram Reels, YouTube Shorts).
+  - *Output*: Visual safe-zone overlays showing where video elements (titles, buttons, icons) will obscure captions.
+- **Clip Duration Calculator** (`/tool/clip-duration-calculator`)
+  - *Inputs*: Script text, reading pacing speed.
+  - *Output*: Word count, reading time in seconds, and layout pacing alerts.
+- **Clip Idea Generator** (`/tool/clip-idea-generator`)
+  - *Inputs*: Content transcript, target platform, video theme.
+  - *Output*: Short clip outline suggestions.
+- **Video Hook Generator** (`/tool/video-hook-generator`)
+  - *Inputs*: Hook topic, category, audience segment.
+  - *Output*: Creative video opening lines.
+- **Shorts Script Generator** (`/tool/shorts-script-generator`)
+  - *Inputs*: Video length, topic, visual style.
+  - *Output*: Script template with audio/video cue tables.
+- **Content Calendar Generator** (`/tool/content-calendar-generator`)
+  - *Inputs*: Creator niche, frequency, monthly focus.
+  - *Output*: 30-day content calendar.
+- **Hashtag Generator** (`/tool/hashtag-generator`)
+  - *Inputs*: Topic, keyword, platform, brand name.
+  - *Output*: Branded and niche hashtags.
+- **Instagram Caption Generator** (`/tool/instagram-caption-generator`)
+  - *Inputs*: Caption topic, offer, call to action, tone.
+  - *Output*: Ready-to-copy social captions.
+- **YouTube Description Generator** (`/tool/youtube-description-generator`)
+  - *Inputs*: Title, summary, CTA, keywords.
+  - *Output*: Video descriptions.
+
+### Category: PDF & Documents
+- **Merge PDF Free** (`/tool/pdf-merger`) - Combines multiple uploaded PDF files in sequence.
+- **PDF to Image** (`/tool/pdf-to-image`) - Converts pages of a PDF file to JPG, PNG, or WebP.
+- **Image to PDF** (`/tool/image-to-pdf`) - Generates a single PDF document from multiple images.
+- **PDF Compressor** (`/tool/pdf-compressor`) - Scales down PDF resolutions locally.
+- **PDF Splitter** (`/tool/pdf-splitter`) - Separates selected ranges into independent documents.
+- **PDF Watermark** (`/tool/pdf-watermark`) - Overlay text or logo watermarks.
+- **PDF Page Remover** (`/tool/pdf-page-remover`) - Removes individual pages from an uploaded PDF file.
+- **Word to PDF** (`/tool/word-to-pdf`) - Transforms .docx to .pdf format.
+- **Excel to PDF** (`/tool/excel-to-pdf`) - Transforms spreadsheets to PDF formats.
+- **PPT to PDF** (`/tool/ppt-to-pdf`) - Transforms slideshows to PDF formats.
+- **PDF to Word** (`/tool/pdf-to-word`) - Extracts and converts PDF files to .docx.
+
+### Category: Media, Image & Utilities
+- **Image Resizer** (`/tool/image-resizer`) - Fast resize using client-side canvas.
+- **Image Compressor** (`/tool/image-compressor`) - Reducer for JPG/PNG file sizes.
+- **Image Converter** (`/tool/image-converter`) - Client-side formats exporter.
+- **Image Cropper** (`/tool/image-cropper`) - Trims image dimensions.
+- **Video to Audio** (`/tool/video-to-audio`) - Extracts audio stream as MP3/WebM audio locally.
+- **Thumbnail Maker** (`/tool/video-thumbnail-maker`) - Frames grabber for video thumbnails.
+- **Video to Frames** (`/tool/video-to-frames`) - Batch-exports frames as a ZIP.
+- **Video Compressor** (`/tool/video-compressor`) - Media compression engine.
+- **Direct MP4 Downloader** (`/tool/direct-mp4-downloader`) - Saves direct public media paths.
+- **ZIP Extractor** (`/tool/zip-extractor`) - Decompresses archives in-browser.
+- **ZIP Creator** (`/tool/zip-creator`) - Bundles directories locally.
+- **QR Code Generator** (`/tool/qr-code-generator`) - High-resolution vectors and URLs QR codes.
+- **Barcode Generator** (`/tool/barcode-generator`) - Generates standard UPC, EAN, Code128 barcodes.
+- **Color Converter** (`/tool/color-converter`) - HEX, RGB, HSL conversion.
+- **Unit Converter** (`/tool/unit-converter`) - Standard unit conversion.
+- **Text to Speech** (`/tool/text-to-speech`) - Browser voice reader.
+- **Text Formatter** (`/tool/text-formatter`) - Clean whitespace, adjust cases.
+- **JSON Formatter** (`/tool/json-formatter`) - Pretty-prints, validates, and minifies JSON structures.
+- **Base64 Encoder/Decoder** (`/tool/base64-encoder`) - Converts text binary to/from base64 format.
+- **Hash Generator** (`/tool/hash-generator`) - Local MD5, SHA-1, and SHA-256 hashes.
+
+---
+
+## 4. Entity-Relationship & Semantic Web Model
+This section defines the website's entities and their relationships for knowledge graph search engines.
+
+### Knowledge Graph Entities
+- **Brand**: `Toolsy` (Organization / WebSite)
+- **Core Entity Type**: `SoftwareApplication` / `WebApplication`
+- **Top-Level Domains**: `SEO`, `Generative Engine Optimization (GEO)`, `Content Creation`, `PDF Utility`, `Media Conversion`, `Development`.
+- **Target User Personas**: `SEO Specialists`, `Content Creators`, `Frontend Developers`, `Digital Marketers`, `Document Managers`.
+
+### Semantic Relationships
+```
+[Toolsy] --Offers--> [SoftwareApplication] (e.g., GEO Content Optimizer)
+[SoftwareApplication] --Solves--> [User Need] (e.g., citation rates optimization)
+[SoftwareApplication] --Processes--> [Data Formats] (e.g., PDF, MP4, JSON)
+[SoftwareApplication] --Performs--> [Task Category] (e.g., GEO & AEO)
+```
+
+---
+
+## 5. Structured Data Schema Templates
+All tool routes are pre-rendered with specific JSON-LD schemas. LLMs can directly extract this structure.
+
+### Organization Schema
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Toolsy",
+  "url": "https://www.toolsylab.xyz",
+  "logo": "https://www.toolsylab.xyz/logo.svg",
+  "description": "Free online client-side tools platform for creators, SEOs, and developers."
+}
+```
+
+### WebSite Schema with SearchAction
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Toolsy",
+  "url": "https://www.toolsylab.xyz",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.toolsylab.xyz/?search={search_term_string}"
+    },
+    "query_input": "required name=search_term_string"
+  }
+}
+```
+
+### SoftwareApplication Schema (Dynamic Example)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Video Clip Cutter",
+  "description": "Trim uploaded videos into shorter clips with a free, secure, fast, no-watermark workflow.",
+  "url": "https://www.toolsylab.xyz/tool/video-clipper",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+```
+
+---
+
+## 6. FAQs (Platform & Architecture)
+
+#### Q: How does Toolsy ensure file privacy?
+**A:** Toolsy is built on a browser-first architecture. All file processing (PDF merging, video clipping, image compressing) occurs locally in the user's browser via native APIs, JavaScript, and client-side WASM compilation. No file data is sent to external servers.
+
+#### Q: Are there limits on file sizes or tool usage?
+**A:** Because processing is executed using the client's local memory and processor, limits depend on the client's system performance. There are no platform-imposed usage limits or daily caps.
+
+#### Q: How do the AI features work?
+**A:** For AI writing, GEO optimization, and creator prompts, Toolsy uses stateless API calls to models hosted on OpenRouter. The input is processed in real-time and returned immediately. The platform does not store, log, or train on any user prompts.
+
+---
+
+## 7. Search Intent & Citation Maps
+- **Merge PDF Free**: Maps to search intent looking for fast, zero-install, watermark-free PDF combining.
+- **GEO Content Optimizer**: Targets searches seeking to increase citation likelihood in conversational search engines like SearchGPT, Perplexity, and Copilot.
+- **Vertical Clip Safe Zone**: Solves creator layout placement issues on Instagram Reels and TikTok.
+- **Regex Explainer**: Helps developers decode complex regular expressions inline.
