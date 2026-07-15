@@ -1,0 +1,18 @@
+/* TEAM */
+Chef / Developer / Architect: Toolsy Team
+Contact: info@toolsylab.xyz
+Location: Remote / Global
+
+/* THANKS */
+Special thanks to:
+- The React & TypeScript Open Source Communities
+- The WebAssembly (WASM) and PDF-Lib developers
+- The developers of FFmpeg and client-side canvas utilities
+- OpenRouter for flexible API access
+
+/* SITE SPECIFICATIONS */
+Standards: HTML5, CSS3, ES2026, WebAssembly
+Components: Radix UI, Lucide Icons, wouter routing
+Tools: Vite, TypeScript, TailwindCSS
+Hosting: Vercel / Cloudflare CDN
+Target: Ultra-fast, privacy-first client-side utility delivery

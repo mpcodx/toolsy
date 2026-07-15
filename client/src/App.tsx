@@ -20,6 +20,9 @@ const TermsAndConditionsPage = lazyNamed(
   () => import("./pages/SitePage"),
   "TermsAndConditionsPage"
 );
+const GlossaryPage = lazy(() => import("./pages/GlossaryPage"));
+const VsPage = lazy(() => import("./pages/VsPage"));
+const WasmPerformancePage = lazy(() => import("./pages/WasmPerformancePage"));
 
 /**
  * Modern Minimalist Design - Slate Blue & Cyan Accents
@@ -38,6 +41,9 @@ function Router() {
         <Route path={"/about-us"} component={AboutUsPage} />
         <Route path={"/contact-us"} component={ContactUsPage} />
         <Route path={"/terms-and-conditions"} component={TermsAndConditionsPage} />
+        <Route path={"/vs/:slug"} component={VsPage} />
+        <Route path={"/docs/glossary"} component={GlossaryPage} />
+        <Route path={"/docs/wasm-performance"} component={WasmPerformancePage} />
         <Route path={"/tool/:id"} component={ToolPage} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
