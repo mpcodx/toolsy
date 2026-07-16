@@ -33,7 +33,11 @@ export default function ToolCard({ tool }: ToolCardProps) {
       onClick={handleClick}
       className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 cursor-pointer transition-all duration-300 hover:border-accent hover:shadow-lg hover:-translate-y-1"
     >
-      {tool.featured ? (
+      {tool.isNew ? (
+        <span className="absolute right-4 top-4 z-20 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-[0_0_15px_-3px_rgba(16,185,129,0.5)] animate-pulse">
+          New
+        </span>
+      ) : tool.featured ? (
         <span className="absolute right-4 top-4 z-20 rounded-full border border-accent/20 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
           Popular
         </span>

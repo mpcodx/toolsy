@@ -62,6 +62,84 @@ function getToolProfile(tool: Tool): ToolProfile {
   const name = normalizePhrase(tool.name);
   const description = normalizePhrase(tool.description);
 
+  if (tool.id === "code-to-image") {
+    return {
+      focus: "convert code snippets into beautiful screenshot cards with customized gradients, themes, and canvas shadows",
+      supportedInput: "raw code blocks in various programming languages",
+      supportedOutput: "high-definition PNG screenshots and sharing cards",
+      extraKeywords: [
+        "code screenshot maker",
+        "code to image",
+        "code beautifier",
+        "beautify code online",
+        "private offline code screenshot maker",
+        "code screenshot online",
+        "carbon tool alternative",
+        "pretty code exporter",
+        "code share card generator"
+      ],
+      trustBadges: ["Free", "Secure", "No Signup", "100% Client-Side"],
+    };
+  }
+
+  if (tool.id === "linkedin-carousel") {
+    return {
+      focus: "design multi-page slide presentations with custom colors, watermarks, and export them as high-quality PDF carousels",
+      supportedInput: "custom titles, paragraphs, bullet points, and color selections for multiple slides",
+      supportedOutput: "multi-page PDF carousels matching LinkedIn square/portrait standards",
+      extraKeywords: [
+        "linkedin carousel pdf",
+        "linkedin slides maker",
+        "pdf slides builder",
+        "linkedin post generator",
+        "create pdf carousel online",
+        "linkedin carousel creator",
+        "generate linkedin pdf carousel",
+        "slides presentation builder"
+      ],
+      trustBadges: ["Free", "Secure", "No Signup", "No Watermark Limit"],
+    };
+  }
+
+  if (tool.id === "image-sanitizer") {
+    return {
+      focus: "compress image files and strip metadata such as EXIF details, GPS tags, and device types completely offline",
+      supportedInput: "JPEG, PNG, WebP, GIF, or BMP image files",
+      supportedOutput: "sanitized and compressed image files",
+      extraKeywords: [
+        "image sanitizer",
+        "strip image metadata",
+        "exif data remover",
+        "remove gps from image",
+        "local image compressor",
+        "offline image metadata cleaner",
+        "compress image offline",
+        "private image compressor",
+        "clean exif data"
+      ],
+      trustBadges: ["Free", "Secure", "No Signup", "100% Offline"],
+    };
+  }
+
+  if (tool.id === "svg-customizer") {
+    return {
+      focus: "parse SVG vector graphics, customize colors, adjust stroke widths, and export clean SVGs or PNG cards",
+      supportedInput: "raw SVG file uploads or vector graphic code",
+      supportedOutput: "modified SVG vector files or rendered PNG presentation cards",
+      extraKeywords: [
+        "svg customizer",
+        "svg color changer",
+        "vector editor",
+        "edit svg colors",
+        "svg to png cards",
+        "customize svg online",
+        "raw svg editor",
+        "change colors in svg file"
+      ],
+      trustBadges: ["Free", "Secure", "No Signup", "Real-Time Editor"],
+    };
+  }
+
   if (tool.id === "direct-mp4-downloader") {
     return {
       focus: "download direct public MP4 file URLs with a browser-safe link",

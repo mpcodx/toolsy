@@ -261,6 +261,22 @@ function getToolTitle(tool) {
     return "Direct MP4 Downloader - Download Public MP4 File URLs";
   }
 
+  if (tool.id === "code-to-image") {
+    return "Code to Image Beautifier - Create Code Screenshots online | Toolsy";
+  }
+
+  if (tool.id === "linkedin-carousel") {
+    return "LinkedIn Slide Carousel Generator - Create PDF Carousels | Toolsy";
+  }
+
+  if (tool.id === "image-sanitizer") {
+    return "Local Image Compressor & Sanitizer - Exif Metadata Remover | Toolsy";
+  }
+
+  if (tool.id === "svg-customizer") {
+    return "Rich SVG Customizer & Exporter - Edit Vector Colors | Toolsy";
+  }
+
   return `${tool.name} - Free ${tool.category} Tool | Toolsy`;
 }
 
@@ -279,6 +295,22 @@ function getToolDescription(tool) {
 
   if (tool.id === "direct-mp4-downloader") {
     return "Paste a direct public MP4 file URL and use a browser-safe download link to save it locally. Direct file URLs only, no platform pages.";
+  }
+
+  if (tool.id === "code-to-image") {
+    return "Convert code snippets into beautiful screenshot cards with customized gradients, themes, and canvas shadows. Free offline tool.";
+  }
+
+  if (tool.id === "linkedin-carousel") {
+    return "Design multi-page slide presentations with custom colors, watermarks, and export them as high-quality PDF carousels. Free online generator.";
+  }
+
+  if (tool.id === "image-sanitizer") {
+    return "Compress image files and strip metadata such as EXIF details, GPS tags, and device types completely offline and private.";
+  }
+
+  if (tool.id === "svg-customizer") {
+    return "Parse SVG vector graphics, customize colors, adjust stroke widths, and export clean SVGs or PNG mockup cards online.";
   }
 
   return `${tool.description}. Free ${String(tool.category).toLowerCase()} tool with no signup required.`;
