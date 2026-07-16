@@ -6,6 +6,7 @@ export interface Tool {
   icon: string;
   color: string;
   featured?: boolean;
+  isNew?: boolean;
   searchAliases?: string[];
 }
 
@@ -653,6 +654,76 @@ export const TOOLS: Tool[] = [
       "tiktok safe zone overlays",
       "instagram reels layout safe zone",
       "captions safe zone helper",
+    ],
+  },
+  {
+    id: "code-to-image",
+    name: "Code to Image Beautifier",
+    description: "Convert code snippets into beautiful screenshot cards with customized gradients, themes, and canvas shadows",
+    category: "Developer",
+    icon: "Code",
+    color: "from-indigo-500 to-purple-600",
+    featured: true,
+    isNew: true,
+    searchAliases: [
+      "code screenshot maker",
+      "code to image",
+      "code beautifier",
+      "beautify code online",
+      "carbon tool alternative",
+      "private offline code screenshot maker"
+    ],
+  },
+  {
+    id: "linkedin-carousel",
+    name: "LinkedIn Slide Carousel Generator",
+    description: "Design multi-page slide presentations with custom colors, watermarks, and export them as high-quality PDF carousels",
+    category: "Social Media",
+    icon: "Presentation",
+    color: "from-blue-600 to-cyan-500",
+    featured: true,
+    isNew: true,
+    searchAliases: [
+      "linkedin carousel pdf",
+      "linkedin slides maker",
+      "pdf slides builder",
+      "linkedin post generator",
+      "create pdf carousel online"
+    ],
+  },
+  {
+    id: "image-sanitizer",
+    name: "Local Image Compressor & Sanitizer",
+    description: "Compress images and automatically strip sensitive metadata (EXIF tags, GPS location, camera data) completely offline",
+    category: "Image",
+    icon: "ShieldCheck",
+    color: "from-emerald-500 to-teal-600",
+    featured: true,
+    isNew: true,
+    searchAliases: [
+      "image sanitizer",
+      "strip image metadata",
+      "exif data remover",
+      "remove gps from image",
+      "local image compressor",
+      "offline image metadata cleaner"
+    ],
+  },
+  {
+    id: "svg-customizer",
+    name: "Rich SVG Customizer & Exporter",
+    description: "Upload vector graphics, customize colors, scale stroke widths, and export clean SVGs or PNG presentation cards",
+    category: "Image",
+    icon: "Paintbrush",
+    color: "from-pink-500 to-rose-600",
+    featured: true,
+    isNew: true,
+    searchAliases: [
+      "svg customizer",
+      "svg color changer",
+      "vector editor",
+      "edit svg colors",
+      "svg to png cards"
     ],
   },
 ];

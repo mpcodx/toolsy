@@ -101,15 +101,18 @@ export default function HomeCatalog({
   clearFilters,
 }: HomeCatalogProps) {
   const filteredTools = useMemo(() => {
+    let list = TOOLS;
     if (searchQuery.trim()) {
-      return searchTools(searchQuery);
+      list = searchTools(searchQuery);
+    } else if (selectedCategory) {
+      list = TOOLS.filter(tool => tool.category === selectedCategory);
     }
 
-    if (selectedCategory) {
-      return TOOLS.filter(tool => tool.category === selectedCategory);
-    }
-
-    return TOOLS;
+    return [...list].sort((a, b) => {
+      if (a.isNew && !b.isNew) return -1;
+      if (!a.isNew && b.isNew) return 1;
+      return 0;
+    });
   }, [searchQuery, selectedCategory]);
 
   const spotlightTools = spotlightToolIds
@@ -118,6 +121,30 @@ export default function HomeCatalog({
 
   return (
     <>
+      {/* New Releases Section */}
+      <section className="py-12 md:py-16 bg-card/30 border-b border-border/80" style={deferredSectionStyle}>
+        <div className="container">
+          <div className="mb-8 flex flex-col gap-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-500 flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              Just Released (v2.0 Expansion)
+            </p>
+            <h2 className="text-3xl font-display font-bold text-foreground">
+              New High-Performance Offline Tools
+            </h2>
+            <p className="max-w-2xl text-sm text-muted-foreground leading-relaxed">
+              Experience the speed and security of fully client-side utility processing. These utilities execute entirely in your local browser with zero server data footprint.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {TOOLS.filter(t => t.isNew).map(tool => (
+              <ToolCard key={tool.id} tool={tool} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 md:py-24" style={deferredSectionStyle}>
         <div className="container">
           <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">

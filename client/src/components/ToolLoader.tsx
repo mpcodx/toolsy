@@ -59,6 +59,10 @@ const toolComponents: Record<string, any> = {
   "llm-prompt-to-query": lazyNamed(() => import("./tools/GeoAeoTools"), "LlmPromptToQuery"),
   "clip-duration-calculator": lazyNamed(() => import("./tools/ClipTools"), "ClipDurationCalculator"),
   "clip-safezone-visualizer": lazyNamed(() => import("./tools/ClipTools"), "ClipSafezoneVisualizer"),
+  "code-to-image": lazy(() => import("./tools/CodeToImage")),
+  "linkedin-carousel": lazy(() => import("./tools/LinkedinCarousel")),
+  "image-sanitizer": lazy(() => import("./tools/ImageSanitizer")),
+  "svg-customizer": lazy(() => import("./tools/SvgCustomizer")),
 };
 
 interface ToolLoaderProps {
