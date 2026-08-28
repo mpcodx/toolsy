@@ -66,6 +66,27 @@ Generates structured metadata, copywriting alternatives, and content clusters.
 - **FAQ Generator** (`/tool/faq-generator`)
   - *Inputs*: Topic, keywords, count.
   - *Output*: Plain-text Q&A structures.
+- **Slug Generator** (`/tool/slug-generator`)
+  - *Inputs*: Page title or phrase, separator, max length, stop-word removal toggle.
+  - *Output*: Hyphenated, underscore, and camelCase URL slug variants.
+- **Open Graph Tag Generator** (`/tool/open-graph-tag-generator`)
+  - *Inputs*: Title, description, image URL, page URL, site name, content type.
+  - *Output*: Ready-to-paste `<meta property="og:*">` tags.
+- **Twitter Card Generator** (`/tool/twitter-card-generator`)
+  - *Inputs*: Card type (summary or summary_large_image), title, description, image URL, site handle.
+  - *Output*: Ready-to-paste `<meta name="twitter:*">` tags.
+- **FAQ Schema Generator** (`/tool/faq-schema-generator`)
+  - *Inputs*: Repeatable question and answer pairs.
+  - *Output*: Valid `FAQPage` JSON-LD structured data.
+- **SERP Snippet Preview Tool** (`/tool/serp-snippet-preview-tool`)
+  - *Inputs*: Title tag, meta description, page URL.
+  - *Output*: Live Google-style search result preview with character-limit warnings.
+- **Robots.txt Generator** (`/tool/robots-txt-generator`)
+  - *Inputs*: Site URL, user-agent rule groups, allow/disallow paths, crawl-delay.
+  - *Output*: A complete, ready-to-upload `robots.txt` file with sitemap reference.
+- **UTM Link Builder** (`/tool/utm-link-builder`)
+  - *Inputs*: Base URL, utm_source, utm_medium, utm_campaign, utm_term, utm_content.
+  - *Output*: A UTM-tagged campaign tracking URL.
 
 ### Category: Social Media & Creator Workflow
 Utilities optimized for video and caption preparation for YouTube Shorts, Instagram Reels, and TikTok clips.
@@ -99,6 +120,23 @@ Utilities optimized for video and caption preparation for YouTube Shorts, Instag
 - **YouTube Description Generator** (`/tool/youtube-description-generator`)
   - *Inputs*: Title, summary, CTA, keywords.
   - *Output*: Video descriptions.
+- **LinkedIn Slide Carousel Generator** (`/tool/linkedin-carousel`)
+  - *Inputs*: Slide titles, bullet points, colors, watermark text.
+  - *Output*: A multi-page PDF carousel sized for LinkedIn posts.
+
+### Category: Developer Tools
+- **Commit Message Generator** (`/tool/commit-message-generator`)
+  - *Inputs*: Change summary, commit type, scope, optional body text.
+  - *Output*: A formatted conventional commit message.
+- **Regex Explainer** (`/tool/regex-explainer`)
+  - *Inputs*: Regex pattern, optional sample text, flavor notes.
+  - *Output*: A plain-English, token-by-token breakdown of the pattern.
+- **cURL Command Generator** (`/tool/curl-command-generator`)
+  - *Inputs*: Request URL, HTTP method, headers, JSON body.
+  - *Output*: A ready-to-run `curl` command.
+- **Code to Image Beautifier** (`/tool/code-to-image`)
+  - *Inputs*: Raw code snippet, language, theme, gradient background.
+  - *Output*: A high-definition PNG screenshot card of the code.
 
 ### Category: PDF & Documents
 - **Merge PDF Free** (`/tool/pdf-merger`) - Combines multiple uploaded PDF files in sequence.
@@ -118,6 +156,8 @@ Utilities optimized for video and caption preparation for YouTube Shorts, Instag
 - **Image Compressor** (`/tool/image-compressor`) - Reducer for JPG/PNG file sizes.
 - **Image Converter** (`/tool/image-converter`) - Client-side formats exporter.
 - **Image Cropper** (`/tool/image-cropper`) - Trims image dimensions.
+- **Local Image Compressor & Sanitizer** (`/tool/image-sanitizer`) - Compresses images and strips EXIF/GPS metadata entirely offline.
+- **Rich SVG Customizer & Exporter** (`/tool/svg-customizer`) - Recolors vector graphics and exports clean SVG or PNG cards.
 - **Video to Audio** (`/tool/video-to-audio`) - Extracts audio stream as MP3/WebM audio locally.
 - **Thumbnail Maker** (`/tool/video-thumbnail-maker`) - Frames grabber for video thumbnails.
 - **Video to Frames** (`/tool/video-to-frames`) - Batch-exports frames as a ZIP.
@@ -132,6 +172,7 @@ Utilities optimized for video and caption preparation for YouTube Shorts, Instag
 - **Text to Speech** (`/tool/text-to-speech`) - Browser voice reader.
 - **Text Formatter** (`/tool/text-formatter`) - Clean whitespace, adjust cases.
 - **JSON Formatter** (`/tool/json-formatter`) - Pretty-prints, validates, and minifies JSON structures.
+- **Word & Character Counter** (`/tool/word-counter`) - Counts words, characters, sentences, reading time, and top repeated words.
 - **Base64 Encoder/Decoder** (`/tool/base64-encoder`) - Converts text binary to/from base64 format.
 - **Hash Generator** (`/tool/hash-generator`) - Local MD5, SHA-1, and SHA-256 hashes.
 

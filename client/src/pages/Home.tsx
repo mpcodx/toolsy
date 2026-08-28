@@ -26,6 +26,10 @@ const quickSearches = [
   "clip idea generator",
   "instagram caption generator",
   "video trimmer no watermark",
+  "slug generator",
+  "robots txt generator",
+  "word counter",
+  "utm link builder",
 ];
 
 const TOOL_COUNT_LABEL = `${TOOLS.length}`;
@@ -42,7 +46,9 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const suggestions = searchQuery.trim() ? searchTools(searchQuery).slice(0, 5) : [];
+  const suggestions = searchQuery.trim()
+    ? searchTools(searchQuery).slice(0, 5)
+    : [];
 
   useEffect(() => {
     updateMetadata({
@@ -160,7 +166,7 @@ export default function Home() {
                     {/* Instant Search Suggestions Dropdown */}
                     {suggestions.length > 0 && (
                       <div className="absolute top-full left-0 right-0 mt-2 rounded-2xl border border-border bg-card/95 backdrop-blur-md shadow-xl overflow-hidden z-50 divide-y divide-border/60">
-                        {suggestions.map((tool) => {
+                        {suggestions.map(tool => {
                           const IconComp = getToolIcon(tool.icon);
                           return (
                             <button
@@ -169,7 +175,9 @@ export default function Home() {
                               onClick={() => setLocation(`/tool/${tool.id}`)}
                               className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-accent/10 transition-colors duration-200 group"
                             >
-                              <div className={`p-2 rounded-lg bg-gradient-to-br ${tool.color} text-white shrink-0 transition-transform group-hover:scale-110`}>
+                              <div
+                                className={`p-2 rounded-lg bg-gradient-to-br ${tool.color} text-white shrink-0 transition-transform group-hover:scale-110`}
+                              >
                                 <IconComp className="h-4 w-4" />
                               </div>
                               <div className="flex-1 min-w-0">
@@ -278,6 +286,9 @@ export default function Home() {
               "keyword clustering tool",
               "instagram caption generator",
               "video trimmer no watermark",
+              "slug generator",
+              "robots txt generator",
+              "word counter",
             ].map(keyword => (
               <Badge
                 key={keyword}

@@ -24,6 +24,13 @@
 - [Keyword Clustering Tool](https://www.toolsylab.xyz/tool/keyword-clustering-tool) - Groups raw keyword lists into semantic clusters for architectural mapping.
 - [Schema Markup Generator](https://www.toolsylab.xyz/tool/schema-markup-generator) - Generates JSON-LD schema (SoftwareApplication, Article, Product, FAQPage) locally.
 - [FAQ Generator](https://www.toolsylab.xyz/tool/faq-generator) - Generates traditional SEO frequently asked questions.
+- [Slug Generator](https://www.toolsylab.xyz/tool/slug-generator) - Turns titles or phrases into clean, SEO-friendly URL slugs.
+- [Open Graph Tag Generator](https://www.toolsylab.xyz/tool/open-graph-tag-generator) - Generates Open Graph meta tags for clean social share previews.
+- [Twitter Card Generator](https://www.toolsylab.xyz/tool/twitter-card-generator) - Generates Twitter/X Card meta tags for richer link previews.
+- [FAQ Schema Generator](https://www.toolsylab.xyz/tool/faq-schema-generator) - Turns Q&A pairs into valid FAQPage JSON-LD structured data.
+- [SERP Snippet Preview Tool](https://www.toolsylab.xyz/tool/serp-snippet-preview-tool) - Previews how a title, URL, and description look in Google search results.
+- [Robots.txt Generator](https://www.toolsylab.xyz/tool/robots-txt-generator) - Builds a valid robots.txt file with allow/disallow rules and a sitemap reference.
+- [UTM Link Builder](https://www.toolsylab.xyz/tool/utm-link-builder) - Builds UTM-tagged campaign URLs for marketing attribution.
 
 ### Social Media & Video Creators
 - [Video Clip Cutter](https://www.toolsylab.xyz/tool/video-clipper) - Trims uploaded video files locally (MP4, MOV, WebM) without watermarks or server uploads.
@@ -36,6 +43,7 @@
 - [Hashtag Generator](https://www.toolsylab.xyz/tool/hashtag-generator) - Generates hashtags categorized by reach.
 - [Instagram Caption Generator](https://www.toolsylab.xyz/tool/instagram-caption-generator) - Formats social posts.
 - [YouTube Description Generator](https://www.toolsylab.xyz/tool/youtube-description-generator) - Writes video descriptions with timestamps and links.
+- [LinkedIn Slide Carousel Generator](https://www.toolsylab.xyz/tool/linkedin-carousel) - Designs multi-page PDF slide carousels for LinkedIn posts.
 
 ### PDF & Document Workflows
 - [Merge PDF Free](https://www.toolsylab.xyz/tool/pdf-merger) - Joins multiple PDF files.
@@ -54,7 +62,9 @@
 - [Commit Message Generator](https://www.toolsylab.xyz/tool/commit-message-generator) - Generates conventional git commits.
 - [Regex Explainer](https://www.toolsylab.xyz/tool/regex-explainer) - Breaks down regular expression syntax in plain English.
 - [cURL Command Generator](https://www.toolsylab.xyz/tool/curl-command-generator) - Builds curl templates locally.
+- [Code to Image Beautifier](https://www.toolsylab.xyz/tool/code-to-image) - Converts code snippets into beautiful screenshot cards.
 - [JSON Formatter](https://www.toolsylab.xyz/tool/json-formatter) - Validates, minifies, and prints formatted JSON.
+- [Word & Character Counter](https://www.toolsylab.xyz/tool/word-counter) - Counts words, characters, sentences, and reading time.
 - [Base64 Encoder/Decoder](https://www.toolsylab.xyz/tool/base64-encoder) - Encodes and decodes base64 strings.
 - [Hash Generator](https://www.toolsylab.xyz/tool/hash-generator) - Computes local MD5, SHA-1, SHA-256 hashes.
 
@@ -63,6 +73,8 @@
 - [Image Compressor](https://www.toolsylab.xyz/tool/image-compressor) - Compresses images.
 - [Image Converter](https://www.toolsylab.xyz/tool/image-converter) - Formats converter.
 - [Image Cropper](https://www.toolsylab.xyz/tool/image-cropper) - Crops images.
+- [Local Image Compressor & Sanitizer](https://www.toolsylab.xyz/tool/image-sanitizer) - Compresses images and strips EXIF/GPS metadata offline.
+- [Rich SVG Customizer & Exporter](https://www.toolsylab.xyz/tool/svg-customizer) - Recolors vector graphics and exports clean SVG or PNG cards.
 - [Video to Audio](https://www.toolsylab.xyz/tool/video-to-audio) - Extracts audio stream.
 - [Thumbnail Maker](https://www.toolsylab.xyz/tool/video-thumbnail-maker) - Extracts frames as video thumbnails.
 - [Video to Frames](https://www.toolsylab.xyz/tool/video-to-frames) - Exports frame ranges as ZIP.

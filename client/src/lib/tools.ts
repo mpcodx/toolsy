@@ -280,6 +280,25 @@ export const TOOLS: Tool[] = [
     icon: "Code",
     color: "from-yellow-500 to-yellow-600",
   },
+  {
+    id: "word-counter",
+    name: "Word & Character Counter",
+    description:
+      "Count words, characters, sentences, and reading time, plus see your most repeated words",
+    category: "Text",
+    icon: "AlignLeft",
+    color: "from-indigo-400 to-purple-500",
+    featured: true,
+    isNew: true,
+    searchAliases: [
+      "word counter",
+      "character counter",
+      "count words online",
+      "text length checker",
+      "reading time calculator",
+      "words to minutes",
+    ],
+  },
 
   // Archive Tools
   {
@@ -409,6 +428,126 @@ export const TOOLS: Tool[] = [
     category: "SEO",
     icon: "MessageCircleQuestion",
     color: "from-lime-500 to-green-600",
+  },
+  {
+    id: "slug-generator",
+    name: "Slug Generator",
+    description:
+      "Turn titles or phrases into clean, SEO-friendly URL slugs with separator and length controls",
+    category: "SEO",
+    icon: "Link",
+    color: "from-teal-500 to-cyan-600",
+    isNew: true,
+    searchAliases: [
+      "slug generator",
+      "url slug generator",
+      "seo slug tool",
+      "convert title to slug",
+      "slugify text",
+      "slugify online",
+    ],
+  },
+  {
+    id: "open-graph-tag-generator",
+    name: "Open Graph Tag Generator",
+    description:
+      "Generate Open Graph meta tags so links look right when shared on Facebook, LinkedIn, and more",
+    category: "SEO",
+    icon: "Globe",
+    color: "from-blue-500 to-indigo-600",
+    isNew: true,
+    searchAliases: [
+      "open graph tag generator",
+      "og tag generator",
+      "facebook meta tag generator",
+      "social share meta tags",
+      "open graph meta tool",
+    ],
+  },
+  {
+    id: "twitter-card-generator",
+    name: "Twitter Card Generator",
+    description:
+      "Create Twitter/X Card meta tags with summary and large image preview formats",
+    category: "SEO",
+    icon: "Twitter",
+    color: "from-sky-400 to-blue-500",
+    isNew: true,
+    searchAliases: [
+      "twitter card generator",
+      "x card generator",
+      "twitter meta tag generator",
+      "social card meta tags",
+      "twitter preview tags",
+    ],
+  },
+  {
+    id: "faq-schema-generator",
+    name: "FAQ Schema Generator",
+    description:
+      "Turn question and answer pairs into valid FAQPage JSON-LD structured data",
+    category: "SEO",
+    icon: "FileJson",
+    color: "from-amber-500 to-yellow-600",
+    isNew: true,
+    searchAliases: [
+      "faq schema generator",
+      "faq json ld generator",
+      "structured data faq tool",
+      "faq markup generator",
+      "faq rich results schema",
+    ],
+  },
+  {
+    id: "serp-snippet-preview-tool",
+    name: "SERP Snippet Preview Tool",
+    description:
+      "Preview how a title, URL, and meta description will look in Google search results",
+    category: "SEO",
+    icon: "Eye",
+    color: "from-emerald-500 to-green-600",
+    isNew: true,
+    searchAliases: [
+      "serp snippet preview tool",
+      "google snippet preview",
+      "meta preview tool",
+      "search result preview",
+      "serp preview generator",
+    ],
+  },
+  {
+    id: "robots-txt-generator",
+    name: "Robots.txt Generator",
+    description:
+      "Build a valid robots.txt file with allow/disallow rules and a sitemap reference",
+    category: "SEO",
+    icon: "Bot",
+    color: "from-slate-500 to-slate-700",
+    isNew: true,
+    searchAliases: [
+      "robots txt generator",
+      "robots.txt generator",
+      "create robots txt",
+      "seo robots file tool",
+      "free robots txt tool",
+    ],
+  },
+  {
+    id: "utm-link-builder",
+    name: "UTM Link Builder",
+    description:
+      "Build UTM-tagged campaign URLs for source, medium, campaign, term, and content tracking",
+    category: "SEO",
+    icon: "Target",
+    color: "from-orange-500 to-pink-600",
+    isNew: true,
+    searchAliases: [
+      "utm link builder",
+      "utm builder",
+      "utm campaign builder",
+      "google analytics utm generator",
+      "campaign url builder",
+    ],
   },
 
   // Developer Tools
@@ -566,7 +705,8 @@ export const TOOLS: Tool[] = [
   {
     id: "geo-content-optimizer",
     name: "GEO Content Optimizer",
-    description: "Optimize your text content to improve visibility and citation rates in Generative AI Search Engines",
+    description:
+      "Optimize your text content to improve visibility and citation rates in Generative AI Search Engines",
     category: "GEO & AEO",
     icon: "SearchCheck",
     color: "from-indigo-500 to-purple-600",
@@ -583,7 +723,8 @@ export const TOOLS: Tool[] = [
   {
     id: "aeo-answer-generator",
     name: "Answer Engine FAQ Generator",
-    description: "Generate concise, structured Q&A pairs and FAQ schema designed for conversational Answer Engines",
+    description:
+      "Generate concise, structured Q&A pairs and FAQ schema designed for conversational Answer Engines",
     category: "GEO & AEO",
     icon: "MessageCircleQuestion",
     color: "from-pink-500 to-rose-600",
@@ -599,7 +740,8 @@ export const TOOLS: Tool[] = [
   {
     id: "brand-mention-optimizer",
     name: "Brand Mention Optimizer",
-    description: "Optimize company profiles, product descriptions, or bios to boost brand citations in AI responses",
+    description:
+      "Optimize company profiles, product descriptions, or bios to boost brand citations in AI responses",
     category: "GEO & AEO",
     icon: "FilePenLine",
     color: "from-cyan-500 to-blue-600",
@@ -613,7 +755,8 @@ export const TOOLS: Tool[] = [
   {
     id: "llm-prompt-to-query",
     name: "Search to Prompt Converter",
-    description: "Convert natural language queries into advanced search queries with operators to gather citations",
+    description:
+      "Convert natural language queries into advanced search queries with operators to gather citations",
     category: "GEO & AEO",
     icon: "TerminalSquare",
     color: "from-slate-600 to-slate-800",
@@ -627,7 +770,8 @@ export const TOOLS: Tool[] = [
   {
     id: "clip-duration-calculator",
     name: "Clip Duration Calculator",
-    description: "Calculate script word counts and pacing speed to optimize for 60-second vertical videos",
+    description:
+      "Calculate script word counts and pacing speed to optimize for 60-second vertical videos",
     category: "Social Media",
     icon: "Table",
     color: "from-amber-500 to-orange-600",
@@ -643,7 +787,8 @@ export const TOOLS: Tool[] = [
   {
     id: "clip-safezone-visualizer",
     name: "Vertical Clip Safe Zone Helper",
-    description: "Visualize vertical safe zone overlays for TikTok, Instagram Reels, and YouTube Shorts to keep captions readable",
+    description:
+      "Visualize vertical safe zone overlays for TikTok, Instagram Reels, and YouTube Shorts to keep captions readable",
     category: "Social Media",
     icon: "Film",
     color: "from-sky-500 to-indigo-600",
@@ -659,7 +804,8 @@ export const TOOLS: Tool[] = [
   {
     id: "code-to-image",
     name: "Code to Image Beautifier",
-    description: "Convert code snippets into beautiful screenshot cards with customized gradients, themes, and canvas shadows",
+    description:
+      "Convert code snippets into beautiful screenshot cards with customized gradients, themes, and canvas shadows",
     category: "Developer",
     icon: "Code",
     color: "from-indigo-500 to-purple-600",
@@ -671,13 +817,14 @@ export const TOOLS: Tool[] = [
       "code beautifier",
       "beautify code online",
       "carbon tool alternative",
-      "private offline code screenshot maker"
+      "private offline code screenshot maker",
     ],
   },
   {
     id: "linkedin-carousel",
     name: "LinkedIn Slide Carousel Generator",
-    description: "Design multi-page slide presentations with custom colors, watermarks, and export them as high-quality PDF carousels",
+    description:
+      "Design multi-page slide presentations with custom colors, watermarks, and export them as high-quality PDF carousels",
     category: "Social Media",
     icon: "Presentation",
     color: "from-blue-600 to-cyan-500",
@@ -688,13 +835,14 @@ export const TOOLS: Tool[] = [
       "linkedin slides maker",
       "pdf slides builder",
       "linkedin post generator",
-      "create pdf carousel online"
+      "create pdf carousel online",
     ],
   },
   {
     id: "image-sanitizer",
     name: "Local Image Compressor & Sanitizer",
-    description: "Compress images and automatically strip sensitive metadata (EXIF tags, GPS location, camera data) completely offline",
+    description:
+      "Compress images and automatically strip sensitive metadata (EXIF tags, GPS location, camera data) completely offline",
     category: "Image",
     icon: "ShieldCheck",
     color: "from-emerald-500 to-teal-600",
@@ -706,13 +854,14 @@ export const TOOLS: Tool[] = [
       "exif data remover",
       "remove gps from image",
       "local image compressor",
-      "offline image metadata cleaner"
+      "offline image metadata cleaner",
     ],
   },
   {
     id: "svg-customizer",
     name: "Rich SVG Customizer & Exporter",
-    description: "Upload vector graphics, customize colors, scale stroke widths, and export clean SVGs or PNG presentation cards",
+    description:
+      "Upload vector graphics, customize colors, scale stroke widths, and export clean SVGs or PNG presentation cards",
     category: "Image",
     icon: "Paintbrush",
     color: "from-pink-500 to-rose-600",
@@ -723,7 +872,7 @@ export const TOOLS: Tool[] = [
       "svg color changer",
       "vector editor",
       "edit svg colors",
-      "svg to png cards"
+      "svg to png cards",
     ],
   },
 ];

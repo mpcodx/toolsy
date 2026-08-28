@@ -12,7 +12,7 @@ The app uses a modern React stack, lazy-loaded tool components, rich metadata, s
 
 ## Why Toolsy
 
-- 42 free tools across AI, SEO, developer, social media, PDF, document, image, video, text, archive, and utility workflows
+- 66 free tools across GEO & AEO, AI, SEO, developer, social media, PDF, document, image, video, text, archive, and utility workflows
 - Fast loading with code splitting and lazy-loaded tool modules
 - SEO-ready pages with unique titles, descriptions, canonical URLs, and JSON-LD
 - Clean, mobile-friendly interface with strong visual hierarchy
@@ -24,6 +24,52 @@ The app uses a modern React stack, lazy-loaded tool components, rich metadata, s
 
 ## Tool Catalog
 
+### GEO & AEO Tools
+
+- GEO Content Optimizer
+- Answer Engine FAQ Generator
+- Brand Mention Optimizer
+- Search to Prompt Converter
+
+### AI Tools
+
+- AI Meta Generator
+- AI Paragraph Rewriter
+- AI Title Generator
+
+### SEO Tools
+
+- Keyword Clustering Tool
+- Schema Markup Generator
+- FAQ Generator
+- Slug Generator
+- Open Graph Tag Generator
+- Twitter Card Generator
+- FAQ Schema Generator
+- SERP Snippet Preview Tool
+- Robots.txt Generator
+- UTM Link Builder
+
+### Developer Tools
+
+- Commit Message Generator
+- Regex Explainer
+- cURL Command Generator
+- Code to Image Beautifier
+
+### Social Media Tools
+
+- Hashtag Generator
+- Instagram Caption Generator
+- YouTube Description Generator
+- Clip Idea Generator
+- Video Hook Generator
+- Shorts Script Generator
+- Content Calendar Generator
+- Clip Duration Calculator
+- Vertical Clip Safe Zone Helper
+- LinkedIn Slide Carousel Generator
+
 ### PDF Tools
 
 - PDF to Image
@@ -32,6 +78,7 @@ The app uses a modern React stack, lazy-loaded tool components, rich metadata, s
 - PDF Merger
 - PDF Splitter
 - PDF Watermark
+- PDF Page Remover
 
 ### Document Conversion
 
@@ -46,12 +93,15 @@ The app uses a modern React stack, lazy-loaded tool components, rich metadata, s
 - Image Compressor
 - Image Converter
 - Image Cropper
+- Local Image Compressor & Sanitizer
+- Rich SVG Customizer & Exporter
 
 ### Text Tools
 
 - Text to Speech
 - Text Formatter
 - JSON Formatter
+- Word & Character Counter
 
 ### Video Tools
 
@@ -59,6 +109,7 @@ The app uses a modern React stack, lazy-loaded tool components, rich metadata, s
 - Thumbnail Maker
 - Video to Frames
 - Video Clip Cutter
+- Video Compressor
 - Direct MP4 Downloader
 
 ### Archive Tools
@@ -74,30 +125,6 @@ The app uses a modern React stack, lazy-loaded tool components, rich metadata, s
 - Color Converter
 - Unit Converter
 - Base64 Encoder/Decoder
-
-### AI Tools
-
-- AI Meta Generator
-- AI Paragraph Rewriter
-- AI Title Generator
-
-### SEO Tools
-
-- Keyword Clustering Tool
-- Schema Markup Generator
-- FAQ Generator
-
-### Developer Tools
-
-- Commit Message Generator
-- Regex Explainer
-- cURL Command Generator
-
-### Social Media Tools
-
-- Hashtag Generator
-- Instagram Caption Generator
-- YouTube Description Generator
 
 ## How It Works
 

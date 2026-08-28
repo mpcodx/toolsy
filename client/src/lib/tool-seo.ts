@@ -64,7 +64,8 @@ function getToolProfile(tool: Tool): ToolProfile {
 
   if (tool.id === "code-to-image") {
     return {
-      focus: "convert code snippets into beautiful screenshot cards with customized gradients, themes, and canvas shadows",
+      focus:
+        "convert code snippets into beautiful screenshot cards with customized gradients, themes, and canvas shadows",
       supportedInput: "raw code blocks in various programming languages",
       supportedOutput: "high-definition PNG screenshots and sharing cards",
       extraKeywords: [
@@ -76,7 +77,7 @@ function getToolProfile(tool: Tool): ToolProfile {
         "code screenshot online",
         "carbon tool alternative",
         "pretty code exporter",
-        "code share card generator"
+        "code share card generator",
       ],
       trustBadges: ["Free", "Secure", "No Signup", "100% Client-Side"],
     };
@@ -84,9 +85,12 @@ function getToolProfile(tool: Tool): ToolProfile {
 
   if (tool.id === "linkedin-carousel") {
     return {
-      focus: "design multi-page slide presentations with custom colors, watermarks, and export them as high-quality PDF carousels",
-      supportedInput: "custom titles, paragraphs, bullet points, and color selections for multiple slides",
-      supportedOutput: "multi-page PDF carousels matching LinkedIn square/portrait standards",
+      focus:
+        "design multi-page slide presentations with custom colors, watermarks, and export them as high-quality PDF carousels",
+      supportedInput:
+        "custom titles, paragraphs, bullet points, and color selections for multiple slides",
+      supportedOutput:
+        "multi-page PDF carousels matching LinkedIn square/portrait standards",
       extraKeywords: [
         "linkedin carousel pdf",
         "linkedin slides maker",
@@ -95,7 +99,7 @@ function getToolProfile(tool: Tool): ToolProfile {
         "create pdf carousel online",
         "linkedin carousel creator",
         "generate linkedin pdf carousel",
-        "slides presentation builder"
+        "slides presentation builder",
       ],
       trustBadges: ["Free", "Secure", "No Signup", "No Watermark Limit"],
     };
@@ -103,7 +107,8 @@ function getToolProfile(tool: Tool): ToolProfile {
 
   if (tool.id === "image-sanitizer") {
     return {
-      focus: "compress image files and strip metadata such as EXIF details, GPS tags, and device types completely offline",
+      focus:
+        "compress image files and strip metadata such as EXIF details, GPS tags, and device types completely offline",
       supportedInput: "JPEG, PNG, WebP, GIF, or BMP image files",
       supportedOutput: "sanitized and compressed image files",
       extraKeywords: [
@@ -115,7 +120,7 @@ function getToolProfile(tool: Tool): ToolProfile {
         "offline image metadata cleaner",
         "compress image offline",
         "private image compressor",
-        "clean exif data"
+        "clean exif data",
       ],
       trustBadges: ["Free", "Secure", "No Signup", "100% Offline"],
     };
@@ -123,9 +128,11 @@ function getToolProfile(tool: Tool): ToolProfile {
 
   if (tool.id === "svg-customizer") {
     return {
-      focus: "parse SVG vector graphics, customize colors, adjust stroke widths, and export clean SVGs or PNG cards",
+      focus:
+        "parse SVG vector graphics, customize colors, adjust stroke widths, and export clean SVGs or PNG cards",
       supportedInput: "raw SVG file uploads or vector graphic code",
-      supportedOutput: "modified SVG vector files or rendered PNG presentation cards",
+      supportedOutput:
+        "modified SVG vector files or rendered PNG presentation cards",
       extraKeywords: [
         "svg customizer",
         "svg color changer",
@@ -134,7 +141,7 @@ function getToolProfile(tool: Tool): ToolProfile {
         "svg to png cards",
         "customize svg online",
         "raw svg editor",
-        "change colors in svg file"
+        "change colors in svg file",
       ],
       trustBadges: ["Free", "Secure", "No Signup", "Real-Time Editor"],
     };
@@ -435,6 +442,23 @@ function getToolProfile(tool: Tool): ToolProfile {
       };
     }
 
+    if (name.includes("counter")) {
+      return {
+        focus:
+          "count words, characters, sentences, and reading time in real time",
+        supportedInput: "plain text or pasted content",
+        supportedOutput: "word, character, sentence counts and reading time",
+        extraKeywords: [
+          "word counter",
+          "character counter",
+          "count words online",
+          "text length checker",
+          "reading time calculator",
+        ],
+        trustBadges: ["Free", "Secure", "No Signup"],
+      };
+    }
+
     return {
       focus: "clean, format, and transform text content",
       supportedInput: "plain text",
@@ -615,6 +639,123 @@ function getToolProfile(tool: Tool): ToolProfile {
       };
     }
 
+    if (tool.id === "slug-generator") {
+      return {
+        focus: "turn titles or phrases into clean, SEO-friendly URL slugs",
+        supportedInput: "page titles, blog headlines, or any phrase",
+        supportedOutput: "hyphenated, underscore, and camelCase slug variants",
+        extraKeywords: [
+          "slug generator",
+          "url slug generator",
+          "seo slug tool",
+          "convert title to slug",
+          "slugify text",
+        ],
+        trustBadges: ["Free", "No Signup", "Instant"],
+      };
+    }
+
+    if (tool.id === "open-graph-tag-generator") {
+      return {
+        focus: "generate Open Graph meta tags for clean social share previews",
+        supportedInput: "page title, description, image URL, and page URL",
+        supportedOutput: "ready-to-paste Open Graph meta tags",
+        extraKeywords: [
+          "open graph tag generator",
+          "og tag generator",
+          "facebook meta tag generator",
+          "social share meta tags",
+          "open graph meta tool",
+        ],
+        trustBadges: ["Free", "No Signup", "Copy-Paste Ready"],
+      };
+    }
+
+    if (tool.id === "twitter-card-generator") {
+      return {
+        focus: "generate Twitter/X Card meta tags for richer link previews",
+        supportedInput: "card title, description, image URL, and handle",
+        supportedOutput: "ready-to-paste Twitter Card meta tags",
+        extraKeywords: [
+          "twitter card generator",
+          "x card generator",
+          "twitter meta tag generator",
+          "social card meta tags",
+          "twitter preview tags",
+        ],
+        trustBadges: ["Free", "No Signup", "Copy-Paste Ready"],
+      };
+    }
+
+    if (tool.id === "faq-schema-generator") {
+      return {
+        focus: "turn question and answer pairs into valid FAQPage JSON-LD",
+        supportedInput: "repeatable question and answer pairs",
+        supportedOutput: "FAQPage JSON-LD structured data",
+        extraKeywords: [
+          "faq schema generator",
+          "faq json ld generator",
+          "structured data faq tool",
+          "faq markup generator",
+          "faq rich results schema",
+        ],
+        trustBadges: ["Free", "No Signup", "JSON-LD"],
+      };
+    }
+
+    if (tool.id === "serp-snippet-preview-tool") {
+      return {
+        focus:
+          "preview how a title, URL, and description look in Google search results",
+        supportedInput: "title tag, meta description, and page URL",
+        supportedOutput:
+          "a live search-result style preview with length warnings",
+        extraKeywords: [
+          "serp snippet preview tool",
+          "google snippet preview",
+          "meta preview tool",
+          "search result preview",
+          "serp preview generator",
+        ],
+        trustBadges: ["Free", "No Signup", "Live Preview"],
+      };
+    }
+
+    if (tool.id === "robots-txt-generator") {
+      return {
+        focus:
+          "build a valid robots.txt file with allow, disallow, and sitemap rules",
+        supportedInput: "site URL, crawl rules, and optional crawl-delay",
+        supportedOutput: "a ready-to-upload robots.txt file",
+        extraKeywords: [
+          "robots txt generator",
+          "robots.txt generator",
+          "create robots txt",
+          "seo robots file tool",
+          "free robots txt tool",
+        ],
+        trustBadges: ["Free", "No Signup", "Instant"],
+      };
+    }
+
+    if (tool.id === "utm-link-builder") {
+      return {
+        focus:
+          "build UTM-tagged campaign URLs for accurate marketing attribution",
+        supportedInput:
+          "a base URL plus source, medium, campaign, term, and content values",
+        supportedOutput: "a UTM-tagged campaign tracking URL",
+        extraKeywords: [
+          "utm link builder",
+          "utm builder",
+          "utm campaign builder",
+          "google analytics utm generator",
+          "campaign url builder",
+        ],
+        trustBadges: ["Free", "No Signup", "Analytics Ready"],
+      };
+    }
+
     return {
       focus:
         "generate SEO-friendly FAQ copy for landing pages and content hubs",
@@ -760,9 +901,12 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "clip-duration-calculator") {
       return {
-        focus: "calculate script word counts and pacing speed to optimize for 60-second vertical videos",
-        supportedInput: "video scripts, custom pacing speeds, and platform limits",
-        supportedOutput: "estimated duration, limit usage progress bars, and pacing ratings",
+        focus:
+          "calculate script word counts and pacing speed to optimize for 60-second vertical videos",
+        supportedInput:
+          "video scripts, custom pacing speeds, and platform limits",
+        supportedOutput:
+          "estimated duration, limit usage progress bars, and pacing ratings",
         extraKeywords: [
           "clip duration calculator",
           "pacing calculator",
@@ -776,9 +920,12 @@ function getToolProfile(tool: Tool): ToolProfile {
 
     if (tool.id === "clip-safezone-visualizer") {
       return {
-        focus: "visualize vertical safe zone overlays for TikTok, Instagram Reels, and YouTube Shorts to keep captions readable",
-        supportedInput: "mobile viewport selections, highlights triggers, and mock frame uploads",
-        supportedOutput: "interactive 9:16 canvas mockups with overlaid safe zone markings",
+        focus:
+          "visualize vertical safe zone overlays for TikTok, Instagram Reels, and YouTube Shorts to keep captions readable",
+        supportedInput:
+          "mobile viewport selections, highlights triggers, and mock frame uploads",
+        supportedOutput:
+          "interactive 9:16 canvas mockups with overlaid safe zone markings",
         extraKeywords: [
           "vertical safe zone",
           "shorts safe zone mockup",
@@ -822,7 +969,8 @@ function getToolProfile(tool: Tool): ToolProfile {
   if (tool.category === "GEO & AEO") {
     if (tool.id === "geo-content-optimizer") {
       return {
-        focus: "optimize text content to maximize visibility and citations in Generative AI Search Engines",
+        focus:
+          "optimize text content to maximize visibility and citations in Generative AI Search Engines",
         supportedInput: "draft articles, landing page copy, or product details",
         supportedOutput: "citation-optimized text drafts and GEO score reports",
         extraKeywords: [
@@ -837,8 +985,10 @@ function getToolProfile(tool: Tool): ToolProfile {
     }
     if (tool.id === "aeo-answer-generator") {
       return {
-        focus: "generate concise, structured Q&A sets and FAQ schema optimized for answer engine visibility",
-        supportedInput: "page topics, target keywords, and voice tone preferences",
+        focus:
+          "generate concise, structured Q&A sets and FAQ schema optimized for answer engine visibility",
+        supportedInput:
+          "page topics, target keywords, and voice tone preferences",
         supportedOutput: "direct answer drafts and JSON-LD FAQ schema",
         extraKeywords: [
           "aeo answer generator",
@@ -851,8 +1001,10 @@ function getToolProfile(tool: Tool): ToolProfile {
     }
     if (tool.id === "brand-mention-optimizer") {
       return {
-        focus: "optimize brand description and authority keywords to boost brand citations in generative summaries",
-        supportedInput: "brand names, company descriptions, niches, and unique selling points",
+        focus:
+          "optimize brand description and authority keywords to boost brand citations in generative summaries",
+        supportedInput:
+          "brand names, company descriptions, niches, and unique selling points",
         supportedOutput: "citation-optimized brand copy",
         extraKeywords: [
           "brand mention optimization",
@@ -864,7 +1016,8 @@ function getToolProfile(tool: Tool): ToolProfile {
       };
     }
     return {
-      focus: "translate conversational questions into advanced search queries with search operators to gather source citations",
+      focus:
+        "translate conversational questions into advanced search queries with search operators to gather source citations",
       supportedInput: "conversational query prompts and search goals",
       supportedOutput: "advanced search engine query strings with operators",
       extraKeywords: [
@@ -1124,7 +1277,8 @@ function buildFaqs(tool: Tool, profile: ToolProfile): ToolSeoFaq[] {
         "Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) are methodologies designed to structure and refine website content so that AI engines (like ChatGPT, Perplexity, and Gemini) can easily read, summarize, and cite it as an authoritative source.",
     });
     commonFaqs.push({
-      question: "Do these optimization tools save or process my text on a server?",
+      question:
+        "Do these optimization tools save or process my text on a server?",
       answer:
         "No. The live scoring analyzer runs completely client-side in your browser, and the optional AI enhancements run via stateless API calls that never store your input.",
     });
