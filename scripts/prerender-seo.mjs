@@ -121,7 +121,6 @@ function buildManagedFallback(entry) {
     <section style="max-width:960px;margin:0 auto;padding:32px 20px;font-family:Arial,sans-serif;line-height:1.6;color:#0f172a;">
       <h1 style="margin:0 0 12px;font-size:2rem;line-height:1.2;">${pageTitle}</h1>
       <p style="margin:0 0 16px;">${description}</p>
-      <p style="margin:0 0 16px;"><strong>Keywords:</strong> ${keywords}</p>
       <ul style="margin:0;padding-left:20px;">
 ${links}
       </ul>

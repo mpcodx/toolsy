@@ -109,6 +109,19 @@ const SITE_PAGES: Record<SitePageId, SitePageContent> = {
         ],
       },
       {
+        title: "Google AdSense and advertising cookies",
+        paragraphs: [
+          "Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites on the internet.",
+          "Google's use of advertising cookies enables it and its partners to serve ads to users based on their visits to Toolsy and/or other sites across the internet.",
+          "Users may opt out of personalized advertising by visiting Google Ads Settings (https://adssettings.google.com). Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting www.aboutads.info.",
+        ],
+        bullets: [
+          "Google and third-party advertising partners use cookies to serve and measure ads on www.toolsylab.xyz",
+          "Ad-serving cookies do not store personally identifiable information like your name or email",
+          "You can manage your personalized advertising preferences through Google Ads Settings anytime",
+        ],
+      },
+      {
         title: "Retention and security",
         paragraphs: [
           "Toolsy aims to minimize retained data and keep the experience lightweight. Because the site includes both local-browser workflows and server-supported features, retention can vary depending on the tool and hosting setup.",
@@ -186,6 +199,13 @@ const SITE_PAGES: Record<SitePageId, SitePageContent> = {
           "As Toolsy expands, the aim is to keep the same values intact: useful pages, simple UX, and a free-first experience that respects the user's time.",
         ],
       },
+      {
+        title: "Our team and company",
+        paragraphs: [
+          "Toolsy is designed, developed, and maintained by Rayon Web Solutions (rayonweb.com), an engineering team dedicated to building accessible web utilities, modern software, and high-performance digital tools.",
+          "We actively update and test each tool to ensure accuracy, speed, and reliability across modern browsers and devices.",
+        ],
+      },
     ],
   },
   "contact-us": {
@@ -203,11 +223,23 @@ const SITE_PAGES: Record<SitePageId, SitePageContent> = {
       "business inquiries",
     ],
     summaryCards: [
-      { label: "Best for", value: "Bug reports, privacy requests, and business conversations" },
-      { label: "Helpful detail", value: "Include the exact page URL, device, and reproduction steps" },
-      { label: "Current site", value: "https://www.toolsylab.xyz" },
+      { label: "Direct Email", value: "rayonwebsolutions@gmail.com" },
+      { label: "Response Time", value: "Within 24 to 48 business hours" },
+      { label: "Parent Company", value: "Rayon Web Solutions" },
     ],
     sections: [
+      {
+        title: "How to get in touch",
+        paragraphs: [
+          "For support requests, tool feedback, partnership inquiries, or privacy concerns, please contact our team directly by email at rayonwebsolutions@gmail.com.",
+          "We monitor messages regularly and aim to reply within 24 to 48 business hours on weekdays.",
+        ],
+        bullets: [
+          "Support & Inquiries: rayonwebsolutions@gmail.com",
+          "Website: https://www.toolsylab.xyz",
+          "Parent Organization: Rayon Web Solutions (https://rayonweb.com)",
+        ],
+      },
       {
         title: "What to contact us about",
         paragraphs: [
@@ -238,13 +270,6 @@ const SITE_PAGES: Record<SitePageId, SitePageContent> = {
         paragraphs: [
           "If your question relates to personal data, cookies, or a rights-related concern, include the exact page involved and describe the issue clearly so it can be reviewed in context.",
           "Requests that identify the page, tool, and date of the incident are easier to process than general descriptions.",
-        ],
-      },
-      {
-        title: "Contact channel note",
-        paragraphs: [
-          "Toolsy can be deployed in different environments, so the public contact method may depend on the operator of the specific deployment you are using.",
-          "If you are running this project yourself, replace this page with your preferred mailbox, help desk, form, or business address. If you are using the hosted Toolsy site, use the official contact details published by that deployment.",
         ],
       },
     ],
